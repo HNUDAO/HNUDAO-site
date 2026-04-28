@@ -1,0 +1,93 @@
+---
+import NewsCard from "@/components/NewsCard.astro";
+import SectionHeading from "@/components/SectionHeading.astro";
+import Tag from "@/components/Tag.astro";
+import ContentLayout from "@/layouts/ContentLayout.astro";
+import { getEntryHref, isExternalHref, isPublished, sortEntriesByDate } from "@/lib/content";
+import { getCollection } from "astro:content";
+
+const entries = sortEntriesByDate((await getCollection("news")).filter(isPublished), "pubDate");
+const featured = entries.find((entry) => entry.data.featured);
+const categories = [...new Set(entries.map((entry) => entry.data.category).filter(Boolean))];
+const featuredHref = featured ? getEntryHref(featured) : "#";
+const featuredExternal = isExternalHref(featuredHref);
+---
+
+<ContentLayout
+  breadcrumbs={[{ label: "新闻动态" }]}
+  description="新闻动态页统一展示内容卡片，点击后直接跳转到公众号原文或外部发布页面。"
+  eyebrow="News"
+  title="新闻动态"
+>
+  <section class="section-shell pt-0">
+    <div class="page-shell">
+      {featured && (
+        <div class="surface-card overflow-hidden">
+          <div class="grid gap-0 lg:grid-cols-[1.08fr_0.92fr]">
+            <img
+              alt={`${featured.data.title} cover`}
+              class="h-full w-full object-cover"
+              height="480"
+              src={featured.data.cover || "/images/placeholder-cover.svg"}
+              width="720"
+            />
+            <div class="px-5 py-7 sm:px-7 sm:py-8">
+              <p class="subtle-label">Featured Story</p>
+              <h2 class="mt-3 text-3xl font-semibold tracking-tight text-ink-950">{featured.data.title}</h2>
+              <p class="mt-4 text-base leading-8 text-ink-600">{featured.data.description}</p>
+              <div class="mt-5 flex flex-wrap gap-2">
+                {featured.data.category && <Tag label={featured.data.category} variant="accent" />}
+                {featured.data.tags.map((tag) => <Tag label={tag} />)}
+              </div>
+              <a
+                class="glass-button focus-ring mt-8 inline-flex items-center justify-center rounded-full px-5 py-3 text-sm font-semibold text-ink-900 transition hover:text-signal-500"
+                href={featuredHref}
+                rel={featuredExternal ? "noreferrer" : undefined}
+                target={featuredExternal ? "_blank" : undefined}
+              >
+                查看原文
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <section class="section-shell pt-0">
+    <div class="page-shell">
+      <SectionHeading
+        eyebrow="Categories"
+        title="分类标签"
+        description="通过分类快速查看协会动态、活动预告、公告说明与内容更新。"
+      />
+      <div class="flex flex-wrap gap-2">
+        {categories.length > 0 ? categories.map((category) => <Tag label={category!} variant="accent" />) : <Tag label="协会动态" />}
+      </div>
+    </div>
+  </section>
+
+  <section class="section-shell pt-0">
+    <div class="page-shell">
+      <SectionHeading
+        eyebrow="All News"
+        title="新闻列表"
+        description="点击卡片可跳转到对应的外部发布渠道，后续新闻将持续同步更新。"
+      />
+      <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+        {entries.map((entry) => (
+          <NewsCard
+            category={entry.data.category}
+            cover={entry.data.cover}
+            date={entry.data.pubDate}
+            description={entry.data.description}
+            featured={entry.data.featured}
+            href={getEntryHref(entry)}
+            tags={entry.data.tags}
+            title={entry.data.title}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+</ContentLayout>

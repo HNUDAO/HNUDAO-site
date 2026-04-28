@@ -1,0 +1,42 @@
+---
+type Props = {
+  eyebrow?: string;
+  title: string;
+  description?: string;
+  actionLabel?: string;
+  actionHref?: string;
+  align?: "left" | "center";
+};
+
+const {
+  eyebrow,
+  title,
+  description,
+  actionLabel,
+  actionHref,
+  align = "left",
+} = Astro.props;
+
+const alignClass = align === "center" ? "items-center text-center" : "items-start text-left";
+---
+
+<div class={`mb-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between ${alignClass}`} data-reveal>
+  <div class="max-w-3xl">
+    {eyebrow && (
+      <div class="mb-4 flex items-center gap-3">
+        <span aria-hidden="true" class="h-px w-10 bg-jade-500"></span>
+        <p class="subtle-label !text-signal-500">{eyebrow}</p>
+      </div>
+    )}
+    <h2 class="text-balance text-3xl font-semibold tracking-tight text-ink-950 sm:text-4xl">{title}</h2>
+    {description && <p class="mt-4 max-w-2xl text-base leading-7 text-ink-600">{description}</p>}
+  </div>
+  {actionLabel && actionHref && (
+    <a
+      class="focus-ring inline-flex items-center justify-center rounded-full border border-ink-200 bg-white px-5 py-3 text-sm font-semibold text-ink-900 transition hover:-translate-y-0.5 hover:border-jade-500 hover:text-signal-500"
+      href={actionHref}
+    >
+      {actionLabel}
+    </a>
+  )}
+</div>

@@ -1,0 +1,40 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+---
+
+<BaseLayout description="未找到你访问的页面。" noindex={true} title="页面未找到">
+  <main class="section-shell" id="main-content">
+    <div class="page-shell">
+      <section class="hero-grid overflow-hidden rounded-[2rem] border border-white/10 px-6 py-16 text-white shadow-glow sm:px-10 sm:py-20">
+        <p class="hero-badge">
+          <span class="h-2 w-2 rounded-full bg-gold-300"></span>
+          404 Not Found
+        </p>
+        <h1 class="mt-8 text-5xl font-semibold tracking-tight sm:text-6xl">页面未找到</h1>
+        <p class="mt-5 max-w-2xl text-lg leading-8 text-white/78">
+          你访问的地址可能已变更、暂未创建，或内容仍在整理中。可以先回到首页，或查看新闻与活动入口。
+        </p>
+        <div class="mt-10 flex flex-wrap gap-3">
+          <a
+            class="focus-ring inline-flex items-center justify-center rounded-full bg-jade-300 px-6 py-3 text-sm font-semibold text-ink-950 transition hover:bg-jade-100"
+            href="/"
+          >
+            返回首页
+          </a>
+          <a
+            class="focus-ring inline-flex items-center justify-center rounded-full border border-white/15 bg-white/5 px-6 py-3 text-sm font-semibold text-white transition hover:border-white/25 hover:bg-white/10"
+            href="/news"
+          >
+            查看新闻动态
+          </a>
+          <a
+            class="focus-ring inline-flex items-center justify-center rounded-full border border-white/15 bg-white/5 px-6 py-3 text-sm font-semibold text-white transition hover:border-white/25 hover:bg-white/10"
+            href="/activities"
+          >
+            查看活动中心
+          </a>
+        </div>
+      </section>
+    </div>
+  </main>
+</BaseLayout>

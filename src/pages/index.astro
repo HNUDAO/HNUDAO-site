@@ -1,0 +1,162 @@
+---
+import ActivityCard from "@/components/ActivityCard.astro";
+import CTASection from "@/components/CTASection.astro";
+import GinkgoLeaf from "@/components/GinkgoLeaf.astro";
+import Hero from "@/components/Hero.astro";
+import NewsCard from "@/components/NewsCard.astro";
+import ProjectCard from "@/components/ProjectCard.astro";
+import SectionHeading from "@/components/SectionHeading.astro";
+import Tag from "@/components/Tag.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import {
+  getEntryHref,
+  getFeaturedEntries,
+  isPublished,
+  sortEntriesByDate,
+  takeEntries,
+} from "@/lib/content";
+import { getCollection } from "astro:content";
+import { organizationName, siteDescription } from "@/lib/site";
+
+const newsEntries = sortEntriesByDate((await getCollection("news")).filter(isPublished), "pubDate");
+const activitiesEntries = sortEntriesByDate((await getCollection("activities")).filter(isPublished), "startDate");
+const projectEntries = sortEntriesByDate((await getCollection("projects")).filter(isPublished), "date");
+
+const latestNews = takeEntries(newsEntries, 2);
+const featuredActivity = getFeaturedEntries(activitiesEntries, 1)[0] || activitiesEntries[0];
+const featuredProject = getFeaturedEntries(projectEntries, 1)[0] || projectEntries[0];
+
+const directions = ["Blockchain", "Web3", "Security", "Open Source", "Research", "Practice"];
+---
+
+<BaseLayout description={siteDescription}>
+  <main id="main-content">
+    <Hero />
+
+    <section class="section-shell relative z-20 -mt-[31vh] pb-6 pt-0 sm:-mt-[35vh]" id="home-intro">
+      <div class="page-shell">
+        <div class="home-intro-stage" data-home-content>
+          <GinkgoLeaf class="ginkgo-leaf ginkgo-leaf-content-left hidden lg:block" />
+          <GinkgoLeaf class="ginkgo-leaf ginkgo-leaf-content-right hidden lg:block" />
+
+          <div class="grid gap-4 lg:grid-cols-[1.08fr_0.92fr]">
+            <section class="surface-card px-5 py-6 sm:px-7 sm:py-7">
+              <p class="mb-4 text-xs font-semibold uppercase tracking-[0.28em] text-signal-500">HNUDAO</p>
+              <h1 class="text-balance text-3xl font-semibold tracking-tight text-ink-950 sm:text-[2.45rem]">
+                {organizationName}
+              </h1>
+              <p class="mt-4 max-w-3xl text-base leading-8 text-ink-600">
+                HNUDAO 致力于连接区块链学习、技术实践、开源协作与校园交流，欢迎对 Web3、网络安全、开源技术和青年创新感兴趣的同学持续关注。
+              </p>
+              <div class="mt-7 flex flex-wrap gap-3">
+                <a
+                  class="focus-ring inline-flex items-center justify-center rounded-full bg-signal-500 px-5 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-[#7f0604]"
+                  href="/about"
+                >
+                  了解协会
+                </a>
+                <a
+                  class="glass-button focus-ring inline-flex items-center justify-center rounded-full px-5 py-3 text-sm font-semibold text-ink-900 transition hover:-translate-y-0.5 hover:text-signal-500"
+                  href="/join"
+                >
+                  加入我们
+                </a>
+              </div>
+            </section>
+
+            <section class="surface-card px-5 py-6 sm:px-7 sm:py-7">
+              <p class="mb-4 text-xs font-semibold uppercase tracking-[0.28em] text-signal-500">Focus</p>
+              <div class="flex flex-wrap gap-2">
+                {directions.map((item) => <Tag label={item} />)}
+              </div>
+              <div class="mt-6 grid gap-3 sm:grid-cols-2">
+                <div class="glass-tile px-4 py-4">
+                  <p class="text-sm font-semibold text-ink-950">组织定位</p>
+                  <p class="mt-2.5 text-sm leading-6 text-ink-600">
+                    以校园技术社群的方式组织学习、分享、协作与公开交流。
+                  </p>
+                </div>
+                <div class="glass-tile px-4 py-4">
+                  <p class="text-sm font-semibold text-ink-950">内容方式</p>
+                  <p class="mt-2.5 text-sm leading-6 text-ink-600">
+                    官网承担统一展示，动态内容将同步到公众号、X 与开源平台。
+                  </p>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-shell pt-8 sm:pt-12">
+      <div class="page-shell">
+        <SectionHeading
+          actionHref="/news"
+          actionLabel="查看内容归档"
+          eyebrow="Latest Updates"
+          title="最新动态"
+          description="查看近期发布的协会动态、公开活动与项目入口，快速了解 HNUDAO 正在推进的内容。"
+        />
+
+        <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+          {latestNews.map((entry) => (
+            <NewsCard
+              category={entry.data.category}
+              compact={true}
+              cover={entry.data.cover}
+              date={entry.data.pubDate}
+              description={entry.data.description}
+              featured={entry.data.featured}
+              href={getEntryHref(entry)}
+              tags={entry.data.tags}
+              title={entry.data.title}
+            />
+          ))}
+          {featuredActivity && (
+            <ActivityCard
+              category={featuredActivity.data.category}
+              compact={true}
+              cover={featuredActivity.data.cover}
+              description={featuredActivity.data.description}
+              href={getEntryHref(featuredActivity)}
+              location={featuredActivity.data.location}
+              startDate={featuredActivity.data.startDate}
+              status={featuredActivity.data.status}
+              tags={featuredActivity.data.tags}
+              title={featuredActivity.data.title}
+            />
+          )}
+          {featuredProject && (
+            <ProjectCard
+              compact={true}
+              cover={featuredProject.data.cover}
+              date={featuredProject.data.date}
+              description={featuredProject.data.description}
+              featured={featuredProject.data.featured}
+              href={getEntryHref(featuredProject)}
+              status={featuredProject.data.status}
+              tags={featuredProject.data.tags}
+              title={featuredProject.data.title}
+            />
+          )}
+        </div>
+      </div>
+    </section>
+
+    <section class="section-shell pt-0">
+      <div class="page-shell">
+        <CTASection
+          description="如果你对区块链、开源协作、技术内容创作或校园活动组织感兴趣，欢迎从这里了解协会的参与方式。"
+          eyebrow="Join HNUDAO"
+          primaryHref="/join"
+          primaryLabel="查看加入我们"
+          secondaryHref="/contact"
+          secondaryLabel="联系我们"
+          title="加入 HNUDAO，一起参与学习、分享与项目实践"
+          tone="home"
+        />
+      </div>
+    </section>
+  </main>
+</BaseLayout>

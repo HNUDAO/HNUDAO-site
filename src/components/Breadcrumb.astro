@@ -1,0 +1,34 @@
+---
+type Item = {
+  label: string;
+  href?: string;
+};
+
+type Props = {
+  items: Item[];
+};
+
+const { items } = Astro.props;
+---
+
+<nav aria-label="Breadcrumb" class="mb-6">
+  <ol class="flex flex-wrap items-center gap-2 text-sm text-ink-500">
+    <li>
+      <a class="focus-ring rounded-md px-1 py-0.5 hover:text-ink-900" href="/">首页</a>
+    </li>
+    {items.map((item) => (
+      <>
+        <li aria-hidden="true" class="text-ink-300">/</li>
+        <li>
+          {item.href ? (
+            <a class="focus-ring rounded-md px-1 py-0.5 hover:text-ink-900" href={item.href}>
+              {item.label}
+            </a>
+          ) : (
+            <span class="px-1 py-0.5 font-medium text-ink-700">{item.label}</span>
+          )}
+        </li>
+      </>
+    ))}
+  </ol>
+</nav>

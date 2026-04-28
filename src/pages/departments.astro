@@ -1,0 +1,36 @@
+---
+import DepartmentCard from "@/components/DepartmentCard.astro";
+import EmptyState from "@/components/EmptyState.astro";
+import SectionHeading from "@/components/SectionHeading.astro";
+import ContentLayout from "@/layouts/ContentLayout.astro";
+import { departments } from "@/data/departments";
+---
+
+<ContentLayout
+  breadcrumbs={[{ label: "部门介绍" }]}
+  description="查看 HNUDAO 当前的部门结构与各方向的主要职责。"
+  eyebrow="Departments"
+  title="部门介绍"
+>
+  <section class="section-shell pt-0">
+    <div class="page-shell">
+      <SectionHeading
+        eyebrow="Structure"
+        title="面向长期维护的部门结构"
+        description="HNUDAO 采用面向协作与长期维护的组织方式，覆盖技术、内容、运营、外联与研究等核心方向。"
+      />
+      {departments.length > 0 ? (
+        <div class="grid gap-5 lg:grid-cols-2 xl:grid-cols-3">
+          {departments.map((department) => <DepartmentCard department={department} />)}
+        </div>
+      ) : (
+        <EmptyState
+          actionHref="/contact"
+          actionLabel="联系协会"
+          description="部门信息正在整理中，后续将继续补充各方向的详细说明。"
+          title="部门信息更新中"
+        />
+      )}
+    </div>
+  </section>
+</ContentLayout>

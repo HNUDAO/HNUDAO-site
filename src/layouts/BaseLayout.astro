@@ -1,0 +1,200 @@
+---
+import Footer from "@/components/Footer.astro";
+import GinkgoLeaf from "@/components/GinkgoLeaf.astro";
+import Header from "@/components/Header.astro";
+import { defaultOgImage, siteDescription, siteName, siteUrl } from "@/lib/site";
+import "@/styles/global.css";
+
+type Props = {
+  title?: string;
+  description?: string;
+  image?: string;
+  noindex?: boolean;
+};
+
+const { title, description = siteDescription, image = defaultOgImage, noindex = false } = Astro.props;
+
+const pageTitle = title ? `${title} | ${siteName}` : siteName;
+const canonical = new URL(Astro.url.pathname, siteUrl).toString();
+const imageUrl = new URL(image, siteUrl).toString();
+const isHome = Astro.url.pathname === "/";
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>{pageTitle}</title>
+    <meta content={description} name="description" />
+    <meta content={siteName} property="og:site_name" />
+    <meta content={pageTitle} property="og:title" />
+    <meta content={description} property="og:description" />
+    <meta content="website" property="og:type" />
+    <meta content={canonical} property="og:url" />
+    <meta content={imageUrl} property="og:image" />
+    <meta content="summary_large_image" name="twitter:card" />
+    <meta content={pageTitle} name="twitter:title" />
+    <meta content={description} name="twitter:description" />
+    <meta content={imageUrl} name="twitter:image" />
+    <link href={canonical} rel="canonical" />
+    <link href="/favicon.svg" rel="icon" type="image/svg+xml" />
+    {noindex && <meta content="noindex, nofollow" name="robots" />}
+  </head>
+  <body class:list={["min-h-screen", isHome && "home-page"]}>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <div aria-hidden="true" class="site-ginkgo site-ginkgo-left">
+      <GinkgoLeaf class="site-ginkgo-icon" />
+    </div>
+    <div aria-hidden="true" class="site-ginkgo site-ginkgo-right">
+      <GinkgoLeaf class="site-ginkgo-icon" />
+    </div>
+    <div aria-hidden="true" class="site-ginkgo site-ginkgo-bottom">
+      <GinkgoLeaf class="site-ginkgo-icon" />
+    </div>
+    <Header />
+    <slot />
+    <Footer />
+
+    <script>
+      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const revealItems = document.querySelectorAll("[data-reveal]");
+      const homeCoverShell = document.querySelector("[data-home-cover-shell]");
+      const homeCover = document.querySelector("[data-home-cover]");
+      const homeLogoStage = document.querySelector("[data-home-logo-stage]");
+      const homeContent = document.querySelector("[data-home-content]");
+      const siteHeader = document.querySelector("[data-site-header]");
+      const homeScrollIndicator = document.querySelector("[data-home-scroll-indicator]");
+
+      const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+      const easeOutCubic = (value) => 1 - Math.pow(1 - value, 3);
+      const easeInOutCubic = (value) =>
+        value < 0.5 ? 4 * value * value * value : 1 - Math.pow(-2 * value + 2, 3) / 2;
+
+      const setDefaultHeaderState = () => {
+        if (!(siteHeader instanceof HTMLElement)) {
+          return;
+        }
+
+        siteHeader.style.setProperty("--header-line-opacity", "0.28");
+        siteHeader.style.setProperty("--header-top-opacity", "0.34");
+        siteHeader.style.setProperty("--header-bottom-opacity", "0.22");
+        siteHeader.style.setProperty("--header-highlight-opacity", "0.44");
+        siteHeader.style.setProperty("--header-shadow-opacity", "0.12");
+        siteHeader.style.setProperty("--header-sheen-opacity", "0.62");
+        siteHeader.style.setProperty("--header-blur", "24px");
+      };
+
+      if (prefersReducedMotion) {
+        revealItems.forEach((item) => item.classList.add("is-visible"));
+        setDefaultHeaderState();
+      } else {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          {
+            threshold: 0.16,
+            rootMargin: "0px 0px -48px 0px",
+          },
+        );
+
+        revealItems.forEach((item) => observer.observe(item));
+
+        if (
+          homeCoverShell instanceof HTMLElement &&
+          homeCover instanceof HTMLElement &&
+          homeLogoStage instanceof HTMLElement &&
+          homeContent instanceof HTMLElement
+        ) {
+          document.body.classList.add("home-scroll-transition");
+
+          let ticking = false;
+
+          const updateHomeTransition = () => {
+            const scrollTop = window.scrollY;
+            const shellTop = homeCoverShell.offsetTop;
+            const localScroll = Math.max(scrollTop - shellTop, 0);
+            const viewportHeight = window.innerHeight;
+
+            const logoProgress = clamp(localScroll / (viewportHeight * 0.74), 0, 1);
+            const contentProgress = clamp(
+              (localScroll - viewportHeight * 0.08) / (viewportHeight * 0.62),
+              0,
+              1,
+            );
+            const headerProgress = clamp(
+              (localScroll - viewportHeight * 0.04) / (viewportHeight * 0.28),
+              0,
+              1,
+            );
+            const coverProgress = clamp(localScroll / (viewportHeight * 1.1), 0, 1);
+
+            const logoEase = easeInOutCubic(logoProgress);
+            const contentEase = easeOutCubic(contentProgress);
+            const headerEase = easeOutCubic(headerProgress);
+            const coverEase = easeOutCubic(coverProgress);
+
+            homeCover.style.setProperty("--cover-blur", `${coverEase * 1.5}px`);
+            homeCover.style.setProperty("--cover-brightness", String(1 - coverEase * 0.035));
+
+            homeLogoStage.style.setProperty("--logo-opacity", String(clamp(1 - logoEase * 1.15, 0, 1)));
+            homeLogoStage.style.setProperty("--logo-scale", String(1 - logoEase * 0.42));
+            homeLogoStage.style.setProperty("--logo-translate", `${logoEase * -72}px`);
+            homeLogoStage.style.setProperty("--logo-blur", `${logoEase * 14}px`);
+
+            if (homeScrollIndicator instanceof HTMLElement) {
+              const indicatorProgress = clamp(localScroll / 64, 0, 1);
+              const indicatorEase = easeOutCubic(indicatorProgress);
+              const indicatorOpacity = clamp(1 - indicatorEase * 1.45, 0, 1);
+              homeScrollIndicator.style.setProperty("--scroll-indicator-opacity", String(indicatorOpacity));
+              homeScrollIndicator.style.setProperty(
+                "--scroll-indicator-translate",
+                `${indicatorEase * 26}px`,
+              );
+              homeScrollIndicator.style.setProperty(
+                "--scroll-indicator-visibility",
+                localScroll > 56 ? "hidden" : "visible",
+              );
+              homeScrollIndicator.style.pointerEvents = localScroll > 56 ? "none" : "auto";
+            }
+
+            homeContent.style.setProperty("--content-opacity", String(contentEase));
+            homeContent.style.setProperty("--content-translate", `${(1 - contentEase) * 208}px`);
+            homeContent.style.setProperty("--content-blur", `${(1 - contentEase) * 16}px`);
+
+            if (siteHeader instanceof HTMLElement) {
+              siteHeader.style.setProperty("--header-line-opacity", String(headerEase * 0.44));
+              siteHeader.style.setProperty("--header-top-opacity", String(0.04 + headerEase * 0.36));
+              siteHeader.style.setProperty("--header-bottom-opacity", String(0.02 + headerEase * 0.26));
+              siteHeader.style.setProperty("--header-highlight-opacity", String(0.12 + headerEase * 0.34));
+              siteHeader.style.setProperty("--header-shadow-opacity", String(0.01 + headerEase * 0.16));
+              siteHeader.style.setProperty("--header-sheen-opacity", String(0.18 + headerEase * 0.48));
+              siteHeader.style.setProperty("--header-blur", `${12 + headerEase * 18}px`);
+            }
+
+            ticking = false;
+          };
+
+          const onScroll = () => {
+            if (!ticking) {
+              window.requestAnimationFrame(updateHomeTransition);
+              ticking = true;
+            }
+          };
+
+          updateHomeTransition();
+          window.addEventListener("scroll", onScroll, { passive: true });
+          window.addEventListener("resize", onScroll);
+        } else {
+          setDefaultHeaderState();
+        }
+      }
+    </script>
+  </body>
+</html>

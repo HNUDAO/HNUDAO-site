@@ -1,0 +1,24 @@
+---
+import GinkgoLeaf from "./GinkgoLeaf.astro";
+
+type Props = {
+  eyebrow?: string;
+  title: string;
+  description?: string;
+};
+
+const { eyebrow, title, description } = Astro.props;
+---
+
+<header class="surface-card relative overflow-hidden px-6 py-10 sm:px-10 sm:py-14" data-reveal>
+  <GinkgoLeaf class="page-ginkgo page-ginkgo-left" />
+  <GinkgoLeaf class="page-ginkgo page-ginkgo-right" />
+  <div class="absolute left-0 top-0 h-1.5 w-32 rounded-r-full bg-gradient-to-r from-signal-500 to-jade-500"></div>
+  <div class="absolute inset-y-0 right-0 hidden w-1/3 bg-gradient-to-l from-jade-100/70 to-transparent sm:block"></div>
+  <div class="relative max-w-3xl">
+    {eyebrow && <p class="subtle-label mb-3 !text-signal-500">{eyebrow}</p>}
+    <h1 class="text-balance text-4xl font-semibold tracking-tight text-ink-950 sm:text-5xl">{title}</h1>
+    {description && <p class="mt-5 max-w-2xl text-base leading-8 text-ink-600 sm:text-lg">{description}</p>}
+  </div>
+  <slot name="actions" />
+</header>

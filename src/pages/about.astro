@@ -1,0 +1,105 @@
+---
+import CTASection from "@/components/CTASection.astro";
+import SectionHeading from "@/components/SectionHeading.astro";
+import StatCard from "@/components/StatCard.astro";
+import Timeline from "@/components/Timeline.astro";
+import ContentLayout from "@/layouts/ContentLayout.astro";
+import { timelineItems } from "@/data/timeline";
+---
+
+<ContentLayout
+  breadcrumbs={[{ label: "关于协会" }]}
+  description="了解 HNUDAO 的定位、愿景、使命、组织文化与发展方向。"
+  eyebrow="About HNUDAO"
+  title="关于协会"
+>
+  <section class="section-shell pt-0">
+    <div class="page-shell grid gap-10 xl:grid-cols-[1.1fr_0.9fr]">
+      <div class="surface-card px-6 py-8 sm:px-8">
+        <SectionHeading
+          eyebrow="Introduction"
+          title="HNUDAO 简介"
+          description="HNUDAO 是河南师范大学区块链协会，关注区块链、Web3、网络安全、开源技术与学生创新实践。我们希望把学习、研究、分享与协作连接起来，让更多同学以更低门槛进入真实的技术场景。"
+        />
+        <div class="grid gap-5 md:grid-cols-2">
+          <div class="rounded-3xl border border-ink-100 bg-ink-50 px-5 py-5">
+            <h3 class="text-xl font-semibold text-ink-950">协会愿景</h3>
+            <p class="mt-3 text-base leading-8 text-ink-600">建设一个兼具技术深度、开放氛围与长期协作能力的校园区块链社区。</p>
+          </div>
+          <div class="rounded-3xl border border-ink-100 bg-ink-50 px-5 py-5">
+            <h3 class="text-xl font-semibold text-ink-950">协会使命</h3>
+            <p class="mt-3 text-base leading-8 text-ink-600">通过公开分享、项目实践、内容沉淀与同伴协作，为同学们提供持续成长的技术平台。</p>
+          </div>
+        </div>
+      </div>
+      <div class="grid gap-4 sm:grid-cols-3 xl:grid-cols-1">
+        <StatCard label="成员规模" note="将按学期公开更新" value="更新中" />
+        <StatCard label="活动计划" note="以每学期安排为准" value="持续发布" />
+        <StatCard label="项目方向" note="围绕学习与实践逐步展开" value="建设中" />
+      </div>
+    </div>
+  </section>
+
+  <section class="section-shell bg-white/65">
+    <div class="page-shell">
+      <SectionHeading
+        eyebrow="Culture"
+        title="组织文化"
+        description="我们希望把校园社团的开放氛围与技术社区的协作方式结合起来。"
+      />
+      <div class="grid gap-5 lg:grid-cols-3">
+        <article class="surface-card px-6 py-7">
+          <h3 class="text-2xl font-semibold text-ink-950">开放协作</h3>
+          <p class="mt-4 text-base leading-8 text-ink-600">鼓励跨年级、跨方向合作，欢迎不同背景的同学一起学习和共建。</p>
+        </article>
+        <article class="surface-card px-6 py-7">
+          <h3 class="text-2xl font-semibold text-ink-950">技术实践</h3>
+          <p class="mt-4 text-base leading-8 text-ink-600">重视从知识理解走向真实实践，让分享、项目和复盘形成闭环。</p>
+        </article>
+        <article class="surface-card px-6 py-7">
+          <h3 class="text-2xl font-semibold text-ink-950">长期主义</h3>
+          <p class="mt-4 text-base leading-8 text-ink-600">持续沉淀内容、项目与经验，让每一届成员都能在前人的基础上继续前进。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-shell">
+    <div class="page-shell grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
+      <div class="surface-card px-6 py-8 sm:px-8">
+        <SectionHeading
+          eyebrow="Future"
+          title="后续发展方向"
+          description="协会将围绕技术学习、内容传播、项目孵化与校内外合作持续拓展。"
+        />
+        <ul class="space-y-3 text-base leading-8 text-ink-600">
+          <li>持续组织公开分享、读书交流与基础技术学习活动。</li>
+          <li>逐步沉淀适合校园场景的项目实践、知识资料与开源成果。</li>
+          <li>探索与更多同学、社团和外部社区建立长期协作关系。</li>
+        </ul>
+      </div>
+      <div class="surface-card px-6 py-8 sm:px-8">
+        <SectionHeading
+          eyebrow="Timeline"
+          title="发展历程"
+          description="发展历程以时间线方式展示，便于后续逐年沉淀协会节点。"
+        />
+        <Timeline items={timelineItems} />
+      </div>
+    </div>
+  </section>
+
+  <section class="section-shell pt-0">
+    <div class="page-shell">
+      <CTASection
+        description="如果你希望进一步了解协会的参与方式、关注后续活动，或者与我们建立联系，可以从这里继续查看。"
+        eyebrow="Next Step"
+        primaryHref="/join"
+        primaryLabel="了解加入方式"
+        secondaryHref="/contact"
+        secondaryLabel="联系我们"
+        title="欢迎继续关注 HNUDAO 的后续更新"
+      />
+    </div>
+  </section>
+</ContentLayout>

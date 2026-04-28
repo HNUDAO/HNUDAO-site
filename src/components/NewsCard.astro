@@ -1,0 +1,76 @@
+---
+import { formatDate } from "@/lib/formatDate";
+import { isExternalHref } from "@/lib/content";
+import Tag from "./Tag.astro";
+
+type Props = {
+  href: string;
+  title: string;
+  description: string;
+  date: Date | string;
+  category?: string;
+  tags?: string[];
+  cover?: string;
+  featured?: boolean;
+  compact?: boolean;
+};
+
+const {
+  href,
+  title,
+  description,
+  date,
+  category,
+  tags = [],
+  cover,
+  featured = false,
+  compact = false,
+} = Astro.props;
+
+const isExternal = isExternalHref(href);
+---
+
+<article class:list={["surface-card group flex flex-col overflow-hidden", compact && "surface-card-compact"]} data-reveal>
+  <a
+    class="focus-ring flex h-full flex-col"
+    href={href}
+    rel={isExternal ? "noreferrer" : undefined}
+    target={isExternal ? "_blank" : undefined}
+  >
+    <div class:list={["overflow-hidden bg-ink-100", compact ? "aspect-[16/7.2]" : "aspect-[16/9]"]}>
+      <img
+        alt={`${title} cover`}
+        class="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"
+        height="360"
+        src={cover || "/images/placeholder-cover.svg"}
+        width="640"
+      />
+    </div>
+    <div class:list={["flex h-full flex-col", compact ? "px-4 py-4" : "px-5 py-5 sm:px-6 sm:py-6"]}>
+      <div class="flex flex-wrap items-center gap-2.5">
+        {category && <Tag label={category} variant="accent" />}
+        {featured && <Tag label="Featured" />}
+        <span class="text-xs text-ink-500 sm:text-sm">{formatDate(date)}</span>
+      </div>
+      <h3
+        class:list={[
+          "mt-3 font-semibold tracking-tight text-ink-950 transition group-hover:text-signal-500",
+          compact ? "text-xl leading-7" : "text-[1.45rem] leading-8 sm:text-2xl",
+        ]}
+      >
+        {title}
+      </h3>
+      <p class:list={["mt-2.5 text-ink-600", compact ? "text-sm leading-6" : "text-sm leading-7"]}>
+        {description}
+      </p>
+      {tags.length > 0 && (
+        <div class="mt-4 flex flex-wrap gap-2">
+          {tags.slice(0, compact ? 2 : 3).map((tag) => <Tag label={tag} />)}
+        </div>
+      )}
+      <div class="mt-auto pt-5 text-sm font-medium text-signal-500">
+        {isExternal ? "查看原文" : "查看内容"}
+      </div>
+    </div>
+  </a>
+</article>

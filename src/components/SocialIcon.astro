@@ -1,0 +1,47 @@
+---
+type Props = {
+  platform: "github" | "email" | "website" | "x" | "wechat";
+  label?: string;
+};
+
+const { platform, label } = Astro.props;
+
+const title = label || platform;
+---
+
+{platform === "github" && (
+  <svg aria-hidden="true" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+    <path d="M12 2C6.477 2 2 6.589 2 12.248c0 4.526 2.865 8.367 6.839 9.722.5.095.682-.222.682-.495 0-.244-.009-.891-.014-1.749-2.782.617-3.369-1.37-3.369-1.37-.455-1.175-1.11-1.488-1.11-1.488-.908-.636.069-.623.069-.623 1.004.072 1.532 1.055 1.532 1.055.892 1.565 2.341 1.113 2.91.851.091-.664.349-1.113.635-1.368-2.221-.259-4.555-1.136-4.555-5.058 0-1.118.389-2.033 1.029-2.749-.103-.259-.446-1.302.097-2.714 0 0 .84-.276 2.75 1.05A9.32 9.32 0 0 1 12 6.836a9.3 9.3 0 0 1 2.504.347c1.909-1.326 2.748-1.05 2.748-1.05.544 1.412.201 2.455.099 2.714.641.716 1.028 1.631 1.028 2.749 0 3.932-2.338 4.796-4.566 5.049.359.317.678.943.678 1.901 0 1.373-.012 2.48-.012 2.817 0 .276.18.595.688.494A10.276 10.276 0 0 0 22 12.248C22 6.589 17.523 2 12 2Z"></path>
+  </svg>
+)}
+
+{platform === "email" && (
+  <svg aria-hidden="true" class="h-5 w-5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewBox="0 0 24 24">
+    <path d="M4 6.5h16v11H4z"></path>
+    <path d="m5 7 7 6 7-6"></path>
+  </svg>
+)}
+
+{platform === "website" && (
+  <svg aria-hidden="true" class="h-5 w-5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9"></circle>
+    <path d="M3 12h18"></path>
+    <path d="M12 3a14 14 0 0 1 0 18"></path>
+    <path d="M12 3a14 14 0 0 0 0 18"></path>
+  </svg>
+)}
+
+{platform === "x" && (
+  <svg aria-hidden="true" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+    <path d="M18.901 2H22l-6.77 7.736L23.2 22h-6.246l-4.89-7.41L5.58 22H2.48l7.24-8.276L1.8 2h6.404l4.42 6.742L18.901 2Zm-1.095 18.11h1.717L7.276 3.79H5.434Z"></path>
+  </svg>
+)}
+
+{platform === "wechat" && (
+  <svg aria-hidden="true" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+    <path d="M9.11 4C4.63 4 1 6.91 1 10.49c0 2.02 1.15 3.82 2.94 5.01L3.1 18.8l3.21-1.6c.9.23 1.84.35 2.8.35 4.48 0 8.1-2.91 8.1-6.49S13.59 4 9.11 4Zm-2.8 4.93a.96.96 0 1 1 0 1.92.96.96 0 0 1 0-1.92Zm5.61 1.92a.96.96 0 1 1 0-1.92.96.96 0 0 1 0 1.92Z"></path>
+    <path d="M17.02 10.45c-3.3 0-5.98 2.13-5.98 4.76 0 2.64 2.68 4.79 5.98 4.79.7 0 1.37-.1 2-.3L22 21.2l-.82-2.57c1.13-.86 1.82-2.06 1.82-3.42 0-2.63-2.68-4.76-5.98-4.76Zm-2.05 3.89a.72.72 0 1 1 0 1.44.72.72 0 0 1 0-1.44Zm4.11 1.44a.72.72 0 1 1 0-1.44.72.72 0 0 1 0 1.44Z"></path>
+  </svg>
+)}
+
+<span class="sr-only">{title}</span>

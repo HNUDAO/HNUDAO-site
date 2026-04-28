@@ -1,0 +1,34 @@
+---
+import Breadcrumb from "@/components/Breadcrumb.astro";
+import PageHeader from "@/components/PageHeader.astro";
+import BaseLayout from "./BaseLayout.astro";
+
+type BreadcrumbItem = {
+  label: string;
+  href?: string;
+};
+
+type Props = {
+  title: string;
+  description?: string;
+  eyebrow?: string;
+  image?: string;
+  breadcrumbs?: BreadcrumbItem[];
+};
+
+const { title, description, eyebrow, image, breadcrumbs = [] } = Astro.props;
+---
+
+<BaseLayout description={description} image={image} title={title}>
+  <main id="main-content">
+    <section class="section-shell">
+      <div class="page-shell">
+        {breadcrumbs.length > 0 && <Breadcrumb items={breadcrumbs} />}
+        <PageHeader description={description} eyebrow={eyebrow} title={title}>
+          <slot name="actions" slot="actions" />
+        </PageHeader>
+      </div>
+    </section>
+    <slot />
+  </main>
+</BaseLayout>

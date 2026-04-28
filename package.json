@@ -1,0 +1,45 @@
+{
+  "name": "hnudao-site",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Static official website project for HNUDAO built with Astro, TypeScript, Tailwind CSS and Markdown content collections.",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "start": "astro preview",
+    "astro": "astro"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HNUDAO/HNUDAO-site.git"
+  },
+  "keywords": [
+    "astro",
+    "tailwindcss",
+    "typescript",
+    "markdown",
+    "vercel",
+    "student-association"
+  ],
+  "author": "HNUDAO",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/HNUDAO/HNUDAO-site/issues"
+  },
+  "homepage": "https://github.com/HNUDAO/HNUDAO-site#readme",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "devDependencies": {
+    "@astrojs/mdx": "^5.0.4",
+    "@astrojs/sitemap": "^3.7.2",
+    "@astrojs/tailwind": "^6.0.2",
+    "astro": "^6.1.10",
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^3.4.18",
+    "typescript": "^5.9.3"
+  }
+}

@@ -1,0 +1,76 @@
+---
+import EmptyState from "@/components/EmptyState.astro";
+import MemberCard from "@/components/MemberCard.astro";
+import SectionHeading from "@/components/SectionHeading.astro";
+import ContentLayout from "@/layouts/ContentLayout.astro";
+import { members } from "@/data/members";
+---
+
+<ContentLayout
+  breadcrumbs={[{ label: "成员风采" }]}
+  description="成员页面将按学期与授权情况逐步更新，当前先保留展示结构与筛选框架。"
+  eyebrow="Members"
+  title="成员风采"
+>
+  <section class="section-shell pt-0">
+    <div class="page-shell">
+      <div class="surface-card px-6 py-6 sm:px-8">
+        <SectionHeading
+          eyebrow="Filter UI"
+          title="筛选框架已预留"
+          description="后续将支持按届次、部门与角色查看成员信息。当前页面先保留公开展示框架，待授权后陆续更新成员资料。"
+        />
+        <form class="grid gap-4 md:grid-cols-3" onsubmit="return false;">
+          <label class="grid gap-2 text-sm font-medium text-ink-700">
+            届次
+            <select class="focus-ring rounded-2xl border border-ink-200 bg-white px-4 py-3 text-sm text-ink-700">
+              <option>全部</option>
+              <option>本届成员</option>
+              <option>往届成员</option>
+            </select>
+          </label>
+          <label class="grid gap-2 text-sm font-medium text-ink-700">
+            部门
+            <select class="focus-ring rounded-2xl border border-ink-200 bg-white px-4 py-3 text-sm text-ink-700">
+              <option>全部部门</option>
+              <option>技术部</option>
+              <option>宣传部</option>
+              <option>运营部</option>
+              <option>外联部</option>
+              <option>学术研究部</option>
+            </select>
+          </label>
+          <label class="grid gap-2 text-sm font-medium text-ink-700">
+            角色
+            <select class="focus-ring rounded-2xl border border-ink-200 bg-white px-4 py-3 text-sm text-ink-700">
+              <option>全部角色</option>
+              <option>理事会</option>
+              <option>核心成员</option>
+              <option>成员</option>
+            </select>
+          </label>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-shell pt-0">
+    <div class="page-shell">
+      {members.length > 0 ? (
+        <>
+          <p class="mb-6 text-sm text-ink-500">成员信息将按授权情况逐步公开更新。</p>
+          <div class="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+            {members.map((member) => <MemberCard member={member} />)}
+          </div>
+        </>
+      ) : (
+        <EmptyState
+          actionHref="/contact"
+          actionLabel="联系协会"
+          description="出于隐私和信息准确性考虑，成员名单将在本人授权和学期更新后逐步公开。"
+          title="成员名单更新中"
+        />
+      )}
+    </div>
+  </section>
+</ContentLayout>

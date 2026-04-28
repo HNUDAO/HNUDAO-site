@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" role="img" aria-labelledby="coverTitle">
+  <title id="coverTitle">HNUDAO placeholder cover</title>
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1220" />
+      <stop offset="55%" stop-color="#16304a" />
+      <stop offset="100%" stop-color="#10263b" />
+    </linearGradient>
+    <radialGradient id="glowA" cx="30%" cy="30%" r="45%">
+      <stop offset="0%" stop-color="#58c9b7" stop-opacity="0.48" />
+      <stop offset="100%" stop-color="#58c9b7" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="glowB" cx="80%" cy="20%" r="35%">
+      <stop offset="0%" stop-color="#d9b45a" stop-opacity="0.4" />
+      <stop offset="100%" stop-color="#d9b45a" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="720" fill="url(#bg)" />
+  <rect width="1200" height="720" fill="url(#glowA)" />
+  <rect width="1200" height="720" fill="url(#glowB)" />
+  <g stroke="rgba(173,205,231,0.18)" stroke-width="1">
+    <path d="M0 120H1200" />
+    <path d="M0 240H1200" />
+    <path d="M0 360H1200" />
+    <path d="M0 480H1200" />
+    <path d="M0 600H1200" />
+    <path d="M150 0V720" />
+    <path d="M330 0V720" />
+    <path d="M510 0V720" />
+    <path d="M690 0V720" />
+    <path d="M870 0V720" />
+    <path d="M1050 0V720" />
+  </g>
+  <rect x="96" y="104" width="1008" height="512" rx="32" fill="rgba(8,18,31,0.42)" stroke="rgba(226,240,251,0.16)" />
+  <text x="140" y="272" fill="#eaf1f8" font-size="78" font-family="system-ui, sans-serif" font-weight="700">HNUDAO</text>
+  <text x="140" y="336" fill="#7edcc5" font-size="28" font-family="system-ui, sans-serif">Placeholder Cover</text>
+  <text x="140" y="392" fill="#cad8e8" font-size="28" font-family="system-ui, sans-serif">For news, activities and projects</text>
+  <text x="140" y="500" fill="#9db5cf" font-size="24" font-family="system-ui, sans-serif">Replace with authorized artwork later</text>
+</svg>

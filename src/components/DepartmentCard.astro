@@ -1,0 +1,42 @@
+---
+import type { Department } from "@/data/departments";
+import Tag from "./Tag.astro";
+
+type Props = {
+  department: Department;
+};
+
+const { department } = Astro.props;
+---
+
+<article class="surface-card flex h-full flex-col px-6 py-7" data-reveal>
+  <div class="flex items-start justify-between gap-4">
+    <div>
+      <p class="subtle-label">Department</p>
+      <h3 class="mt-3 text-2xl font-semibold text-ink-950">{department.name}</h3>
+    </div>
+    <div class="rounded-2xl bg-ink-100 px-4 py-3 text-right">
+      <p class="text-xs uppercase tracking-[0.2em] text-ink-500">成员规模</p>
+      <p class="mt-2 text-sm font-semibold text-ink-800">{department.membersCount}</p>
+    </div>
+  </div>
+  <p class="mt-5 text-base leading-7 text-ink-600">{department.description}</p>
+  <div class="mt-6">
+    <p class="text-sm font-semibold text-ink-900">核心职责</p>
+    <ul class="mt-3 space-y-2 text-sm leading-7 text-ink-600">
+      {department.responsibilities.map((item) => (
+        <li class="flex gap-3">
+          <span aria-hidden="true" class="mt-2 h-2 w-2 rounded-full bg-jade-500"></span>
+          <span>{item}</span>
+        </li>
+      ))}
+    </ul>
+  </div>
+  <div class="mt-6 flex flex-wrap gap-2">
+    {department.tags.map((tag) => <Tag label={tag} />)}
+  </div>
+  <div class="mt-6 grid gap-3 rounded-2xl bg-ink-50 px-4 py-4 text-sm text-ink-600 sm:grid-cols-2">
+    <p><span class="font-semibold text-ink-900">负责人：</span>{department.lead}</p>
+    <p><span class="font-semibold text-ink-900">联系：</span>{department.contact}</p>
+  </div>
+</article>
