@@ -1,7 +1,7 @@
 ---
 title: "新学期公开分享活动筹备中"
 description: "面向校内同学的公开分享活动正在筹备，主题、地点与报名方式将以正式通知为准。"
-startDate: 2026-05-12
+startDate: 2026-04-29
 endDate: 2026-05-12
 location: "校内场地申请中"
 status: "upcoming"

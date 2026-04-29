@@ -1,7 +1,7 @@
 ---
 title: "HNUDAO 官网项目"
 description: "协会官网作为首个公开项目，用于统一展示组织信息、活动入口与内容更新。"
-date: 2026-04-28
+date: 2026-04-29
 status: "planning"
 tags: ["官网", "开源", "基础设施"]
 cover: "/images/placeholder-cover.svg"

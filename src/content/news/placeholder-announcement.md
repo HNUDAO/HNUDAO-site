@@ -1,7 +1,7 @@
 ---
 title: "官方渠道说明"
 description: "当前可公开访问的官方渠道包括官网、GitHub、X 与微信公众号。"
-pubDate: 2026-04-12
+pubDate: 2026-04-29
 author: "HNUDAO"
 category: "通知公告"
 tags: ["公告", "官方渠道"]

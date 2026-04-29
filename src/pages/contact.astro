@@ -8,6 +8,7 @@ const contactCards = [
   { label: "邮箱", value: contactInfo.email, href: `mailto:${contactInfo.email}` },
   { label: "微信公众号", value: contactInfo.wechatOfficial },
   { label: "QQ 群", value: contactInfo.qqGroup },
+  { label: "Telegram", value: contactInfo.telegramGroup, href: "#telegram" },
   { label: "GitHub", value: contactInfo.github, href: contactInfo.github },
   { label: "X", value: contactInfo.x, href: contactInfo.x },
   { label: "地址", value: contactInfo.address },
@@ -51,8 +52,8 @@ const contactCards = [
             <a
               class="focus-ring inline-flex h-12 w-12 items-center justify-center rounded-full border border-ink-200 bg-white text-ink-800 transition hover:border-signal-500 hover:text-signal-500"
               href={link.href}
-              rel="noreferrer"
-              target={link.platform === "email" ? undefined : "_blank"}
+              rel={link.href.startsWith("http") ? "noreferrer" : undefined}
+              target={link.href.startsWith("http") ? "_blank" : undefined}
             >
               <SocialIcon label={link.label} platform={link.platform} />
             </a>
@@ -67,8 +68,8 @@ const contactCards = [
               <a
                 class="mt-4 block text-xl font-semibold text-ink-950 transition hover:text-signal-500"
                 href={item.href}
-                rel={item.href.startsWith("mailto:") ? undefined : "noreferrer"}
-                target={item.href.startsWith("mailto:") ? undefined : "_blank"}
+                rel={item.href.startsWith("http") ? "noreferrer" : undefined}
+                target={item.href.startsWith("http") ? "_blank" : undefined}
               >
                 {item.value}
               </a>

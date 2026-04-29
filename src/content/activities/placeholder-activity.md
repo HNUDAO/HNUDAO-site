@@ -1,7 +1,7 @@
 ---
 title: "学期活动日历将陆续发布"
 description: "协会将在学期内陆续发布公开分享、工作坊与社群活动安排。"
-startDate: 2026-05-20
+startDate: 2026-04-29
 endDate: 2026-05-20
 location: "以后续活动通知为准"
 status: "upcoming"

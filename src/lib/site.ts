@@ -12,7 +12,7 @@ export type QuickLink = {
 export type SocialLink = {
   label: string;
   href: string;
-  platform: "github" | "x" | "wechat" | "email";
+  platform: "github" | "x" | "wechat" | "email" | "telegram";
 };
 
 export type FooterGroup = {
@@ -41,6 +41,7 @@ export const navItems: NavItem[] = [
   { label: "活动中心", href: "/activities" },
   { label: "项目展示", href: "/projects" },
   { label: "加入我们", href: "/join" },
+  { label: "赞助我们", href: "/sponsor" },
   { label: "联系我们", href: "/contact" },
 ];
 
@@ -65,12 +66,18 @@ export const quickLinks: QuickLink[] = [
     description: "了解协会方向、参与方式、招新流程与常见问题。",
     href: "/join",
   },
+  {
+    title: "赞助我们",
+    description: "查看 HNUDAO 的链上赞助地址，支持协会活动、内容与项目建设。",
+    href: "/sponsor",
+  },
 ];
 
 export const socialLinks: SocialLink[] = [
   { label: "邮箱", href: "mailto:contact@mail.hnudao.cn", platform: "email" },
   { label: "GitHub", href: "https://github.com/HNUDAO", platform: "github" },
   { label: "X", href: "https://x.com/HNUBlockchain", platform: "x" },
+  { label: "Telegram", href: "#telegram", platform: "telegram" },
   { label: "微信公众号", href: "#", platform: "wechat" },
 ];
 
@@ -78,6 +85,7 @@ export const contactInfo = {
   email: "contact@mail.hnudao.cn",
   wechatOfficial: "悬停公众号图标即可查看二维码",
   qqGroup: "QQ群将在招新季或公开活动期间开放",
+  telegramGroup: "Telegram 社群筹备中，开放后将在官网与 X 同步公布",
   github: "https://github.com/HNUDAO",
   x: "https://x.com/HNUBlockchain",
   address: "中国大陆河南省新乡市建设东路46号河南师范大学",
@@ -91,6 +99,7 @@ export const footerLinks: FooterGroup[] = [
       { label: "首页", href: "/" },
       { label: "关于协会", href: "/about" },
       { label: "加入我们", href: "/join" },
+      { label: "赞助我们", href: "/sponsor" },
       { label: "联系我们", href: "/contact" },
     ],
   },

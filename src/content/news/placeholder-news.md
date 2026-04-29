@@ -1,7 +1,7 @@
 ---
 title: "内容发布与更新说明"
 description: "官网将持续同步协会新闻、公开分享、项目进展与阶段性公告。"
-pubDate: 2026-04-20
+pubDate: 2026-04-29
 author: "HNUDAO"
 category: "内容发布"
 tags: ["新闻", "更新说明"]

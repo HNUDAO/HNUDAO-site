@@ -1,7 +1,7 @@
 ---
 title: "校园区块链知识库方向"
 description: "协会计划逐步沉淀适合校园学习的区块链与开源资料，形成可持续更新的知识库。"
-date: 2026-04-18
+date: 2026-04-29
 status: "active"
 tags: ["知识库", "学习资料"]
 cover: "/images/placeholder-cover.svg"

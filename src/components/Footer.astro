@@ -40,8 +40,8 @@ import SocialIcon from "./SocialIcon.astro";
               <a
                 class="focus-ring inline-flex h-12 w-12 items-center justify-center rounded-full border border-jade-500/20 bg-white/5 text-white transition hover:border-jade-500/40 hover:bg-white/10"
                 href={link.href}
-                rel="noreferrer"
-                target={link.platform === "email" ? undefined : "_blank"}
+                rel={link.href.startsWith("http") ? "noreferrer" : undefined}
+                target={link.href.startsWith("http") ? "_blank" : undefined}
               >
                 <SocialIcon label={link.label} platform={link.platform} />
               </a>
