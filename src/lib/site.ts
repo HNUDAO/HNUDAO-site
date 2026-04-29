@@ -77,7 +77,7 @@ export const socialLinks: SocialLink[] = [
   { label: "邮箱", href: "mailto:contact@mail.hnudao.cn", platform: "email" },
   { label: "GitHub", href: "https://github.com/HNUDAO", platform: "github" },
   { label: "X", href: "https://x.com/HNUBlockchain", platform: "x" },
-  { label: "Telegram", href: "#telegram", platform: "telegram" },
+  { label: "Telegram", href: "https://t.me/+krLRGRCmEoxjNjFh", platform: "telegram" },
   { label: "微信公众号", href: "#", platform: "wechat" },
 ];
 
@@ -85,7 +85,7 @@ export const contactInfo = {
   email: "contact@mail.hnudao.cn",
   wechatOfficial: "悬停公众号图标即可查看二维码",
   qqGroup: "QQ群将在招新季或公开活动期间开放",
-  telegramGroup: "Telegram 社群筹备中，开放后将在官网与 X 同步公布",
+  telegramGroup: "https://t.me/+krLRGRCmEoxjNjFh",
   github: "https://github.com/HNUDAO",
   x: "https://x.com/HNUBlockchain",
   address: "中国大陆河南省新乡市建设东路46号河南师范大学",
