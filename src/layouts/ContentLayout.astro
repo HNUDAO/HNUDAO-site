@@ -21,7 +21,7 @@ const { title, description, eyebrow, image, breadcrumbs = [] } = Astro.props;
 
 <BaseLayout description={description} image={image} title={title}>
   <main id="main-content">
-    <section class="section-shell">
+    <section class="pt-8 pb-5 sm:pt-10 sm:pb-6">
       <div class="page-shell">
         {breadcrumbs.length > 0 && <Breadcrumb items={breadcrumbs} />}
         <PageHeader description={description} eyebrow={eyebrow} title={title}>

@@ -70,7 +70,7 @@ img {
 }
 
 .section-shell {
-  @apply py-14 sm:py-20;
+  @apply py-10 sm:py-12;
 }
 
 .surface-card,

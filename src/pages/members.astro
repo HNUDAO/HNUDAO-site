@@ -4,21 +4,43 @@ import MemberCard from "@/components/MemberCard.astro";
 import SectionHeading from "@/components/SectionHeading.astro";
 import ContentLayout from "@/layouts/ContentLayout.astro";
 import { members } from "@/data/members";
+
+const advisorMembers = members.filter((member) => member.group === "advisor");
+const studentMembers = members.filter((member) => member.group === "member");
 ---
 
 <ContentLayout
   breadcrumbs={[{ label: "成员风采" }]}
-  description="成员页面将按学期与授权情况逐步更新，当前先保留展示结构与筛选框架。"
+  description="成员页面将按学期与授权情况逐步更新，当前已公开指导老师信息，并保留学生成员展示与筛选框架。"
   eyebrow="Members"
   title="成员风采"
 >
-  <section class="section-shell pt-0">
+  <section class="section-shell -mt-8 pb-6 pt-0 sm:-mt-10 sm:pb-8">
+    <div class="page-shell">
+      <div class="grid gap-4 xl:grid-cols-[0.92fr_1.08fr]">
+        <div class="surface-card px-6 py-6 sm:px-8">
+          <SectionHeading
+            eyebrow="Advisors"
+            title="指导老师"
+            description="以下介绍根据校内公开页面整理，当前仅保留简要信息与官方入口。"
+          />
+          <p class="text-sm leading-7 text-ink-600">
+            协会的学生成员信息将按授权逐步公开，指导老师部分先作为当前对外展示的核心成员信息。
+          </p>
+        </div>
+        <div class="grid gap-4 md:grid-cols-2">
+          {advisorMembers.map((member) => <MemberCard member={member} />)}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-shell pb-6 pt-0 sm:pb-8">
     <div class="page-shell">
       <div class="surface-card px-6 py-6 sm:px-8">
         <SectionHeading
           eyebrow="Filter UI"
-          title="筛选框架已预留"
-          description="后续将支持按届次、部门与角色查看成员信息。当前页面先保留公开展示框架，待授权后陆续更新成员资料。"
+          title="筛选"
         />
         <form class="grid gap-4 md:grid-cols-3" onsubmit="return false;">
           <label class="grid gap-2 text-sm font-medium text-ink-700">
@@ -56,19 +78,19 @@ import { members } from "@/data/members";
 
   <section class="section-shell pt-0">
     <div class="page-shell">
-      {members.length > 0 ? (
+      {studentMembers.length > 0 ? (
         <>
           <p class="mb-6 text-sm text-ink-500">成员信息将按授权情况逐步公开更新。</p>
           <div class="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-            {members.map((member) => <MemberCard member={member} />)}
+            {studentMembers.map((member) => <MemberCard member={member} />)}
           </div>
         </>
       ) : (
         <EmptyState
           actionHref="/contact"
           actionLabel="联系协会"
-          description="出于隐私和信息准确性考虑，成员名单将在本人授权和学期更新后逐步公开。"
-          title="成员名单更新中"
+          description="出于隐私和信息准确性考虑，学生成员名单将在本人授权和学期更新后逐步公开。"
+          title="学生成员名单更新中"
         />
       )}
     </div>

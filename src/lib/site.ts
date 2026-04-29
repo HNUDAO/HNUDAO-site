@@ -35,13 +35,10 @@ export const defaultOgImage = "/images/placeholder-cover.svg";
 export const navItems: NavItem[] = [
   { label: "首页", href: "/" },
   { label: "关于协会", href: "/about" },
-  { label: "部门介绍", href: "/departments" },
   { label: "成员风采", href: "/members" },
-  { label: "新闻动态", href: "/news" },
-  { label: "活动中心", href: "/activities" },
+  { label: "动态资讯", href: "/news" },
   { label: "项目展示", href: "/projects" },
   { label: "加入我们", href: "/join" },
-  { label: "赞助我们", href: "/sponsor" },
   { label: "联系我们", href: "/contact" },
 ];
 
