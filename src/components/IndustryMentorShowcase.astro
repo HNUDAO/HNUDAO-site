@@ -1,0 +1,256 @@
+---
+import GinkgoLeaf from "@/components/GinkgoLeaf.astro";
+---
+
+<section class="special-feature-section section-shell pt-5 sm:pt-6" aria-labelledby="special-feature-heading">
+  <div class="page-shell">
+    <div class="mb-7 flex flex-col gap-4 text-left" data-reveal>
+      <div class="mb-1 flex items-center gap-3">
+        <span aria-hidden="true" class="h-px w-10 bg-[rgba(170,0,13,0.62)]"></span>
+        <p class="subtle-label !text-[#8e1c23]">SPECIAL FEATURE</p>
+      </div>
+      <div class="max-w-3xl">
+        <h2
+          id="special-feature-heading"
+          class="text-balance text-[2rem] font-semibold tracking-tight text-[#231d19] sm:text-[2.3rem]"
+        >
+          特邀导师与研究成果
+        </h2>
+        <p class="mt-3 max-w-2xl text-base leading-7 text-[#7a6658]">
+          聚焦产业合作、导师支持与研究成果展示。
+        </p>
+      </div>
+    </div>
+
+    <div class="mentor-research-card" data-reveal>
+      <GinkgoLeaf
+        class="pointer-events-none absolute left-[-1.45rem] top-[1.7rem] z-0 hidden w-[4.9rem] rotate-[-18deg] text-[rgba(214,190,151,0.14)] md:block"
+      />
+      <GinkgoLeaf
+        class="pointer-events-none absolute bottom-[1.1rem] right-[-1.15rem] z-0 hidden w-[4.4rem] rotate-[18deg] text-[rgba(214,190,151,0.18)] md:block"
+      />
+      <GinkgoLeaf
+        class="pointer-events-none absolute bottom-[1.55rem] right-[3.35rem] z-0 hidden w-[3.1rem] rotate-[24deg] text-[rgba(170,0,13,0.06)] md:block"
+      />
+
+      <div class="grid gap-0 lg:grid-cols-[minmax(0,1.06fr)_1px_minmax(0,0.94fr)]">
+        <section class="mentor-panel">
+          <div class="flex items-center gap-3">
+            <p class="special-feature-kicker">VIP AREA</p>
+            <span aria-hidden="true" class="h-2 w-2 rounded-full bg-[#aa000d]"></span>
+          </div>
+
+          <h3 class="mt-3 text-balance text-[1.3rem] font-semibold tracking-tight text-[#f6efe5] sm:text-[1.52rem]">
+            特邀行业导师 / Industry Partner &amp; Mentor
+          </h3>
+
+          <div class="mt-6 grid items-center gap-5 sm:grid-cols-[96px_minmax(0,1fr)] sm:gap-6 lg:grid-cols-[108px_minmax(0,1fr)]">
+            <div class="mentor-logo-frame">
+              <img
+                src="/Logos/Aipha/Aipha Logo.svg"
+                alt="Aipha Brain Lab Logo"
+                class="h-full w-full object-contain"
+                loading="lazy"
+              />
+            </div>
+
+            <div class="min-w-0">
+              <p class="text-[1rem] font-medium leading-7 text-[#f2e9dc] sm:text-[1.05rem]">
+                Aipha Brain Lab（艾法智能脑实验室）
+              </p>
+              <p class="mt-2 text-[1.14rem] font-semibold tracking-tight text-[#f6efe5] sm:text-[1.28rem]">
+                梁泽波 Zebo Liang
+              </p>
+              <p class="mt-2 text-sm leading-7 text-[rgba(246,239,229,0.76)] sm:text-[0.95rem]">
+                创始人兼首席人工智能交易研究员
+              </p>
+
+              <div class="mt-4">
+                <span class="special-feature-pill">
+                  <span aria-hidden="true" class="special-feature-pill__star">★</span>
+                  HNUDAO 特邀行业导师
+                </span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <div class="mentor-research-divider" aria-hidden="true"></div>
+
+        <section class="research-panel">
+          <p class="special-feature-kicker">RESEARCH</p>
+
+          <h3 class="mt-3 text-balance text-[1.3rem] font-semibold tracking-tight text-[#f6efe5] sm:text-[1.52rem]">
+            前沿课题 / Research
+          </h3>
+
+          <p class="mt-5 max-w-[28rem] text-[1rem] font-medium leading-8 text-[#f2e9dc] sm:text-[1.08rem]">
+            <span class="block">《Exact and Verifiable B-Privacy for</span>
+            <span class="block">Weighted DAO Voting via Off-chain PSI》</span>
+          </p>
+
+          <p class="mt-3 max-w-[28rem] text-sm italic leading-7 text-[rgba(246,239,229,0.64)] sm:text-[0.95rem]">
+            Special thanks to our exclusive industry data supporter: Aipha Brain Lab
+          </p>
+
+          <div class="mt-5">
+            <span class="special-feature-pill">EXCLUSIVE DATA SUPPORT</span>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .mentor-research-card {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(214, 190, 151, 0.22);
+    border-radius: 24px;
+    background:
+      radial-gradient(circle at 16% 14%, rgba(170, 0, 13, 0.07), transparent 28%),
+      radial-gradient(circle at 52% -6%, rgba(214, 190, 151, 0.08), transparent 34%),
+      radial-gradient(circle at 78% 24%, rgba(214, 190, 151, 0.045), transparent 28%),
+      linear-gradient(135deg, #1b1817 0%, #231e1b 36%, #1f2228 100%);
+    box-shadow:
+      inset 0 1px 0 rgba(246, 239, 229, 0.04),
+      inset 0 0 0 1px rgba(214, 190, 151, 0.06),
+      0 14px 36px rgba(32, 24, 20, 0.12);
+    color: #f6efe5;
+  }
+
+  .mentor-research-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(180deg, rgba(246, 239, 229, 0.035), transparent 34%),
+      linear-gradient(90deg, transparent 0%, rgba(214, 190, 151, 0.035) 48%, transparent 100%);
+    pointer-events: none;
+  }
+
+  .mentor-research-card::after {
+    content: "";
+    position: absolute;
+    left: 29%;
+    top: -7%;
+    width: 42%;
+    height: 22%;
+    background: radial-gradient(ellipse at center, rgba(214, 190, 151, 0.12), transparent 72%);
+    filter: blur(10px);
+    opacity: 0.42;
+    pointer-events: none;
+  }
+
+  .mentor-panel,
+  .research-panel {
+    position: relative;
+    z-index: 1;
+    min-height: 236px;
+    padding: clamp(1.6rem, 2.2vw, 2.75rem);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .mentor-panel {
+    padding-right: clamp(1.6rem, 2vw, 2.4rem);
+  }
+
+  .research-panel {
+    padding-left: clamp(1.6rem, 2vw, 2.4rem);
+  }
+
+  .mentor-research-divider {
+    width: 1px;
+    background: rgba(214, 190, 151, 0.16);
+  }
+
+  .special-feature-kicker {
+    margin: 0;
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 0.32em;
+    color: #d6be97;
+  }
+
+  .mentor-logo-frame {
+    display: grid;
+    place-items: center;
+    width: 96px;
+    height: 96px;
+    padding: 0.8rem;
+    border: 1px solid rgba(214, 190, 151, 0.24);
+    border-radius: 22px;
+    background:
+      linear-gradient(180deg, #121110 0%, #171514 100%);
+    box-shadow:
+      inset 0 1px 0 rgba(246, 239, 229, 0.05),
+      inset 0 0 0 1px rgba(214, 190, 151, 0.05),
+      0 10px 24px rgba(12, 9, 8, 0.18);
+  }
+
+  .special-feature-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    border-radius: 9999px;
+    border: 1px solid rgba(214, 190, 151, 0.35);
+    padding: 0.55rem 0.88rem;
+    background: rgba(214, 190, 151, 0.04);
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #d6be97;
+    box-shadow: inset 0 1px 0 rgba(246, 239, 229, 0.045);
+    white-space: nowrap;
+  }
+
+  .special-feature-pill__star {
+    font-size: 0.82rem;
+    line-height: 1;
+    color: #c9ae84;
+  }
+
+  @media (min-width: 640px) {
+    .mentor-logo-frame {
+      width: 108px;
+      height: 108px;
+    }
+  }
+
+  @media (max-width: 1023px) {
+    .mentor-panel,
+    .research-panel {
+      min-height: 0;
+    }
+
+    .mentor-research-divider {
+      width: auto;
+      height: 1px;
+      margin: 0 clamp(1.6rem, 2.2vw, 2.75rem);
+    }
+
+    .research-panel {
+      padding-top: 1.4rem;
+    }
+  }
+
+  @media (max-width: 639px) {
+    .mentor-panel,
+    .research-panel {
+      padding: 1.4rem;
+    }
+
+    .mentor-research-divider {
+      margin: 0 1.4rem;
+    }
+
+    .special-feature-pill {
+      white-space: normal;
+      line-height: 1.5;
+    }
+  }
+</style>
