@@ -44,13 +44,19 @@ const isHome = Astro.url.pathname === "/";
   <body class:list={["min-h-screen", isHome && "home-page"]}>
     <a class="skip-link" href="#main-content">Skip to main content</a>
     <div aria-hidden="true" class="site-ginkgo site-ginkgo-left">
-      <GinkgoLeaf class="site-ginkgo-icon" />
+      <GinkgoLeaf class="site-ginkgo-icon" variant="leaf3" />
+    </div>
+    <div aria-hidden="true" class="site-ginkgo site-ginkgo-upper-right">
+      <GinkgoLeaf class="site-ginkgo-icon" variant="leaf1" />
     </div>
     <div aria-hidden="true" class="site-ginkgo site-ginkgo-right">
-      <GinkgoLeaf class="site-ginkgo-icon" />
+      <GinkgoLeaf class="site-ginkgo-icon" variant="leaf3" />
+    </div>
+    <div aria-hidden="true" class="site-ginkgo site-ginkgo-mid-left">
+      <GinkgoLeaf class="site-ginkgo-icon" variant="leaf2" />
     </div>
     <div aria-hidden="true" class="site-ginkgo site-ginkgo-bottom">
-      <GinkgoLeaf class="site-ginkgo-icon" />
+      <GinkgoLeaf class="site-ginkgo-icon" variant="leaf4" />
     </div>
     <Header />
     <slot />
@@ -165,8 +171,8 @@ const isHome = Astro.url.pathname === "/";
             }
 
             homeContent.style.setProperty("--content-opacity", String(contentEase));
-            homeContent.style.setProperty("--content-translate", `${(1 - contentEase) * 208}px`);
-            homeContent.style.setProperty("--content-blur", `${(1 - contentEase) * 16}px`);
+            homeContent.style.setProperty("--content-translate", `${(1 - contentEase) * 160}px`);
+            homeContent.style.setProperty("--content-blur", `${(1 - contentEase) * 12}px`);
 
             if (siteHeader instanceof HTMLElement) {
               siteHeader.style.setProperty("--header-line-opacity", String(headerEase * 0.44));

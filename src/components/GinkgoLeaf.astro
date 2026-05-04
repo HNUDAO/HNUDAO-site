@@ -1,118 +1,24 @@
 ---
+import Leaf1 from "@/components/GinkgoLeaf/Leaf1.astro";
+import Leaf2 from "@/components/GinkgoLeaf/Leaf2.astro";
+import Leaf3 from "@/components/GinkgoLeaf/Leaf3.astro";
+import Leaf4 from "@/components/GinkgoLeaf/Leaf4.astro";
+
 type Props = {
   class?: string;
+  variant?: "leaf1" | "leaf2" | "leaf3" | "leaf4";
 };
 
-const { class: className = "" } = Astro.props;
+const { class: className = "", variant = "leaf3" } = Astro.props;
+
+const variants = {
+  leaf1: Leaf1,
+  leaf2: Leaf2,
+  leaf3: Leaf3,
+  leaf4: Leaf4,
+};
+
+const LeafComponent = variants[variant];
 ---
 
-<svg
-  aria-hidden="true"
-  class={className}
-  fill="none"
-  viewBox="0 0 220 220"
-  xmlns="http://www.w3.org/2000/svg"
->
-  <g stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-    <!-- 细长叶柄：参考图里叶柄较长、轻微弯曲 -->
-    <path
-      d="M110.8 204C109.9 188.5 109.8 175.2 112.2 162.7C113.9 153.8 114.2 148.4 110.2 143.6"
-      stroke-width="4.2"
-    />
-
-    <!-- 银杏叶外轮廓：扇形、上缘自然起伏、中央浅裂口、下方收窄 -->
-    <path
-      d="
-        M110.2 143.6
-        C99.1 139.4 87.4 135.5 75.8 129.4
-        C62.6 122.5 50.9 112.8 43.2 100.8
-        C36.1 89.8 32.8 77.1 34.8 65.1
-        C36.7 53.7 43.5 43.4 54.1 36.8
-        C63.4 31 74.7 28.6 86.1 30.1
-        C95.8 31.4 103.8 36.4 109.1 44.1
-
-        C112.2 36.1 119.8 30.7 129.4 28.9
-        C140.7 26.8 152.5 29.1 162.7 35.4
-        C173.3 41.9 180.3 52.1 182.4 63.8
-        C184.5 75.5 181.2 88.4 174.1 99.7
-        C166.2 112.2 154.1 122.4 140.2 129.7
-        C128.3 136 116.6 140.1 110.2 143.6
-        Z
-      "
-      stroke-width="3.2"
-    />
-
-    <!-- 顶部中央裂口：银杏叶标志性二裂感，不要太深 -->
-    <path
-      d="M109.1 44.1C111.9 52.2 113.2 60.8 112.6 69.8C112.2 76.4 110.9 82.6 108.7 89.4"
-      stroke-width="2.1"
-      opacity="0.9"
-    />
-
-    <!-- 左侧轮廓的内层装饰线，让叶片更有参考图的细腻感 -->
-    <path
-      d="
-        M109.6 137.8
-        C94.8 132.6 80.7 126.2 68.9 117.4
-        C56.8 108.4 48.6 97.7 44.9 85.9
-        C41.4 74.8 42.7 63.6 48.6 54.4
-        C54.9 44.7 65 39.1 76.8 38.2
-      "
-      stroke-width="1.55"
-      opacity="0.44"
-    />
-
-    <!-- 右侧轮廓的内层装饰线 -->
-    <path
-      d="
-        M110.8 137.8
-        C126.5 132.5 141.1 126 153.3 116.9
-        C165.3 107.9 173.3 97.1 176.7 85.2
-        C179.8 74.2 178.2 63.1 172.3 54.1
-        C166 44.5 155.9 39 144.2 38.2
-      "
-      stroke-width="1.55"
-      opacity="0.44"
-    />
-
-    <!-- 主叶脉：从叶柄收窄处向外放射，左侧 -->
-    <path d="M110.2 143.6C94.5 130.8 78.6 120.5 56.2 108.4" stroke-width="2.15" opacity="0.9" />
-    <path d="M110.2 143.6C91.8 126.2 73.2 109.4 46.8 87.2" stroke-width="2.05" opacity="0.88" />
-    <path d="M110.2 143.6C91.9 120.7 75.2 99.5 54.2 67.1" stroke-width="1.92" opacity="0.86" />
-    <path d="M110.2 143.6C95.6 117.6 83.6 91.9 73.1 54.8" stroke-width="1.82" opacity="0.84" />
-    <path d="M110.2 143.6C101.2 115.3 95.8 88.3 91.7 48.2" stroke-width="1.72" opacity="0.82" />
-
-    <!-- 主叶脉：右侧 -->
-    <path d="M110.2 143.6C126.4 130.5 142.6 120.1 165.1 107.6" stroke-width="2.15" opacity="0.9" />
-    <path d="M110.2 143.6C129.1 125.8 148.2 108.4 174.7 85.2" stroke-width="2.05" opacity="0.88" />
-    <path d="M110.2 143.6C128.8 120.1 145.6 98.1 166.2 65.2" stroke-width="1.92" opacity="0.86" />
-    <path d="M110.2 143.6C125.3 117.1 137.6 90.8 148.5 52.9" stroke-width="1.82" opacity="0.84" />
-    <path d="M110.2 143.6C119.7 114.9 125.5 87.2 130.4 46.9" stroke-width="1.72" opacity="0.82" />
-
-    <!-- 中部叶脉：让扇形中心更饱满 -->
-    <path d="M110.2 143.6C106.8 116.8 105.4 90.6 106.2 54.8" stroke-width="1.58" opacity="0.78" />
-    <path d="M110.2 143.6C113.9 116.5 116 90.1 116.4 54.2" stroke-width="1.58" opacity="0.78" />
-
-    <!-- 左侧细密叶脉：模拟参考图中很多细线向外扩散 -->
-    <path d="M110.2 143.6C98.3 134.9 87.9 128.2 75.4 121.7" stroke-width="1.35" opacity="0.72" />
-    <path d="M110.2 143.6C96.9 131.9 84.8 122.1 69.9 112.1" stroke-width="1.32" opacity="0.72" />
-    <path d="M110.2 143.6C95.8 128.8 83.1 115.4 67.1 99.1" stroke-width="1.28" opacity="0.7" />
-    <path d="M110.2 143.6C96.2 125.5 83.7 108.3 68.8 86.7" stroke-width="1.24" opacity="0.7" />
-    <path d="M110.2 143.6C98.1 122.8 87.4 102.5 75.6 76.1" stroke-width="1.2" opacity="0.68" />
-    <path d="M110.2 143.6C100.8 120.3 93.4 98.5 86.7 70.4" stroke-width="1.16" opacity="0.68" />
-    <path d="M110.2 143.6C104.3 118.8 100.2 95.3 97.6 66.1" stroke-width="1.12" opacity="0.66" />
-
-    <!-- 右侧细密叶脉 -->
-    <path d="M110.2 143.6C122.5 134.7 133.2 127.9 145.9 121.1" stroke-width="1.35" opacity="0.72" />
-    <path d="M110.2 143.6C124 131.5 136.5 121.4 151.4 111.1" stroke-width="1.32" opacity="0.72" />
-    <path d="M110.2 143.6C125.1 128.3 138.1 114.4 154.1 97.8" stroke-width="1.28" opacity="0.7" />
-    <path d="M110.2 143.6C124.7 124.8 137.5 107.1 152.5 84.9" stroke-width="1.24" opacity="0.7" />
-    <path d="M110.2 143.6C122.7 122.2 133.7 101.2 145.8 74.2" stroke-width="1.2" opacity="0.68" />
-    <path d="M110.2 143.6C120 119.8 127.7 97.5 134.8 68.7" stroke-width="1.16" opacity="0.68" />
-    <path d="M110.2 143.6C116.5 118.5 120.9 94.5 124.2 64.8" stroke-width="1.12" opacity="0.66" />
-
-    <!-- 边缘方向短线：强化顶部扇形与波浪边缘 -->
-    <path d="M110.2 143.6C86.2 137.9 66.2 132.3 49.7 124.4" stroke-width="1.1" opacity="0.58" />
-    <path d="M110.2 143.6C134.8 137.7 155.3 131.8 171.8 123.4" stroke-width="1.1" opacity="0.58" />
-  </g>
-</svg>
+<LeafComponent class={className} />

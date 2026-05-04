@@ -1,0 +1,27 @@
+name: Mirror to repo B
+
+on:
+  push:
+    branches:
+      - "**"
+    tags:
+      - "**"
+  delete:
+  workflow_dispatch:
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Mirror repository
+        env:
+          MIRROR_TOKEN: ${{ secrets.MIRROR_TOKEN }}
+        run: |
+          git clone --mirror https://x-access-token:${{ github.token }}@github.com/${{ github.repository }} source.git
+          cd source.git
+
+          git remote set-url --push origin https://x-access-token:${MIRROR_TOKEN}@github.com/HNUDAO/HNUDAO-site.git
+
+          git fetch -p origin
+          git push --mirror

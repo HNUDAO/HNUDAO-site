@@ -13,11 +13,11 @@ const isActive = (href: string) => {
 ---
 
 <header class="site-header sticky top-0 z-40" data-site-header>
-  <div class="page-shell site-header-inner flex min-h-[5.9rem] items-center justify-between gap-6">
-    <a class="focus-ring flex items-center gap-4 rounded-2xl px-1 py-2" href="/">
+  <div class="page-shell site-header-inner flex min-h-[3.35rem] items-center justify-between gap-4">
+    <a class="focus-ring flex items-center gap-2.5 rounded-[0.95rem] px-1 py-1" href="/">
       <img
         alt="HNUDAO Logo"
-        class="h-[4.6rem] w-auto max-w-[340px] object-contain sm:h-[5rem] sm:max-w-[400px] lg:h-[5.5rem] lg:max-w-[460px]"
+        class="h-[2.55rem] w-auto max-w-[188px] object-contain sm:h-[2.8rem] sm:max-w-[218px] lg:h-[3.2rem] lg:max-w-[262px]"
         src="/logo-placeholder.svg"
       />
       <span class="sr-only">{siteShortName}</span>
@@ -27,7 +27,7 @@ const isActive = (href: string) => {
       {navItems.map((item) => (
         <a
           class:list={[
-            "site-nav-link focus-ring rounded-full px-4 py-2.5 text-sm font-medium transition",
+            "site-nav-link focus-ring rounded-full px-3 py-1.5 text-[0.82rem] font-medium transition",
             isActive(item.href)
               ? "bg-signal-500 text-white shadow-sm"
               : "text-ink-700 hover:text-signal-500",
@@ -42,7 +42,7 @@ const isActive = (href: string) => {
     <button
       aria-controls="mobile-menu"
       aria-expanded="false"
-      class="site-mobile-toggle focus-ring inline-flex h-11 w-11 items-center justify-center rounded-full text-ink-900 transition hover:text-signal-500 lg:hidden"
+      class="site-mobile-toggle focus-ring inline-flex h-9 w-9 items-center justify-center rounded-full text-ink-900 transition hover:text-signal-500 lg:hidden"
       data-nav-toggle
       type="button"
     >

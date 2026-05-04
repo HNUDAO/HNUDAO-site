@@ -1,0 +1,21 @@
+---
+import { leafPaths } from "./paths";
+
+type Props = {
+  class?: string;
+};
+
+const { class: className = "" } = Astro.props;
+const { pathData, viewBox } = leafPaths.leaf4;
+---
+
+<svg
+  aria-hidden="true"
+  class={className}
+  fill="none"
+  focusable="false"
+  viewBox={viewBox}
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path d={pathData} fill="currentColor" />
+</svg>

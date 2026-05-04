@@ -34,30 +34,34 @@ const directions = ["Blockchain", "Web3", "Security", "Open Source", "Research",
   <main id="main-content">
     <Hero />
 
-    <section class="section-shell relative z-20 -mt-[31vh] pb-6 pt-0 sm:-mt-[35vh]" id="home-intro">
+    <section class="section-shell relative z-20 -mt-[24vh] pb-4 pt-0 sm:-mt-[27vh]" id="home-intro">
       <div class="page-shell">
         <div class="home-intro-stage" data-home-content>
-          <GinkgoLeaf class="ginkgo-leaf ginkgo-leaf-content-left hidden lg:block" />
-          <GinkgoLeaf class="ginkgo-leaf ginkgo-leaf-content-right hidden lg:block" />
+          <GinkgoLeaf class="ginkgo-leaf ginkgo-leaf-content-left hidden lg:block" variant="leaf1" />
+          <GinkgoLeaf class="ginkgo-leaf ginkgo-leaf-content-right hidden lg:block" variant="leaf1" />
+          <GinkgoLeaf
+            class="pointer-events-none absolute bottom-[-0.45rem] right-[14%] z-0 hidden w-[2.35rem] rotate-[16deg] text-[rgba(226,194,119,0.18)] md:block"
+            variant="leaf2"
+          />
 
-          <div class="grid gap-4 lg:grid-cols-[1.08fr_0.92fr]">
-            <section class="surface-card px-5 py-6 sm:px-7 sm:py-7">
+          <div class="grid gap-3.5 lg:grid-cols-[1.08fr_0.92fr]">
+            <section class="surface-card px-4 py-5 sm:px-5 sm:py-5.5">
               <p class="mb-4 text-xs font-semibold uppercase tracking-[0.28em] text-signal-500">HNUDAO</p>
-              <h1 class="text-balance text-3xl font-semibold tracking-tight text-ink-950 sm:text-[2.45rem]">
+              <h1 class="text-balance text-[2rem] font-semibold tracking-tight text-ink-950 sm:text-[2.1rem]">
                 {organizationName}
               </h1>
-              <p class="mt-4 max-w-3xl text-base leading-8 text-ink-600">
+              <p class="mt-3 max-w-3xl text-[0.92rem] leading-7 text-ink-600">
                 HNUDAO 致力于连接区块链学习、技术实践、开源协作与校园交流，欢迎对 Web3、网络安全、开源技术和青年创新感兴趣的同学持续关注。
               </p>
-              <div class="mt-7 flex flex-wrap gap-3">
+              <div class="mt-5 flex flex-wrap gap-2.5">
                 <a
-                  class="focus-ring inline-flex items-center justify-center rounded-full bg-signal-500 px-5 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-[#7f0604]"
+                  class="focus-ring inline-flex items-center justify-center rounded-full bg-signal-500 px-4 py-2.5 text-[0.84rem] font-semibold text-white transition hover:-translate-y-0.5 hover:bg-[#7f0604]"
                   href="/about"
                 >
                   了解协会
                 </a>
                 <a
-                  class="glass-button focus-ring inline-flex items-center justify-center rounded-full px-5 py-3 text-sm font-semibold text-ink-900 transition hover:-translate-y-0.5 hover:text-signal-500"
+                  class="glass-button focus-ring inline-flex items-center justify-center rounded-full px-4 py-2.5 text-[0.84rem] font-semibold text-ink-900 transition hover:-translate-y-0.5 hover:text-signal-500"
                   href="/join"
                 >
                   加入我们
@@ -65,21 +69,21 @@ const directions = ["Blockchain", "Web3", "Security", "Open Source", "Research",
               </div>
             </section>
 
-            <section class="surface-card px-5 py-6 sm:px-7 sm:py-7">
+            <section class="surface-card px-4 py-5 sm:px-5 sm:py-5.5">
               <p class="mb-4 text-xs font-semibold uppercase tracking-[0.28em] text-signal-500">Focus</p>
               <div class="flex flex-wrap gap-2">
                 {directions.map((item) => <Tag label={item} />)}
               </div>
-              <div class="mt-6 grid gap-3 sm:grid-cols-2">
-                <div class="glass-tile px-4 py-4">
+              <div class="mt-5 grid gap-2.5 sm:grid-cols-2">
+                <div class="glass-tile px-3.5 py-3.5">
                   <p class="text-sm font-semibold text-ink-950">组织定位</p>
-                  <p class="mt-2.5 text-sm leading-6 text-ink-600">
+                  <p class="mt-2 text-[0.84rem] leading-5 text-ink-600">
                     以校园技术社群的方式组织学习、分享、协作与公开交流。
                   </p>
                 </div>
-                <div class="glass-tile px-4 py-4">
+                <div class="glass-tile px-3.5 py-3.5">
                   <p class="text-sm font-semibold text-ink-950">内容方式</p>
-                  <p class="mt-2.5 text-sm leading-6 text-ink-600">
+                  <p class="mt-2 text-[0.84rem] leading-5 text-ink-600">
                     官网承担统一展示，动态内容将同步到公众号、X 与开源平台。
                   </p>
                 </div>
@@ -92,8 +96,17 @@ const directions = ["Blockchain", "Web3", "Security", "Open Source", "Research",
 
     <IndustryMentorShowcase />
 
-    <section class="section-shell pt-8 sm:pt-12">
+    <section class="section-shell pt-6 sm:pt-8">
       <div class="page-shell">
+        <div class="relative">
+          <GinkgoLeaf
+            class="pointer-events-none absolute right-[-1.15rem] top-[-1.35rem] hidden w-[2.8rem] rotate-[14deg] text-[rgba(223,190,121,0.16)] lg:block"
+            variant="leaf4"
+          />
+          <GinkgoLeaf
+            class="pointer-events-none absolute left-[-0.9rem] bottom-[-1.1rem] hidden w-[2.45rem] rotate-[-18deg] text-[rgba(170,0,13,0.07)] lg:block"
+            variant="leaf2"
+          />
         <SectionHeading
           actionHref="/news"
           actionLabel="查看内容归档"
@@ -143,6 +156,7 @@ const directions = ["Blockchain", "Web3", "Security", "Open Source", "Research",
               title={featuredProject.data.title}
             />
           )}
+        </div>
         </div>
       </div>
     </section>

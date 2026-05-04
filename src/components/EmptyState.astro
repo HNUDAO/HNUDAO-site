@@ -9,17 +9,17 @@ type Props = {
 const { title, description, actionLabel, actionHref } = Astro.props;
 ---
 
-<div class="surface-card flex flex-col items-start gap-4 px-6 py-8 sm:px-8" data-reveal>
-  <div class="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-ink-100 text-xl font-semibold text-ink-700">
+<div class="surface-card flex flex-col items-start gap-3.5 px-5 py-6 sm:px-6" data-reveal>
+  <div class="inline-flex h-10 w-10 items-center justify-center rounded-[1rem] bg-ink-100 text-lg font-semibold text-ink-700">
     ...
   </div>
   <div>
-    <h3 class="text-xl font-semibold text-ink-900">{title}</h3>
-    <p class="mt-2 max-w-2xl text-base leading-7 text-ink-600">{description}</p>
+    <h3 class="text-[1.05rem] font-semibold text-ink-900">{title}</h3>
+    <p class="mt-2 max-w-2xl text-[0.9rem] leading-6 text-ink-600">{description}</p>
   </div>
   {actionLabel && actionHref && (
     <a
-      class="focus-ring inline-flex items-center justify-center rounded-full border border-ink-200 bg-white px-5 py-3 text-sm font-semibold text-ink-900 transition hover:border-jade-300 hover:text-jade-700"
+      class="focus-ring inline-flex items-center justify-center rounded-full border border-ink-200 bg-white px-4 py-2.5 text-[0.84rem] font-semibold text-ink-900 transition hover:border-jade-300 hover:text-jade-700"
       href={actionHref}
     >
       {actionLabel}

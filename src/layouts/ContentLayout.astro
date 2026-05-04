@@ -1,5 +1,6 @@
 ---
 import Breadcrumb from "@/components/Breadcrumb.astro";
+import GinkgoLeaf from "@/components/GinkgoLeaf.astro";
 import PageHeader from "@/components/PageHeader.astro";
 import BaseLayout from "./BaseLayout.astro";
 
@@ -29,6 +30,28 @@ const { title, description, eyebrow, image, breadcrumbs = [] } = Astro.props;
         </PageHeader>
       </div>
     </section>
-    <slot />
+    <div class="content-ginkgo-shell">
+      <GinkgoLeaf
+        aria-hidden="true"
+        class="content-ginkgo content-ginkgo-upper-left"
+        variant="leaf1"
+      />
+      <GinkgoLeaf
+        aria-hidden="true"
+        class="content-ginkgo content-ginkgo-mid-right"
+        variant="leaf2"
+      />
+      <GinkgoLeaf
+        aria-hidden="true"
+        class="content-ginkgo content-ginkgo-lower-left"
+        variant="leaf4"
+      />
+      <GinkgoLeaf
+        aria-hidden="true"
+        class="content-ginkgo content-ginkgo-footer-right"
+        variant="leaf3"
+      />
+      <slot />
+    </div>
   </main>
 </BaseLayout>
