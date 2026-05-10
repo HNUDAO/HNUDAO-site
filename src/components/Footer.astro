@@ -6,7 +6,10 @@ import {
   siteShortName,
   socialLinks,
 } from "@/lib/site";
+import { getLocaleFromPath } from "@/lib/i18n";
 import SocialIcon from "./SocialIcon.astro";
+
+const locale = getLocaleFromPath(Astro.url.pathname);
 ---
 
 <footer class="mt-16 border-t border-[rgba(170,137,109,0.14)] bg-[linear-gradient(180deg,#f8f4ee_0%,#f3ebe2_100%)] text-ink-900">
@@ -15,13 +18,13 @@ import SocialIcon from "./SocialIcon.astro";
       <div class="max-w-2xl">
         <p class="text-[0.72rem] font-semibold uppercase tracking-[0.3em] text-signal-500">{siteShortName}</p>
         <h2 class="mt-2.5 text-[1.35rem] font-semibold tracking-tight text-ink-950 sm:text-[1.7rem]">
-          {organizationName}
+          {organizationName[locale]}
         </h2>
-        <p class="mt-3 max-w-xl text-[0.9rem] leading-6 text-ink-600">{siteDescription}</p>
+        <p class="mt-3 max-w-xl text-[0.9rem] leading-6 text-ink-600">{siteDescription[locale]}</p>
       </div>
 
       <div class="flex flex-wrap gap-2.5 lg:justify-end">
-        {socialLinks.map((link) => (
+        {socialLinks[locale].map((link) => (
           <a
             class="focus-ring inline-flex h-9 w-9 items-center justify-center rounded-full border border-[rgba(170,137,109,0.18)] bg-white/74 text-ink-700 transition hover:border-signal-500/30 hover:text-signal-500"
             href={link.platform === "wechat" ? "#" : link.href}
@@ -35,12 +38,12 @@ import SocialIcon from "./SocialIcon.astro";
     </div>
 
     <div class="mt-7 flex flex-col gap-2 border-t border-[rgba(170,137,109,0.14)] pt-4 text-[0.78rem] text-ink-500 sm:flex-row sm:items-center sm:justify-between">
-      <p>© 2026 HNUDAO</p>
+      <p>&copy; 2026 HNUDAO</p>
       <p>
-        <a class="focus-ring transition hover:text-signal-500" href={`mailto:${contactInfo.email}`}>
-          {contactInfo.email}
+        <a class="focus-ring transition hover:text-signal-500" href={`mailto:${contactInfo[locale].email}`}>
+          {contactInfo[locale].email}
         </a>
-        <span> · {contactInfo.address}</span>
+        <span> &middot; {contactInfo[locale].address}</span>
       </p>
     </div>
   </div>

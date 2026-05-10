@@ -15,13 +15,22 @@ import {
   isPublished,
   sortEntriesByDate,
   takeEntries,
+  filterByLocale,
 } from "@/lib/content";
 import { getCollection } from "astro:content";
 import { organizationName, siteDescription } from "@/lib/site";
+import { getLocaleFromPath, useTranslations } from "@/lib/i18n";
 
-const newsEntries = sortEntriesByDate((await getCollection("news")).filter(isPublished), "pubDate");
-const activitiesEntries = sortEntriesByDate((await getCollection("activities")).filter(isPublished), "startDate");
-const projectEntries = sortEntriesByDate((await getCollection("projects")).filter(isPublished), "date");
+const locale = getLocaleFromPath(Astro.url.pathname);
+const t = useTranslations(locale);
+
+const allNews = await getCollection("news");
+const allActivities = await getCollection("activities");
+const allProjects = await getCollection("projects");
+
+const newsEntries = sortEntriesByDate(filterByLocale(allNews, locale).filter(isPublished), "pubDate");
+const activitiesEntries = sortEntriesByDate(filterByLocale(allActivities, locale).filter(isPublished), "startDate");
+const projectEntries = sortEntriesByDate(filterByLocale(allProjects, locale).filter(isPublished), "date");
 
 const latestNews = takeEntries(newsEntries, 2);
 const featuredActivity = getFeaturedEntries(activitiesEntries, 1)[0] || activitiesEntries[0];
@@ -30,7 +39,7 @@ const featuredProject = getFeaturedEntries(projectEntries, 1)[0] || projectEntri
 const directions = ["Blockchain", "Web3", "Security", "Open Source", "Research", "Practice"];
 ---
 
-<BaseLayout description={siteDescription}>
+<BaseLayout description={siteDescription[locale]}>
   <main id="main-content">
     <Hero />
 
@@ -48,23 +57,23 @@ const directions = ["Blockchain", "Web3", "Security", "Open Source", "Research",
             <section class="surface-card px-4 py-5 sm:px-5 sm:py-5.5">
               <p class="mb-4 text-xs font-semibold uppercase tracking-[0.28em] text-signal-500">HNUDAO</p>
               <h1 class="text-balance text-[2rem] font-semibold tracking-tight text-ink-950 sm:text-[2.1rem]">
-                {organizationName}
+                {organizationName[locale]}
               </h1>
               <p class="mt-3 max-w-3xl text-[0.92rem] leading-7 text-ink-600">
-                HNUDAO 致力于连接区块链学习、技术实践、开源协作与校园交流，欢迎对 Web3、网络安全、开源技术和青年创新感兴趣的同学持续关注。
+                {t("home.orgDescription")}
               </p>
               <div class="mt-5 flex flex-wrap gap-2.5">
                 <a
                   class="focus-ring inline-flex items-center justify-center rounded-full bg-signal-500 px-4 py-2.5 text-[0.84rem] font-semibold text-white transition hover:-translate-y-0.5 hover:bg-[#7f0604]"
                   href="/about"
                 >
-                  了解协会
+                  {t("home.learnMore")}
                 </a>
                 <a
                   class="glass-button focus-ring inline-flex items-center justify-center rounded-full px-4 py-2.5 text-[0.84rem] font-semibold text-ink-900 transition hover:-translate-y-0.5 hover:text-signal-500"
                   href="/join"
                 >
-                  加入我们
+                  {t("home.joinUs")}
                 </a>
               </div>
             </section>
@@ -76,15 +85,15 @@ const directions = ["Blockchain", "Web3", "Security", "Open Source", "Research",
               </div>
               <div class="mt-5 grid gap-2.5 sm:grid-cols-2">
                 <div class="glass-tile px-3.5 py-3.5">
-                  <p class="text-sm font-semibold text-ink-950">组织定位</p>
+                  <p class="text-sm font-semibold text-ink-950">{t("home.orgPosition")}</p>
                   <p class="mt-2 text-[0.84rem] leading-5 text-ink-600">
-                    以校园技术社群的方式组织学习、分享、协作与公开交流。
+                    {t("home.orgPositionDesc")}
                   </p>
                 </div>
                 <div class="glass-tile px-3.5 py-3.5">
-                  <p class="text-sm font-semibold text-ink-950">内容方式</p>
+                  <p class="text-sm font-semibold text-ink-950">{t("home.contentMethod")}</p>
                   <p class="mt-2 text-[0.84rem] leading-5 text-ink-600">
-                    官网承担统一展示，动态内容将同步到公众号、X 与开源平台。
+                    {t("home.contentMethodDesc")}
                   </p>
                 </div>
               </div>
@@ -109,10 +118,10 @@ const directions = ["Blockchain", "Web3", "Security", "Open Source", "Research",
           />
         <SectionHeading
           actionHref="/news"
-          actionLabel="查看内容归档"
+          actionLabel={t("common.viewMore")}
           eyebrow="Latest Updates"
-          title="最新动态"
-          description="查看近期发布的协会动态、公开活动与项目入口，快速了解 HNUDAO 正在推进的内容。"
+          title={t("home.latestUpdates")}
+          description={t("home.latestUpdatesDesc")}
         />
 
         <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
@@ -164,13 +173,13 @@ const directions = ["Blockchain", "Web3", "Security", "Open Source", "Research",
     <section class="section-shell pt-0">
       <div class="page-shell">
         <CTASection
-          description="如果你对区块链、开源协作、技术内容创作或校园活动组织感兴趣，欢迎从这里了解协会的参与方式。"
+          description={t("home.joinCtaDesc")}
           eyebrow="Join HNUDAO"
           primaryHref="/join"
-          primaryLabel="查看加入我们"
+          primaryLabel={t("home.viewJoin")}
           secondaryHref="/contact"
-          secondaryLabel="联系我们"
-          title="加入 HNUDAO，一起参与学习、分享与项目实践"
+          secondaryLabel={t("home.contactUs")}
+          title={t("home.joinCtaTitle")}
           tone="home"
         />
       </div>

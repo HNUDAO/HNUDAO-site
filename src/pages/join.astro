@@ -2,27 +2,31 @@
 import CTASection from "@/components/CTASection.astro";
 import SectionHeading from "@/components/SectionHeading.astro";
 import ContentLayout from "@/layouts/ContentLayout.astro";
+import { getLocaleFromPath, useTranslations } from "@/lib/i18n";
+
+const locale = getLocaleFromPath(Astro.url.pathname);
+const t = useTranslations(locale);
 ---
 
 <ContentLayout
-  breadcrumbs={[{ label: "加入我们" }]}
-  description="了解为什么加入 HNUDAO、适合哪些同学、常见参与方式与招新流程。"
+  breadcrumbs={[{ label: t("join.breadcrumb") }]}
+  description={t("join.description")}
   eyebrow="Join HNUDAO"
-  title="加入我们"
+  title={t("join.title")}
 >
   <section class="section-shell pt-0">
     <div class="page-shell grid gap-5 lg:grid-cols-3">
       <article class="surface-card px-6 py-7">
-        <h2 class="text-2xl font-semibold text-ink-950">为什么加入 HNUDAO</h2>
-        <p class="mt-4 text-base leading-8 text-ink-600">在这里，你可以接触真实技术议题、参与公开分享、认识志同道合的同学，并在协作中提升表达与实践能力。</p>
+        <h2 class="text-2xl font-semibold text-ink-950">{t("join.whyJoin")}</h2>
+        <p class="mt-4 text-base leading-8 text-ink-600">{t("join.whyJoinDesc")}</p>
       </article>
       <article class="surface-card px-6 py-7">
-        <h2 class="text-2xl font-semibold text-ink-950">适合哪些同学</h2>
-        <p class="mt-4 text-base leading-8 text-ink-600">无论你是刚开始接触区块链，还是已经在关注 Web3、网络安全、开源项目或技术传播，只要愿意学习和协作，都适合加入。</p>
+        <h2 class="text-2xl font-semibold text-ink-950">{t("join.whoFits")}</h2>
+        <p class="mt-4 text-base leading-8 text-ink-600">{t("join.whoFitsDesc")}</p>
       </article>
       <article class="surface-card px-6 py-7">
-        <h2 class="text-2xl font-semibold text-ink-950">部门选择建议</h2>
-        <p class="mt-4 text-base leading-8 text-ink-600">可以根据自己的兴趣选择开发、内容传播、活动组织、研究分享或对外合作方向，后续也可以在协作中逐步调整。</p>
+        <h2 class="text-2xl font-semibold text-ink-950">{t("join.deptAdvice")}</h2>
+        <p class="mt-4 text-base leading-8 text-ink-600">{t("join.deptAdviceDesc")}</p>
       </article>
     </div>
   </section>
@@ -31,29 +35,29 @@ import ContentLayout from "@/layouts/ContentLayout.astro";
     <div class="page-shell">
       <SectionHeading
         eyebrow="Process"
-        title="加入方式与招新流程"
-        description="正式招新信息将以学期安排为准，以下为当前的标准参与流程。"
+        title={t("join.processTitle")}
+        description={t("join.processDesc")}
       />
       <div class="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
         <article class="surface-card px-5 py-6">
           <p class="subtle-label">Step 01</p>
-          <h3 class="mt-3 text-xl font-semibold text-ink-950">关注公开渠道</h3>
-          <p class="mt-3 text-sm leading-7 text-ink-600">优先关注官网、公众号与 X，第一时间获取招新与活动更新。</p>
+          <h3 class="mt-3 text-xl font-semibold text-ink-950">{t("join.step1Title")}</h3>
+          <p class="mt-3 text-sm leading-7 text-ink-600">{t("join.step1Desc")}</p>
         </article>
         <article class="surface-card px-5 py-6">
           <p class="subtle-label">Step 02</p>
-          <h3 class="mt-3 text-xl font-semibold text-ink-950">填写报名信息</h3>
-          <p class="mt-3 text-sm leading-7 text-ink-600">报名入口开放后，提交基础信息、兴趣方向与个人情况说明。</p>
+          <h3 class="mt-3 text-xl font-semibold text-ink-950">{t("join.step2Title")}</h3>
+          <p class="mt-3 text-sm leading-7 text-ink-600">{t("join.step2Desc")}</p>
         </article>
         <article class="surface-card px-5 py-6">
           <p class="subtle-label">Step 03</p>
-          <h3 class="mt-3 text-xl font-semibold text-ink-950">参加交流或面试</h3>
-          <p class="mt-3 text-sm leading-7 text-ink-600">通过交流了解你的兴趣、基础与时间投入，也帮助你认识协会的协作节奏。</p>
+          <h3 class="mt-3 text-xl font-semibold text-ink-950">{t("join.step3Title")}</h3>
+          <p class="mt-3 text-sm leading-7 text-ink-600">{t("join.step3Desc")}</p>
         </article>
         <article class="surface-card px-5 py-6">
           <p class="subtle-label">Step 04</p>
-          <h3 class="mt-3 text-xl font-semibold text-ink-950">进入部门协作</h3>
-          <p class="mt-3 text-sm leading-7 text-ink-600">进入对应方向后，参与日常学习、内容共创、活动筹备或项目实践。</p>
+          <h3 class="mt-3 text-xl font-semibold text-ink-950">{t("join.step4Title")}</h3>
+          <p class="mt-3 text-sm leading-7 text-ink-600">{t("join.step4Desc")}</p>
         </article>
       </div>
     </div>
@@ -64,39 +68,39 @@ import ContentLayout from "@/layouts/ContentLayout.astro";
       <div class="surface-card px-6 py-8 sm:px-8">
         <SectionHeading
           eyebrow="FAQ"
-          title="常见问题"
-          description="以下回答为当前公开版说明，正式招新时会结合当学期安排更新。"
+          title={t("join.faqTitle")}
+          description={t("join.faqDesc")}
         />
         <div class="space-y-4">
           <details class="rounded-3xl border border-ink-100 bg-ink-50 px-5 py-4">
-            <summary class="cursor-pointer text-base font-semibold text-ink-900">没有相关经验可以加入吗？</summary>
-            <p class="mt-3 text-sm leading-7 text-ink-600">可以。我们欢迎刚开始接触相关方向的同学，重点更看重兴趣、投入意愿和持续学习能力。</p>
+            <summary class="cursor-pointer text-base font-semibold text-ink-900">{t("join.faq1Q")}</summary>
+            <p class="mt-3 text-sm leading-7 text-ink-600">{t("join.faq1A")}</p>
           </details>
           <details class="rounded-3xl border border-ink-100 bg-ink-50 px-5 py-4">
-            <summary class="cursor-pointer text-base font-semibold text-ink-900">不同部门如何选择？</summary>
-            <p class="mt-3 text-sm leading-7 text-ink-600">建议先根据兴趣和可投入时间做初步选择，后续也可以在实际协作中逐步找到更适合自己的方向。</p>
+            <summary class="cursor-pointer text-base font-semibold text-ink-900">{t("join.faq2Q")}</summary>
+            <p class="mt-3 text-sm leading-7 text-ink-600">{t("join.faq2A")}</p>
           </details>
           <details class="rounded-3xl border border-ink-100 bg-ink-50 px-5 py-4">
-            <summary class="cursor-pointer text-base font-semibold text-ink-900">报名入口什么时候开放？</summary>
-            <p class="mt-3 text-sm leading-7 text-ink-600">一般会结合学期安排统一开放，具体时间请以官网、公众号和 X 的正式通知为准。</p>
+            <summary class="cursor-pointer text-base font-semibold text-ink-900">{t("join.faq3Q")}</summary>
+            <p class="mt-3 text-sm leading-7 text-ink-600">{t("join.faq3A")}</p>
           </details>
         </div>
       </div>
 
       <div class="surface-card-dark px-6 py-8 sm:px-8">
         <p class="cta-eyebrow text-xs font-semibold">Registration</p>
-        <h2 class="cta-title mt-3 text-3xl">报名入口</h2>
+        <h2 class="cta-title mt-3 text-3xl">{t("join.registerTitle")}</h2>
         <p class="cta-description mt-4 text-base leading-8">
-          当前暂未开放统一报名入口。正式开始后，本页会同步公布报名方式与时间安排。
+          {t("join.registerDesc")}
         </p>
         <a
           class="focus-ring cta-primary-button mt-8 inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-semibold transition hover:-translate-y-0.5"
           href="#"
         >
-          报名入口待开放
+          {t("join.registerBtn")}
         </a>
         <div class="cta-note-panel mt-8 rounded-3xl px-5 py-5 text-sm leading-7 text-white/76">
-          关注公众号、X 或官网更新，获取后续招新与活动通知。
+          {t("join.registerNote")}
         </div>
       </div>
     </div>
@@ -105,13 +109,13 @@ import ContentLayout from "@/layouts/ContentLayout.astro";
   <section class="section-shell pt-0">
     <div class="page-shell">
       <CTASection
-        description="如果你想进一步了解协会的方向或保持关注，可以先通过官方渠道与我们建立联系。"
+        description={t("join.ctaDesc")}
         eyebrow="Keep in Touch"
         primaryHref="/contact"
-        primaryLabel="查看联系渠道"
+        primaryLabel={t("join.viewContact")}
         secondaryHref="/news"
-        secondaryLabel="浏览最新动态"
-        title="欢迎保持关注，等待后续开放"
+        secondaryLabel={t("join.viewNews")}
+        title={t("join.ctaTitle")}
       />
     </div>
   </section>

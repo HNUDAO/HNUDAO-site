@@ -4,16 +4,20 @@ import MemberCard from "@/components/MemberCard.astro";
 import SectionHeading from "@/components/SectionHeading.astro";
 import ContentLayout from "@/layouts/ContentLayout.astro";
 import { members } from "@/data/members";
+import { getLocaleFromPath, useTranslations } from "@/lib/i18n";
 
-const advisorMembers = members.filter((member) => member.group === "advisor");
-const studentMembers = members.filter((member) => member.group === "member");
+const locale = getLocaleFromPath(Astro.url.pathname);
+const t = useTranslations(locale);
+
+const advisorMembers = members[locale].filter((member) => member.group === "advisor");
+const studentMembers = members[locale].filter((member) => member.group === "member");
 ---
 
 <ContentLayout
-  breadcrumbs={[{ label: "成员风采" }]}
-  description="成员页面将按学期与授权情况逐步更新，当前已公开指导老师信息，并保留学生成员展示与筛选框架。"
+  breadcrumbs={[{ label: t("members.breadcrumb") }]}
+  description={t("members.description")}
   eyebrow="Members"
-  title="成员风采"
+  title={t("members.title")}
 >
   <section class="section-shell -mt-8 pb-6 pt-0 sm:-mt-10 sm:pb-8">
     <div class="page-shell">
@@ -21,11 +25,11 @@ const studentMembers = members.filter((member) => member.group === "member");
         <div class="surface-card px-6 py-6 sm:px-8">
           <SectionHeading
             eyebrow="Advisors"
-            title="指导老师"
-            description="以下介绍根据校内公开页面整理，当前仅保留简要信息与官方入口。"
+            title={t("members.advisorsTitle")}
+            description={t("members.advisorsDesc")}
           />
           <p class="text-sm leading-7 text-ink-600">
-            协会的学生成员信息将按授权逐步公开，指导老师部分先作为当前对外展示的核心成员信息。
+            {t("members.advisorsNote")}
           </p>
         </div>
         <div class="grid gap-4 md:grid-cols-2">
@@ -40,35 +44,30 @@ const studentMembers = members.filter((member) => member.group === "member");
       <div class="surface-card px-6 py-6 sm:px-8">
         <SectionHeading
           eyebrow="Filter UI"
-          title="筛选"
+          title={t("members.filterTitle")}
         />
         <form class="grid gap-4 md:grid-cols-3" onsubmit="return false;">
           <label class="grid gap-2 text-sm font-medium text-ink-700">
-            届次
+            {t("members.grade")}
             <select class="focus-ring rounded-2xl border border-ink-200 bg-white px-4 py-3 text-sm text-ink-700">
-              <option>全部</option>
-              <option>本届成员</option>
-              <option>往届成员</option>
+              <option>{t("members.allGrades")}</option>
+              <option>{t("members.currentGrade")}</option>
+              <option>{t("members.pastGrade")}</option>
             </select>
           </label>
           <label class="grid gap-2 text-sm font-medium text-ink-700">
-            部门
+            {t("members.department")}
             <select class="focus-ring rounded-2xl border border-ink-200 bg-white px-4 py-3 text-sm text-ink-700">
-              <option>全部部门</option>
-              <option>技术部</option>
-              <option>宣传部</option>
-              <option>运营部</option>
-              <option>外联部</option>
-              <option>学术研究部</option>
+              <option>{t("members.allDepts")}</option>
             </select>
           </label>
           <label class="grid gap-2 text-sm font-medium text-ink-700">
-            角色
+            {t("members.role")}
             <select class="focus-ring rounded-2xl border border-ink-200 bg-white px-4 py-3 text-sm text-ink-700">
-              <option>全部角色</option>
-              <option>理事会</option>
-              <option>核心成员</option>
-              <option>成员</option>
+              <option>{t("members.allRoles")}</option>
+              <option>{t("members.council")}</option>
+              <option>{t("members.coreMembers")}</option>
+              <option>{t("members.member")}</option>
             </select>
           </label>
         </form>
@@ -80,7 +79,7 @@ const studentMembers = members.filter((member) => member.group === "member");
     <div class="page-shell">
       {studentMembers.length > 0 ? (
         <>
-          <p class="mb-6 text-sm text-ink-500">成员信息将按授权情况逐步公开更新。</p>
+          <p class="mb-6 text-sm text-ink-500">{t("members.updateNote")}</p>
           <div class="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
             {studentMembers.map((member) => <MemberCard member={member} />)}
           </div>
@@ -88,9 +87,9 @@ const studentMembers = members.filter((member) => member.group === "member");
       ) : (
         <EmptyState
           actionHref="/contact"
-          actionLabel="联系协会"
-          description="出于隐私和信息准确性考虑，学生成员名单将在本人授权和学期更新后逐步公开。"
-          title="学生成员名单更新中"
+          actionLabel={t("contact.contactAssociation")}
+          description={t("members.emptyDesc")}
+          title={t("members.emptyTitle")}
         />
       )}
     </div>

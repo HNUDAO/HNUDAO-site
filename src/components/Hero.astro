@@ -1,5 +1,9 @@
 ---
 import GinkgoLeaf from "./GinkgoLeaf.astro";
+import { getLocaleFromPath, useTranslations } from "@/lib/i18n";
+
+const locale = getLocaleFromPath(Astro.url.pathname);
+const t = useTranslations(locale);
 ---
 
 <section class="hero-shell relative" data-home-cover-shell>
@@ -33,12 +37,12 @@ import GinkgoLeaf from "./GinkgoLeaf.astro";
     </div>
 
     <a
-      aria-label="Scroll to content"
+      aria-label={t("common.scroll")}
       class="hero-scroll-indicator focus-ring absolute bottom-6 left-1/2 flex -translate-x-1/2 flex-col items-center gap-2 rounded-full px-3 py-2 text-[0.64rem] uppercase tracking-[0.28em] text-ink-500"
       data-home-scroll-indicator
       href="#home-intro"
     >
-      <span>Scroll</span>
+      <span>{t("common.scroll")}</span>
       <span aria-hidden="true" class="hero-scroll-arrow"></span>
     </a>
   </div>

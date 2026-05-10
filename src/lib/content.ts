@@ -64,3 +64,13 @@ export function getEntryHref(entry: LinkableEntry, fallback = "#") {
 export function isExternalHref(href: string) {
   return /^https?:\/\//.test(href);
 }
+
+export function filterByLocale<T extends { id: string }>(
+  entries: T[],
+  locale: "zh-CN" | "en",
+): T[] {
+  if (locale === "zh-CN") {
+    return entries.filter((e) => !e.id.endsWith(".en"));
+  }
+  return entries.filter((e) => e.id.endsWith(".en"));
+}

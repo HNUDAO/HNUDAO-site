@@ -3,32 +3,36 @@ import ActivityCard from "@/components/ActivityCard.astro";
 import SectionHeading from "@/components/SectionHeading.astro";
 import Tag from "@/components/Tag.astro";
 import ContentLayout from "@/layouts/ContentLayout.astro";
-import { getEntryHref, isExternalHref, isPublished, sortEntriesByDate } from "@/lib/content";
+import { getEntryHref, isExternalHref, isPublished, sortEntriesByDate, filterByLocale } from "@/lib/content";
 import { getCollection } from "astro:content";
+import { getLocaleFromPath, useTranslations } from "@/lib/i18n";
 
-const entries = sortEntriesByDate((await getCollection("activities")).filter(isPublished), "startDate");
+const locale = getLocaleFromPath(Astro.url.pathname);
+const t = useTranslations(locale);
+
+const entries = sortEntriesByDate(filterByLocale(await getCollection("activities"), locale).filter(isPublished), "startDate");
 const featured = entries.find((entry) => entry.data.featured);
 const statusLabels = [
-  { label: "upcoming", text: "即将开始" },
-  { label: "ongoing", text: "进行中" },
-  { label: "past", text: "已结束" },
+  { label: "upcoming", text: t("activities.upcoming") },
+  { label: "ongoing", text: t("activities.ongoing") },
+  { label: "past", text: t("activities.past") },
 ];
 const featuredHref = featured ? getEntryHref(featured) : "#";
 const featuredExternal = isExternalHref(featuredHref);
 ---
 
 <ContentLayout
-  breadcrumbs={[{ label: "活动中心" }]}
-  description="活动中心用于集中展示活动入口，卡片默认跳转到公众号原文、活动发布页或报名页。"
+  breadcrumbs={[{ label: t("activities.breadcrumb") }]}
+  description={t("activities.description")}
   eyebrow="Activities"
-  title="活动中心"
+  title={t("activities.title")}
 >
   <section class="section-shell pt-0">
     <div class="page-shell grid gap-5 lg:grid-cols-[1.06fr_0.94fr]">
       {featured && (
         <div class="surface-card overflow-hidden">
           <img
-            alt={`${featured.data.title} 活动封面`}
+            alt={`${featured.data.title} cover`}
             class="aspect-[16/8] w-full object-cover"
             height="480"
             src={featured.data.cover || "/images/placeholder-cover.svg"}
@@ -44,7 +48,7 @@ const featuredExternal = isExternalHref(featuredHref);
               rel={featuredExternal ? "noreferrer" : undefined}
               target={featuredExternal ? "_blank" : undefined}
             >
-              查看发布链接
+              {t("common.viewLink")}
             </a>
           </div>
         </div>
@@ -53,23 +57,23 @@ const featuredExternal = isExternalHref(featuredHref);
       <div class="surface-card px-5 py-7 sm:px-7 sm:py-8">
         <SectionHeading
           eyebrow="Status"
-          title="活动状态"
-          description="状态不仅依赖颜色，还通过文字明确区分，便于可访问性与后续维护。"
+          title={t("activities.statusTitle")}
+          description={t("activities.statusDesc")}
         />
         <div class="flex flex-wrap gap-3">
           {statusLabels.map((status) => <Tag label={`${status.label} / ${status.text}`} variant="accent" />)}
         </div>
         <div class="mt-6 grid gap-3">
           <div class="glass-tile px-4 py-4">
-            <p class="text-sm font-semibold text-ink-950">维护方式</p>
+            <p class="text-sm font-semibold text-ink-950">{t("activities.maintainMethod")}</p>
             <p class="mt-2.5 text-sm leading-6 text-ink-600">
-              活动条目可以填写报名链接、公众号推文链接或其他公开发布地址。
+              {t("activities.maintainMethodDesc")}
             </p>
           </div>
           <div class="glass-tile px-4 py-4">
-            <p class="text-sm font-semibold text-ink-950">当前说明</p>
+            <p class="text-sm font-semibold text-ink-950">{t("activities.currentNote")}</p>
             <p class="mt-2.5 text-sm leading-6 text-ink-600">
-              当前活动页已作为公开发布入口使用，后续将逐步接入真实活动通知与报名信息。
+              {t("activities.currentNoteDesc")}
             </p>
           </div>
         </div>
@@ -81,8 +85,8 @@ const featuredExternal = isExternalHref(featuredHref);
     <div class="page-shell">
       <SectionHeading
         eyebrow="All Activities"
-        title="活动列表"
-        description="活动卡片将直接跳转到外部发布页或官方通知，方便统一维护与传播。"
+        title={t("activities.allActivitiesTitle")}
+        description={t("activities.allActivitiesDesc")}
       />
       <div class="grid gap-4 lg:grid-cols-2 xl:grid-cols-3">
         {entries.map((entry) => (

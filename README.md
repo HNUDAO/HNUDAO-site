@@ -33,36 +33,44 @@ HNUDAO 官网不是学校门户，也不是单页宣传页，而是一个可持�
 
 ## 技术栈
 
-- Astro
+- Astro 5
 - TypeScript
 - Tailwind CSS
 - Markdown / MDX
 - Astro Content Collections
+- Astro i18n 路由（中文 + 英文）
 - 静态站点输出
 - Vercel 部署
 
 ## 页面结构
 
-- `/`
-  首页
-- `/about`
-  关于协会
-- `/departments`
-  部门介绍
-- `/members`
-  成员风采
-- `/news`
-  新闻动态
-- `/activities`
-  活动中心
-- `/projects`
-  项目展示
-- `/join`
-  加入我们
-- `/contact`
-  联系我们
-- `/404`
-  自定义 404 页面
+站点支持中文（默认）和英文两种语言，使用子路径路由：
+
+**中文页面（根路径）：**
+
+- `/` — 首页
+- `/about` — 关于协会
+- `/departments` — 部门介绍
+- `/members` — 成员风采
+- `/news` — 新闻动态
+- `/activities` — 活动中心
+- `/projects` — 项目展示
+- `/join` — 加入我们
+- `/contact` — 联系我们
+- `/404` — 自定义 404 页面
+
+**英文页面（`/en/` 前缀）：**
+
+- `/en/` — Homepage
+- `/en/about` — About
+- `/en/departments` — Departments
+- `/en/members` — Members
+- `/en/news` — News
+- `/en/activities` — Activities
+- `/en/projects` — Projects
+- `/en/join` — Join Us
+- `/en/contact` — Contact
+- `/en/404` — 404 Page
 
 ## 目录结构
 
@@ -76,14 +84,25 @@ HNUDAO 官网不是学校门户，也不是单页宣传页，而是一个可持�
 │   └── images/
 ├── src/
 │   ├── components/           # 复用组件
-│   ├── content/              # 新闻、活动、项目、通知 Markdown
+│   ├── content/              # 新闻、活动、项目、通知 Markdown（含 .en.md 英文版）
 │   ├── data/                 # 部门、成员、时间线等结构化数据
+│   ├── i18n/                 # 翻译文件（zh-CN.json, en.json）
 │   ├── layouts/              # 页面布局
 │   ├── lib/                  # 站点配置与工具函数
+│   │   ├── site.ts           # 站点配置（locale-keyed）
+│   │   ├── i18n.ts           # i18n 工具函数
+│   │   ├── content.ts        # 内容工具（含 filterByLocale）
+│   │   └── formatDate.ts     # 日期格式化（locale-aware）
 │   ├── pages/                # 路由页面
+│   │   ├── index.astro       # 中文首页
+│   │   ├── en/               # 英文页面
+│   │   │   ├── index.astro
+│   │   │   ├── about.astro
+│   │   │   └── ...
+│   │   └── ...
 │   ├── styles/               # 全局样式
 │   └── content.config.ts     # Content Collections schema
-├── astro.config.mjs
+├── astro.config.mjs          # 含 i18n 路由配置
 ├── tailwind.config.mjs
 ├── package.json
 └── README.md
@@ -141,27 +160,31 @@ pnpm preview
 最常见的内容更新方式：
 
 1. 在 `src/content/news/`、`src/content/activities/`、`src/content/projects/` 中新增 Markdown 文件
-2. 把图片放到 `public/images/` 对应目录
-3. 本地运行 `npm run dev`
-4. 检查页面效果
-5. 运行 `npm run build`
-6. 提交代码并推送到 GitHub
-7. 等待 Vercel 自动部署
+2. 如需英文版，在同目录新增 `.en.md` 后缀文件（如 `welcome.en.md`）
+3. 把图片放到 `public/images/` 对应目录
+4. 本地运行 `npm run dev`
+5. 检查中英文页面效果
+6. 运行 `npm run build`
+7. 提交代码并推送到 GitHub
+8. 等待 Vercel 自动部署
 
 ## 配置更新
 
 以下内容通常不需要改组件代码，直接修改配置即可：
 
 - 站点名称、组织名称、描述、导航：
-  `src/lib/site.ts`
+  `src/lib/site.ts`（所有导出均为 `Record<Locale, T>` 格式，需同时更新中英文）
 - 社交链接与联系方式：
   `src/lib/site.ts`
 - 部门内容：
-  `src/data/departments.ts`
+  `src/data/departments.ts`（`Record<Locale, Department[]>`）
 - 成员内容：
-  `src/data/members.ts`
+  `src/data/members.ts`（`Record<Locale, Member[]>`）
 - 时间线：
-  `src/data/timeline.ts`
+  `src/data/timeline.ts`（`Record<Locale, TimelineItem[]>`）
+- 翻译文本：
+  `src/i18n/zh-CN.json`（中文 UI 文本）
+  `src/i18n/en.json`（英文 UI 文本）
 
 ## 部署方式
 

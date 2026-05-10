@@ -41,7 +41,7 @@
 - `docs/01-getting-started.md`
   本地环境准备、安装依赖、启动开发、构建与预览。
 - `docs/02-content-guide.md`
-  如何新增新闻、活动、项目，如何放图片，如何写 frontmatter。
+  如何新增新闻、活动、项目，如何放图片，如何写 frontmatter，多语言内容规则。
 - `docs/03-deployment.md`
   GitHub、Vercel、正式环境与预览环境的部署流程。
 - `docs/04-domain-dns.md`
@@ -49,7 +49,7 @@
 - `docs/05-maintenance-workflow.md`
   多人协作、PR 审核、分支命名、图片整理与换届交接。
 - `docs/06-customization.md`
-  如何修改站点名称、Logo、导航、联系方式、颜色与页面结构。
+  如何修改站点名称、Logo、导航、联系方式、颜色、页面结构，以及多语言配置。
 - `docs/07-troubleshooting.md`
   构建失败、图片不显示、二维码不显示、Vercel 构建失败等排查方法。
 

@@ -2,6 +2,10 @@
 import CTASection from "@/components/CTASection.astro";
 import SectionHeading from "@/components/SectionHeading.astro";
 import ContentLayout from "@/layouts/ContentLayout.astro";
+import { getLocaleFromPath, useTranslations } from "@/lib/i18n";
+
+const locale = getLocaleFromPath(Astro.url.pathname);
+const t = useTranslations(locale);
 
 const wallets = [
   { network: "Tron (波场)", address: "TS6pMbkDQ3NnHoMXM5H48TYwGVgKkvrqdX", symbol: "TRX" },
@@ -17,46 +21,46 @@ const wallets = [
 ---
 
 <ContentLayout
-  breadcrumbs={[{ label: "赞助我们" }]}
-  description="查看 HNUDAO 的公开链上赞助地址，支持协会活动、内容建设与项目实践。"
+  breadcrumbs={[{ label: t("sponsor.breadcrumb") }]}
+  description={t("sponsor.description")}
   eyebrow="Sponsor HNUDAO"
-  title="赞助我们"
+  title={t("sponsor.title")}
 >
   <section class="section-shell pt-0">
     <div class="page-shell grid gap-5 lg:grid-cols-[1.02fr_0.98fr]">
       <div class="surface-card px-6 py-8 sm:px-8">
         <SectionHeading
           eyebrow="Why Sponsor"
-          title="支持 HNUDAO 的活动、内容与项目建设"
-          description="HNUDAO 欢迎来自校友、朋友、社区伙伴和支持者的赞助。你的支持将用于公开活动、内容发布、基础设施与项目实践等方向。"
+          title={t("sponsor.whyTitle")}
+          description={t("sponsor.whyDesc")}
         />
         <div class="grid gap-4 sm:grid-cols-2">
           <article class="glass-tile px-5 py-5">
-            <h3 class="text-lg font-semibold text-ink-950">活动支持</h3>
-            <p class="mt-3 text-sm leading-7 text-ink-600">用于公开分享、工作坊、社群活动和相关组织成本。</p>
+            <h3 class="text-lg font-semibold text-ink-950">{t("sponsor.activitySupport")}</h3>
+            <p class="mt-3 text-sm leading-7 text-ink-600">{t("sponsor.activitySupportDesc")}</p>
           </article>
           <article class="glass-tile px-5 py-5">
-            <h3 class="text-lg font-semibold text-ink-950">内容建设</h3>
-            <p class="mt-3 text-sm leading-7 text-ink-600">用于官网、资料整理、设计物料与公开内容发布。</p>
+            <h3 class="text-lg font-semibold text-ink-950">{t("sponsor.contentBuild")}</h3>
+            <p class="mt-3 text-sm leading-7 text-ink-600">{t("sponsor.contentBuildDesc")}</p>
           </article>
           <article class="glass-tile px-5 py-5">
-            <h3 class="text-lg font-semibold text-ink-950">项目实践</h3>
-            <p class="mt-3 text-sm leading-7 text-ink-600">用于开源项目、实验性工具与长期协作成果的建设。</p>
+            <h3 class="text-lg font-semibold text-ink-950">{t("sponsor.projectPractice")}</h3>
+            <p class="mt-3 text-sm leading-7 text-ink-600">{t("sponsor.projectPracticeDesc")}</p>
           </article>
           <article class="glass-tile px-5 py-5">
-            <h3 class="text-lg font-semibold text-ink-950">基础设施</h3>
-            <p class="mt-3 text-sm leading-7 text-ink-600">用于域名、托管、开发协作与其他必要的基础服务。</p>
+            <h3 class="text-lg font-semibold text-ink-950">{t("sponsor.infrastructure")}</h3>
+            <p class="mt-3 text-sm leading-7 text-ink-600">{t("sponsor.infrastructureDesc")}</p>
           </article>
         </div>
       </div>
 
       <div class="surface-card-dark px-6 py-8 sm:px-8">
         <p class="cta-eyebrow text-xs font-semibold">Notice</p>
-        <h2 class="cta-title mt-3 text-3xl">转账前请务必确认链与地址</h2>
+        <h2 class="cta-title mt-3 text-3xl">{t("sponsor.noticeTitle")}</h2>
         <div class="cta-description mt-5 space-y-3 text-sm leading-7">
-          <p>不同链必须使用对应网络转账，不要跨链直接发送。</p>
-          <p>以太坊、Optimism、Base、BNB Chain、Polygon、Arbitrum 当前使用同一 EVM 地址，但转账时仍需确认网络选择正确。</p>
-          <p>若你计划进行较大金额赞助，建议先通过邮箱联系协会确认用途与接收安排。</p>
+          <p>{t("sponsor.notice1")}</p>
+          <p>{t("sponsor.notice2")}</p>
+          <p>{t("sponsor.notice3")}</p>
         </div>
       </div>
     </div>
@@ -66,8 +70,8 @@ const wallets = [
     <div class="page-shell">
       <SectionHeading
         eyebrow="Wallets"
-        title="公开赞助地址"
-        description="点击复制按钮即可快速复制对应网络地址。请再次核对链、币种和地址后再发起转账。"
+        title={t("sponsor.walletsTitle")}
+        description={t("sponsor.walletsDesc")}
       />
       <div class="grid gap-5 lg:grid-cols-2 xl:grid-cols-3">
         {wallets.map((wallet) => (
@@ -82,7 +86,7 @@ const wallets = [
                 data-copy-address={wallet.address}
                 type="button"
               >
-                复制
+                {t("common.copy")}
               </button>
             </div>
             <div class="mt-5 rounded-3xl border border-ink-100 bg-ink-50 px-4 py-4">
@@ -97,13 +101,13 @@ const wallets = [
   <section class="section-shell pt-0">
     <div class="page-shell">
       <CTASection
-        description="如果你希望进行合作、了解赞助用途，或在转账前希望进一步确认，请优先通过邮件与我们联系。"
+        description={t("sponsor.ctaDesc")}
         eyebrow="Need Confirmation"
         primaryHref="/contact"
-        primaryLabel="联系协会"
+        primaryLabel={t("sponsor.contactAssociation")}
         secondaryHref="mailto:contact@mail.hnudao.cn"
-        secondaryLabel="发送邮件"
-        title="感谢你对 HNUDAO 的支持"
+        secondaryLabel={t("sponsor.sendEmail")}
+        title={t("sponsor.ctaTitle")}
       />
     </div>
   </section>

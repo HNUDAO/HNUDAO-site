@@ -3,34 +3,38 @@ import SectionHeading from "@/components/SectionHeading.astro";
 import ContentLayout from "@/layouts/ContentLayout.astro";
 import SocialIcon from "@/components/SocialIcon.astro";
 import { contactInfo, socialLinks } from "@/lib/site";
+import { getLocaleFromPath, useTranslations } from "@/lib/i18n";
+
+const locale = getLocaleFromPath(Astro.url.pathname);
+const t = useTranslations(locale);
 
 const contactCards = [
-  { label: "邮箱", value: contactInfo.email, href: `mailto:${contactInfo.email}` },
-  { label: "微信公众号", value: contactInfo.wechatOfficial },
-  { label: "QQ 群", value: contactInfo.qqGroup },
-  { label: "Telegram", value: contactInfo.telegramGroup, href: "#telegram" },
-  { label: "GitHub", value: contactInfo.github, href: contactInfo.github },
-  { label: "X", value: contactInfo.x, href: contactInfo.x },
-  { label: "地址", value: contactInfo.address },
-  { label: "合作与咨询", value: contactInfo.principal },
+  { label: t("contact.email"), value: contactInfo[locale].email, href: `mailto:${contactInfo[locale].email}` },
+  { label: t("contact.wechat"), value: contactInfo[locale].wechatOfficial },
+  { label: t("contact.qqGroup"), value: contactInfo[locale].qqGroup },
+  { label: "Telegram", value: contactInfo[locale].telegramGroup, href: "#telegram" },
+  { label: "GitHub", value: contactInfo[locale].github, href: contactInfo[locale].github },
+  { label: "X", value: contactInfo[locale].x, href: contactInfo[locale].x },
+  { label: t("contact.address"), value: contactInfo[locale].address },
+  { label: t("contact.consultation"), value: contactInfo[locale].principal },
 ];
 ---
 
 <ContentLayout
-  breadcrumbs={[{ label: "联系我们" }]}
-  description="查看 HNUDAO 当前公开的联系渠道与官方平台入口。"
+  breadcrumbs={[{ label: t("contact.breadcrumb") }]}
+  description={t("contact.description")}
   eyebrow="Contact"
-  title="联系我们"
+  title={t("contact.title")}
 >
   <section class="section-shell pt-0">
     <div class="page-shell">
       <SectionHeading
         eyebrow="Channels"
-        title="官方渠道"
-        description="目前对外开放的渠道包括 GitHub、X 与微信公众号。邮箱、QQ群等更多方式会在正式启用后继续补充。"
+        title={t("contact.channelsTitle")}
+        description={t("contact.channelsDesc")}
       />
       <div class="mb-8 flex flex-wrap gap-3">
-        {socialLinks.map((link) => (
+        {socialLinks[locale].map((link) => (
           link.platform === "wechat" ? (
             <div class="group relative">
               <button
@@ -41,11 +45,11 @@ const contactCards = [
               </button>
               <div class="pointer-events-none absolute bottom-[calc(100%+1rem)] left-1/2 z-20 w-48 -translate-x-1/2 translate-y-2 rounded-3xl border border-ink-100 bg-white p-3 text-center opacity-0 shadow-2xl shadow-ink-900/12 transition duration-200 group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:translate-y-0 group-focus-within:opacity-100">
                 <img
-                  alt="HNUDAO 微信公众号二维码"
+                  alt={t("contact.wechatQrAlt")}
                   class="h-auto w-full rounded-2xl border border-ink-100"
                   src="/qrcode_for公众号.jpg"
                 />
-                <p class="mt-3 text-xs leading-6 text-ink-600">微信扫码关注 HNUDAO 公众号</p>
+                <p class="mt-3 text-xs leading-6 text-ink-600">{t("contact.wechatQrText")}</p>
               </div>
             </div>
           ) : (

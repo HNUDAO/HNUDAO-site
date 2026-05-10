@@ -1,0 +1,97 @@
+---
+import NewsCard from "@/components/NewsCard.astro";
+import SectionHeading from "@/components/SectionHeading.astro";
+import Tag from "@/components/Tag.astro";
+import ContentLayout from "@/layouts/ContentLayout.astro";
+import { getEntryHref, isExternalHref, isPublished, sortEntriesByDate, filterByLocale } from "@/lib/content";
+import { getCollection } from "astro:content";
+import { useTranslations } from "@/lib/i18n";
+
+const locale = "en" as const;
+const t = useTranslations(locale);
+
+const entries = sortEntriesByDate(filterByLocale(await getCollection("news"), locale).filter(isPublished), "pubDate");
+const featured = entries.find((entry) => entry.data.featured);
+const categories = [...new Set(entries.map((entry) => entry.data.category).filter(Boolean))];
+const featuredHref = featured ? getEntryHref(featured) : "#";
+const featuredExternal = isExternalHref(featuredHref);
+---
+
+<ContentLayout
+  breadcrumbs={[{ label: t("news.breadcrumb") }]}
+  description={t("news.description")}
+  eyebrow="News"
+  title={t("news.title")}
+>
+  <section class="section-shell pt-0">
+    <div class="page-shell">
+      {featured && (
+        <div class="surface-card overflow-hidden">
+          <div class="grid gap-0 lg:grid-cols-[1.08fr_0.92fr]">
+            <img
+              alt={`${featured.data.title} cover`}
+              class="h-full w-full object-cover"
+              height="480"
+              src={featured.data.cover || "/images/placeholder-cover.svg"}
+              width="720"
+            />
+            <div class="px-5 py-7 sm:px-7 sm:py-8">
+              <p class="subtle-label">Featured Story</p>
+              <h2 class="mt-3 text-3xl font-semibold tracking-tight text-ink-950">{featured.data.title}</h2>
+              <p class="mt-4 text-base leading-8 text-ink-600">{featured.data.description}</p>
+              <div class="mt-5 flex flex-wrap gap-2">
+                {featured.data.category && <Tag label={featured.data.category} variant="accent" />}
+                {featured.data.tags.map((tag) => <Tag label={tag} />)}
+              </div>
+              <a
+                class="glass-button focus-ring mt-8 inline-flex items-center justify-center rounded-full px-5 py-3 text-sm font-semibold text-ink-900 transition hover:text-signal-500"
+                href={featuredHref}
+                rel={featuredExternal ? "noreferrer" : undefined}
+                target={featuredExternal ? "_blank" : undefined}
+              >
+                {t("common.viewOriginal")}
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <section class="section-shell pt-0">
+    <div class="page-shell">
+      <SectionHeading
+        eyebrow="Categories"
+        title={t("news.categoriesTitle")}
+        description={t("news.categoriesDesc")}
+      />
+      <div class="flex flex-wrap gap-2">
+        {categories.length > 0 ? categories.map((category) => <Tag label={category!} variant="accent" />) : <Tag label={t("news.defaultCategory")} />}
+      </div>
+    </div>
+  </section>
+
+  <section class="section-shell pt-0">
+    <div class="page-shell">
+      <SectionHeading
+        eyebrow="All News"
+        title={t("news.allNewsTitle")}
+        description={t("news.allNewsDesc")}
+      />
+      <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+        {entries.map((entry) => (
+          <NewsCard
+            category={entry.data.category}
+            cover={entry.data.cover}
+            date={entry.data.pubDate}
+            description={entry.data.description}
+            featured={entry.data.featured}
+            href={getEntryHref(entry)}
+            tags={entry.data.tags}
+            title={entry.data.title}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+</ContentLayout>

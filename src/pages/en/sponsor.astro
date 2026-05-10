@@ -1,0 +1,148 @@
+---
+import CTASection from "@/components/CTASection.astro";
+import SectionHeading from "@/components/SectionHeading.astro";
+import ContentLayout from "@/layouts/ContentLayout.astro";
+import { useTranslations } from "@/lib/i18n";
+
+const locale = "en" as const;
+const t = useTranslations(locale);
+
+const wallets = [
+  { network: "Tron", address: "TS6pMbkDQ3NnHoMXM5H48TYwGVgKkvrqdX", symbol: "TRX" },
+  { network: "Bitcoin", address: "bc1q9lp6xck09f6qan7ef0s8ahey3wpsufp29339gp", symbol: "BTC" },
+  { network: "Ethereum", address: "0x9c6D45e3EED75aeb832b08340763417103671D72", symbol: "ETH" },
+  { network: "Optimism", address: "0x9c6D45e3EED75aeb832b08340763417103671D72", symbol: "OP" },
+  { network: "Base", address: "0x9c6D45e3EED75aeb832b08340763417103671D72", symbol: "BASE" },
+  { network: "BNB Chain", address: "0x9c6D45e3EED75aeb832b08340763417103671D72", symbol: "BNB" },
+  { network: "Polygon", address: "0x9c6D45e3EED75aeb832b08340763417103671D72", symbol: "MATIC" },
+  { network: "Arbitrum", address: "0x9c6D45e3EED75aeb832b08340763417103671D72", symbol: "ARB" },
+  { network: "Solana", address: "9qCSAw8Tdm2sNLWfymg8NzWqGDYBw65C8rNC1cboxqPR", symbol: "SOL" },
+];
+---
+
+<ContentLayout
+  breadcrumbs={[{ label: t("sponsor.breadcrumb") }]}
+  description={t("sponsor.description")}
+  eyebrow="Sponsor HNUDAO"
+  title={t("sponsor.title")}
+>
+  <section class="section-shell pt-0">
+    <div class="page-shell grid gap-5 lg:grid-cols-[1.02fr_0.98fr]">
+      <div class="surface-card px-6 py-8 sm:px-8">
+        <SectionHeading
+          eyebrow="Why Sponsor"
+          title={t("sponsor.whyTitle")}
+          description={t("sponsor.whyDesc")}
+        />
+        <div class="grid gap-4 sm:grid-cols-2">
+          <article class="glass-tile px-5 py-5">
+            <h3 class="text-lg font-semibold text-ink-950">{t("sponsor.activitySupport")}</h3>
+            <p class="mt-3 text-sm leading-7 text-ink-600">{t("sponsor.activitySupportDesc")}</p>
+          </article>
+          <article class="glass-tile px-5 py-5">
+            <h3 class="text-lg font-semibold text-ink-950">{t("sponsor.contentBuild")}</h3>
+            <p class="mt-3 text-sm leading-7 text-ink-600">{t("sponsor.contentBuildDesc")}</p>
+          </article>
+          <article class="glass-tile px-5 py-5">
+            <h3 class="text-lg font-semibold text-ink-950">{t("sponsor.projectPractice")}</h3>
+            <p class="mt-3 text-sm leading-7 text-ink-600">{t("sponsor.projectPracticeDesc")}</p>
+          </article>
+          <article class="glass-tile px-5 py-5">
+            <h3 class="text-lg font-semibold text-ink-950">{t("sponsor.infrastructure")}</h3>
+            <p class="mt-3 text-sm leading-7 text-ink-600">{t("sponsor.infrastructureDesc")}</p>
+          </article>
+        </div>
+      </div>
+
+      <div class="surface-card-dark px-6 py-8 sm:px-8">
+        <p class="cta-eyebrow text-xs font-semibold">Notice</p>
+        <h2 class="cta-title mt-3 text-3xl">{t("sponsor.noticeTitle")}</h2>
+        <div class="cta-description mt-5 space-y-3 text-sm leading-7">
+          <p>{t("sponsor.notice1")}</p>
+          <p>{t("sponsor.notice2")}</p>
+          <p>{t("sponsor.notice3")}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-shell pt-0">
+    <div class="page-shell">
+      <SectionHeading
+        eyebrow="Wallets"
+        title={t("sponsor.walletsTitle")}
+        description={t("sponsor.walletsDesc")}
+      />
+      <div class="grid gap-5 lg:grid-cols-2 xl:grid-cols-3">
+        {wallets.map((wallet) => (
+          <article class="surface-card flex h-full flex-col px-6 py-7" data-reveal>
+            <div class="flex items-start justify-between gap-4">
+              <div>
+                <p class="subtle-label">{wallet.symbol}</p>
+                <h3 class="mt-3 text-2xl font-semibold text-ink-950">{wallet.network}</h3>
+              </div>
+              <button
+                class="focus-ring inline-flex items-center justify-center rounded-full border border-ink-200 bg-white px-4 py-2 text-sm font-semibold text-ink-900 transition hover:border-jade-500 hover:text-signal-500"
+                data-copy-address={wallet.address}
+                type="button"
+              >
+                {t("common.copy")}
+              </button>
+            </div>
+            <div class="mt-5 rounded-3xl border border-ink-100 bg-ink-50 px-4 py-4">
+              <p class="break-all font-mono text-sm leading-7 text-ink-700">{wallet.address}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section-shell pt-0">
+    <div class="page-shell">
+      <CTASection
+        description={t("sponsor.ctaDesc")}
+        eyebrow="Need Confirmation"
+        primaryHref="/en/contact"
+        primaryLabel={t("sponsor.contactAssociation")}
+        secondaryHref="mailto:contact@mail.hnudao.cn"
+        secondaryLabel={t("sponsor.sendEmail")}
+        title={t("sponsor.ctaTitle")}
+      />
+    </div>
+  </section>
+
+  <script>
+    const copyButtons = document.querySelectorAll("[data-copy-address]");
+
+    copyButtons.forEach((button) => {
+      button.addEventListener("click", async () => {
+        if (!(button instanceof HTMLButtonElement)) {
+          return;
+        }
+
+        const address = button.dataset.copyAddress;
+
+        if (!address) {
+          return;
+        }
+
+        try {
+          await navigator.clipboard.writeText(address);
+          const originalText = button.textContent;
+          button.textContent = "Copied";
+
+          window.setTimeout(() => {
+            button.textContent = originalText;
+          }, 1600);
+        } catch {
+          button.textContent = "Failed";
+
+          window.setTimeout(() => {
+            button.textContent = "Copy";
+          }, 1600);
+        }
+      });
+    });
+  </script>
+</ContentLayout>

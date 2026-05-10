@@ -1,20 +1,64 @@
 # 06 Customization
 
+## 多语言（i18n）相关
+
+### 如何新增或修改翻译
+
+翻译文件位于：
+
+- `src/i18n/zh-CN.json` — 中文
+- `src/i18n/en.json` — 英文
+
+使用 `t("section.key")` 语法调用，如 `t("home.learnMore")`。
+
+新增翻译时，两个文件都要更新，保持 key 一致。
+
+### 如何新增英文页面
+
+1. 在 `src/pages/en/` 下新增 `.astro` 文件（与中文页面对应）
+2. 使用 `const locale = "en" as const` 硬编码语言
+3. 使用 `t()` 调用获取翻译文本
+4. 所有链接加 `/en/` 前缀（如 `/en/about`）
+5. 使用 locale-indexed 数据（如 `departments[locale]`）
+
+### 如何为内容添加英文版
+
+在同目录下新增 `.en.md` 后缀文件：
+
+- 中文：`src/content/news/welcome.md`
+- 英文：`src/content/news/welcome.en.md`
+
+### 语言切换器
+
+语言切换器组件位于 `src/components/LanguageSwitcher.astro`，已集成到 Header 导航栏。
+
+### i18n 路由配置
+
+在 `astro.config.mjs` 中：
+
+```js
+i18n: {
+  defaultLocale: "zh-CN",
+  locales: ["zh-CN", "en"],
+  routing: { prefixDefaultLocale: false },
+}
+```
+
+中文在根路径，英文在 `/en/` 前缀。
+
 ## 如何改网站名称和组织信息
 
 主要修改文件：
 
 - `src/lib/site.ts`
 
-重点字段：
+所有导出均为 `Record<Locale, T>` 格式，需同时更新中英文：
 
 - `siteName`
 - `siteShortName`
 - `siteDescription`
 - `organizationName`
-- `englishOrganizationName`
 - `slogan`
-- `sloganEn`
 - `siteUrl`
 
 ## 如何改 GitHub、X 和联系方式

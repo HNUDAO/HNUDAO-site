@@ -3,6 +3,7 @@ import Footer from "@/components/Footer.astro";
 import GinkgoLeaf from "@/components/GinkgoLeaf.astro";
 import Header from "@/components/Header.astro";
 import { defaultOgImage, siteDescription, siteName, siteUrl } from "@/lib/site";
+import { getLocaleFromPath, useTranslations } from "@/lib/i18n";
 import "@/styles/global.css";
 
 type Props = {
@@ -12,16 +13,21 @@ type Props = {
   noindex?: boolean;
 };
 
-const { title, description = siteDescription, image = defaultOgImage, noindex = false } = Astro.props;
+const locale = getLocaleFromPath(Astro.url.pathname);
+const t = useTranslations(locale);
+const { title, description = siteDescription[locale], image = defaultOgImage, noindex = false } = Astro.props;
+
+const zhPath = Astro.url.pathname.replace(/^\/en/, "") || "/";
+const enPath = `/en${Astro.url.pathname.replace(/^\/en/, "")}`;
+const canonical = new URL(Astro.url.pathname, siteUrl).toString();
 
 const pageTitle = title ? `${title} | ${siteName}` : siteName;
-const canonical = new URL(Astro.url.pathname, siteUrl).toString();
 const imageUrl = new URL(image, siteUrl).toString();
 const isHome = Astro.url.pathname === "/";
 ---
 
 <!doctype html>
-<html lang="zh-CN" view-transitions>
+<html lang={locale === "en" ? "en" : "zh-CN"} view-transitions>
   <head>
     <meta charset="UTF-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
@@ -38,11 +44,14 @@ const isHome = Astro.url.pathname === "/";
     <meta content={description} name="twitter:description" />
     <meta content={imageUrl} name="twitter:image" />
     <link href={canonical} rel="canonical" />
+    <link rel="alternate" hreflang="zh-CN" href={new URL(zhPath, siteUrl).toString()} />
+    <link rel="alternate" hreflang="en" href={new URL(enPath, siteUrl).toString()} />
+    <link rel="alternate" hreflang="x-default" href={new URL(zhPath, siteUrl).toString()} />
     <link href="/favicon.svg" rel="icon" type="image/svg+xml" />
     {noindex && <meta content="noindex, nofollow" name="robots" />}
   </head>
   <body class:list={["min-h-screen", isHome && "home-page"]}>
-    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <a class="skip-link" href="#main-content">{t("common.skipToContent")}</a>
     <div aria-hidden="true" class="site-ginkgo site-ginkgo-left">
       <GinkgoLeaf class="site-ginkgo-icon" variant="leaf3" />
     </div>

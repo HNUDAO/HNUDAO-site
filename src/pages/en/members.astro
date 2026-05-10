@@ -1,0 +1,97 @@
+---
+import EmptyState from "@/components/EmptyState.astro";
+import MemberCard from "@/components/MemberCard.astro";
+import SectionHeading from "@/components/SectionHeading.astro";
+import ContentLayout from "@/layouts/ContentLayout.astro";
+import { members } from "@/data/members";
+import { useTranslations } from "@/lib/i18n";
+
+const locale = "en" as const;
+const t = useTranslations(locale);
+
+const advisorMembers = members[locale].filter((member) => member.group === "advisor");
+const studentMembers = members[locale].filter((member) => member.group === "member");
+---
+
+<ContentLayout
+  breadcrumbs={[{ label: t("members.breadcrumb") }]}
+  description={t("members.description")}
+  eyebrow="Members"
+  title={t("members.title")}
+>
+  <section class="section-shell -mt-8 pb-6 pt-0 sm:-mt-10 sm:pb-8">
+    <div class="page-shell">
+      <div class="grid gap-4 xl:grid-cols-[0.92fr_1.08fr]">
+        <div class="surface-card px-6 py-6 sm:px-8">
+          <SectionHeading
+            eyebrow="Advisors"
+            title={t("members.advisorsTitle")}
+            description={t("members.advisorsDesc")}
+          />
+          <p class="text-sm leading-7 text-ink-600">
+            {t("members.advisorsNote")}
+          </p>
+        </div>
+        <div class="grid gap-4 md:grid-cols-2">
+          {advisorMembers.map((member) => <MemberCard member={member} />)}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-shell pb-6 pt-0 sm:pb-8">
+    <div class="page-shell">
+      <div class="surface-card px-6 py-6 sm:px-8">
+        <SectionHeading
+          eyebrow="Filter UI"
+          title={t("members.filterTitle")}
+        />
+        <form class="grid gap-4 md:grid-cols-3" onsubmit="return false;">
+          <label class="grid gap-2 text-sm font-medium text-ink-700">
+            {t("members.grade")}
+            <select class="focus-ring rounded-2xl border border-ink-200 bg-white px-4 py-3 text-sm text-ink-700">
+              <option>{t("members.allGrades")}</option>
+              <option>{t("members.currentGrade")}</option>
+              <option>{t("members.pastGrade")}</option>
+            </select>
+          </label>
+          <label class="grid gap-2 text-sm font-medium text-ink-700">
+            {t("members.department")}
+            <select class="focus-ring rounded-2xl border border-ink-200 bg-white px-4 py-3 text-sm text-ink-700">
+              <option>{t("members.allDepts")}</option>
+            </select>
+          </label>
+          <label class="grid gap-2 text-sm font-medium text-ink-700">
+            {t("members.role")}
+            <select class="focus-ring rounded-2xl border border-ink-200 bg-white px-4 py-3 text-sm text-ink-700">
+              <option>{t("members.allRoles")}</option>
+              <option>{t("members.council")}</option>
+              <option>{t("members.coreMembers")}</option>
+              <option>{t("members.member")}</option>
+            </select>
+          </label>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-shell pt-0">
+    <div class="page-shell">
+      {studentMembers.length > 0 ? (
+        <>
+          <p class="mb-6 text-sm text-ink-500">{t("members.updateNote")}</p>
+          <div class="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+            {studentMembers.map((member) => <MemberCard member={member} />)}
+          </div>
+        </>
+      ) : (
+        <EmptyState
+          actionHref="/en/contact"
+          actionLabel={t("contact.contactAssociation")}
+          description={t("members.emptyDesc")}
+          title={t("members.emptyTitle")}
+        />
+      )}
+    </div>
+  </section>
+</ContentLayout>

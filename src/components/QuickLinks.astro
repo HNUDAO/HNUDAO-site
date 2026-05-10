@@ -1,11 +1,14 @@
 ---
 import type { QuickLink } from "@/lib/site";
+import { useTranslations, type Locale } from "@/lib/i18n";
 
 type Props = {
   links: QuickLink[];
+  locale: Locale;
 };
 
-const { links } = Astro.props;
+const { links, locale } = Astro.props;
+const t = useTranslations(locale);
 ---
 
 <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
@@ -20,7 +23,7 @@ const { links } = Astro.props;
         <h3 class="mt-2.5 text-[1.05rem] font-semibold text-ink-900 transition group-hover:text-jade-700">{link.title}</h3>
         <p class="mt-2.5 text-[0.84rem] leading-6 text-ink-600">{link.description}</p>
       </div>
-      <span class="mt-6 text-sm font-semibold text-ink-900">查看板块</span>
+      <span class="mt-6 text-sm font-semibold text-ink-900">{t("common.viewMore")}</span>
     </a>
   ))}
 </div>

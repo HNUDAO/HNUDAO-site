@@ -1,0 +1,88 @@
+---
+import SectionHeading from "@/components/SectionHeading.astro";
+import ContentLayout from "@/layouts/ContentLayout.astro";
+import SocialIcon from "@/components/SocialIcon.astro";
+import { contactInfo, socialLinks } from "@/lib/site";
+import { useTranslations } from "@/lib/i18n";
+
+const locale = "en" as const;
+const t = useTranslations(locale);
+
+const contactCards = [
+  { label: t("contact.email"), value: contactInfo[locale].email, href: `mailto:${contactInfo[locale].email}` },
+  { label: t("contact.wechat"), value: contactInfo[locale].wechatOfficial },
+  { label: t("contact.qqGroup"), value: contactInfo[locale].qqGroup },
+  { label: "Telegram", value: contactInfo[locale].telegramGroup, href: "#telegram" },
+  { label: "GitHub", value: contactInfo[locale].github, href: contactInfo[locale].github },
+  { label: "X", value: contactInfo[locale].x, href: contactInfo[locale].x },
+  { label: t("contact.address"), value: contactInfo[locale].address },
+  { label: t("contact.consultation"), value: contactInfo[locale].principal },
+];
+---
+
+<ContentLayout
+  breadcrumbs={[{ label: t("contact.breadcrumb") }]}
+  description={t("contact.description")}
+  eyebrow="Contact"
+  title={t("contact.title")}
+>
+  <section class="section-shell pt-0">
+    <div class="page-shell">
+      <SectionHeading
+        eyebrow="Channels"
+        title={t("contact.channelsTitle")}
+        description={t("contact.channelsDesc")}
+      />
+      <div class="mb-8 flex flex-wrap gap-3">
+        {socialLinks[locale].map((link) => (
+          link.platform === "wechat" ? (
+            <div class="group relative">
+              <button
+                class="focus-ring inline-flex h-12 w-12 items-center justify-center rounded-full border border-ink-200 bg-white text-ink-800 transition hover:border-signal-500 hover:text-signal-500"
+                type="button"
+              >
+                <SocialIcon label={link.label} platform={link.platform} />
+              </button>
+              <div class="pointer-events-none absolute bottom-[calc(100%+1rem)] left-1/2 z-20 w-48 -translate-x-1/2 translate-y-2 rounded-3xl border border-ink-100 bg-white p-3 text-center opacity-0 shadow-2xl shadow-ink-900/12 transition duration-200 group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:translate-y-0 group-focus-within:opacity-100">
+                <img
+                  alt={t("contact.wechatQrAlt")}
+                  class="h-auto w-full rounded-2xl border border-ink-100"
+                  src="/qrcode_for公众号.jpg"
+                />
+                <p class="mt-3 text-xs leading-6 text-ink-600">{t("contact.wechatQrText")}</p>
+              </div>
+            </div>
+          ) : (
+            <a
+              class="focus-ring inline-flex h-12 w-12 items-center justify-center rounded-full border border-ink-200 bg-white text-ink-800 transition hover:border-signal-500 hover:text-signal-500"
+              href={link.href}
+              rel={link.href.startsWith("http") ? "noreferrer" : undefined}
+              target={link.href.startsWith("http") ? "_blank" : undefined}
+            >
+              <SocialIcon label={link.label} platform={link.platform} />
+            </a>
+          )
+        ))}
+      </div>
+      <div class="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+        {contactCards.map((item) => (
+          <article class="surface-card h-full px-6 py-7">
+            <p class="subtle-label">{item.label}</p>
+            {item.href ? (
+              <a
+                class="mt-4 block text-xl font-semibold text-ink-950 transition hover:text-signal-500"
+                href={item.href}
+                rel={item.href.startsWith("http") ? "noreferrer" : undefined}
+                target={item.href.startsWith("http") ? "_blank" : undefined}
+              >
+                {item.value}
+              </a>
+            ) : (
+              <p class="mt-4 text-xl font-semibold text-ink-950">{item.value}</p>
+            )}
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+</ContentLayout>

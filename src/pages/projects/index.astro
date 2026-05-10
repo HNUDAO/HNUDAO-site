@@ -3,10 +3,14 @@ import ProjectCard from "@/components/ProjectCard.astro";
 import SectionHeading from "@/components/SectionHeading.astro";
 import Tag from "@/components/Tag.astro";
 import ContentLayout from "@/layouts/ContentLayout.astro";
-import { getEntryHref, isExternalHref, isPublished, sortEntriesByDate } from "@/lib/content";
+import { getEntryHref, isExternalHref, isPublished, sortEntriesByDate, filterByLocale } from "@/lib/content";
 import { getCollection } from "astro:content";
+import { getLocaleFromPath, useTranslations } from "@/lib/i18n";
 
-const entries = sortEntriesByDate((await getCollection("projects")).filter(isPublished), "date");
+const locale = getLocaleFromPath(Astro.url.pathname);
+const t = useTranslations(locale);
+
+const entries = sortEntriesByDate(filterByLocale(await getCollection("projects"), locale).filter(isPublished), "date");
 const featured = entries.find((entry) => entry.data.featured);
 const statusTags = ["planning", "active", "archived"];
 const featuredHref = featured ? getEntryHref(featured) : "#";
@@ -14,17 +18,17 @@ const featuredExternal = isExternalHref(featuredHref);
 ---
 
 <ContentLayout
-  breadcrumbs={[{ label: "项目展示" }]}
-  description="项目展示页用于长期沉淀协会项目、课程实践与开源成果，卡片可直接跳转到仓库或外部演示地址。"
+  breadcrumbs={[{ label: t("projects.breadcrumb") }]}
+  description={t("projects.description")}
   eyebrow="Projects"
-  title="项目展示"
+  title={t("projects.title")}
 >
   <section class="section-shell pt-0">
     <div class="page-shell grid gap-5 lg:grid-cols-[1.02fr_0.98fr]">
       {featured && (
         <div class="surface-card overflow-hidden">
           <img
-            alt={`${featured.data.title} 项目封面`}
+            alt={`${featured.data.title} cover`}
             class="aspect-[16/8] w-full object-cover"
             height="480"
             src={featured.data.cover || "/images/placeholder-cover.svg"}
@@ -40,7 +44,7 @@ const featuredExternal = isExternalHref(featuredHref);
               rel={featuredExternal ? "noreferrer" : undefined}
               target={featuredExternal ? "_blank" : undefined}
             >
-              打开项目链接
+              {t("common.openProject")}
             </a>
           </div>
         </div>
@@ -49,23 +53,23 @@ const featuredExternal = isExternalHref(featuredHref);
       <div class="surface-card px-5 py-7 sm:px-7 sm:py-8">
         <SectionHeading
           eyebrow="Status Tags"
-          title="项目状态"
-          description="项目支持规划中、进行中、已归档三种状态，适合长期维护与版本化沉淀。"
+          title={t("projects.statusTitle")}
+          description={t("projects.statusDesc")}
         />
         <div class="flex flex-wrap gap-2">
           {statusTags.map((status) => <Tag label={status} variant="accent" />)}
         </div>
         <div class="mt-6 grid gap-3">
           <div class="glass-tile px-4 py-4">
-            <p class="text-sm font-semibold text-ink-950">外部地址</p>
+            <p class="text-sm font-semibold text-ink-950">{t("projects.externalUrl")}</p>
             <p class="mt-2.5 text-sm leading-6 text-ink-600">
-              项目可以指向 GitHub 仓库、Demo 页面、文档页或其他公开演示地址。
+              {t("projects.externalUrlDesc")}
             </p>
           </div>
           <div class="glass-tile px-4 py-4">
-            <p class="text-sm font-semibold text-ink-950">当前说明</p>
+            <p class="text-sm font-semibold text-ink-950">{t("projects.currentNote")}</p>
             <p class="mt-2.5 text-sm leading-6 text-ink-600">
-              当前项目页展示的是协会正在建设或计划推进的公开方向，后续会逐步替换为真实成果链接。
+              {t("projects.currentNoteDesc")}
             </p>
           </div>
         </div>
@@ -77,8 +81,8 @@ const featuredExternal = isExternalHref(featuredHref);
     <div class="page-shell">
       <SectionHeading
         eyebrow="Project List"
-        title="项目列表"
-        description="点击卡片后可直接进入项目仓库、演示地址或其他公开资料页。"
+        title={t("projects.projectListTitle")}
+        description={t("projects.projectListDesc")}
       />
       <div class="grid gap-4 lg:grid-cols-2 xl:grid-cols-3">
         {entries.map((entry) => (

@@ -9,6 +9,37 @@
 - 配置型内容
   放在 `src/lib/site.ts`、`src/data/departments.ts`、`src/data/members.ts`、`src/data/timeline.ts`。
 
+站点支持中文（默认）和英文两种语言。配置型数据使用 `Record<Locale, T>` 格式，Markdown 内容通过文件名后缀区分语言。
+
+## 多语言内容规则
+
+### Markdown 内容（新闻、活动、项目、通知）
+
+- 中文版：`src/content/news/welcome.md`（无后缀）
+- 英文版：`src/content/news/welcome.en.md`（`.en.md` 后缀）
+- 系统通过 `filterByLocale()` 自动按语言过滤内容
+- 中文页面只显示无后缀文件，英文页面只显示 `.en.md` 文件
+
+### 配置型数据（部门、成员、时间线、站点信息）
+
+所有导出均为 `Record<Locale, T>` 格式：
+
+```ts
+export const departments: Record<Locale, Department[]> = {
+  "zh-CN": [/* 中文部门数据 */],
+  en: [/* 英文部门数据 */],
+};
+```
+
+更新时必须同时更新中英文版本。
+
+### 翻译文件（UI 文本）
+
+- `src/i18n/zh-CN.json` — 中文 UI 文本
+- `src/i18n/en.json` — 英文 UI 文本
+
+使用 `t("key.subkey")` 调用，如 `t("home.learnMore")`。
+
 ## 如何新增新闻
 
 1. 在 `src/content/news/` 下新建一个 Markdown 文件。

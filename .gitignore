@@ -1,6 +1,41 @@
-node_modules
-dist
-.astro
+# serena
+.serena
+
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+.astro/
+
+# Environment variables
 .env
-.env.local
+.env.*
+!.env.example
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS files
 .DS_Store
+Thumbs.db
+
+# Editor directories
+.idea/
+*.swp
+*.swo
+
+# Vercel
+.vercel/
+
+# TypeScript
+*.tsbuildinfo
+
+# Project-specific temporary files
+.serena/
+docs/superpowers/
+build-output.txt
+pkublockchain-home.html

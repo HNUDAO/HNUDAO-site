@@ -1,0 +1,188 @@
+---
+import ActivityCard from "@/components/ActivityCard.astro";
+import CTASection from "@/components/CTASection.astro";
+import GinkgoLeaf from "@/components/GinkgoLeaf.astro";
+import Hero from "@/components/Hero.astro";
+import IndustryMentorShowcase from "@/components/IndustryMentorShowcase.astro";
+import NewsCard from "@/components/NewsCard.astro";
+import ProjectCard from "@/components/ProjectCard.astro";
+import SectionHeading from "@/components/SectionHeading.astro";
+import Tag from "@/components/Tag.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import {
+  getEntryHref,
+  getFeaturedEntries,
+  isPublished,
+  sortEntriesByDate,
+  takeEntries,
+  filterByLocale,
+} from "@/lib/content";
+import { getCollection } from "astro:content";
+import { organizationName, siteDescription } from "@/lib/site";
+import { useTranslations } from "@/lib/i18n";
+
+const locale = "en" as const;
+const t = useTranslations(locale);
+
+const allNews = await getCollection("news");
+const allActivities = await getCollection("activities");
+const allProjects = await getCollection("projects");
+
+const newsEntries = sortEntriesByDate(filterByLocale(allNews, locale).filter(isPublished), "pubDate");
+const activitiesEntries = sortEntriesByDate(filterByLocale(allActivities, locale).filter(isPublished), "startDate");
+const projectEntries = sortEntriesByDate(filterByLocale(allProjects, locale).filter(isPublished), "date");
+
+const latestNews = takeEntries(newsEntries, 2);
+const featuredActivity = getFeaturedEntries(activitiesEntries, 1)[0] || activitiesEntries[0];
+const featuredProject = getFeaturedEntries(projectEntries, 1)[0] || projectEntries[0];
+
+const directions = ["Blockchain", "Web3", "Security", "Open Source", "Research", "Practice"];
+---
+
+<BaseLayout description={siteDescription[locale]}>
+  <main id="main-content">
+    <Hero />
+
+    <section class="section-shell relative z-20 -mt-[24vh] pb-4 pt-0 sm:-mt-[27vh]" id="home-intro">
+      <div class="page-shell">
+        <div class="home-intro-stage" data-home-content>
+          <GinkgoLeaf class="ginkgo-leaf ginkgo-leaf-content-left hidden lg:block" variant="leaf1" />
+          <GinkgoLeaf class="ginkgo-leaf ginkgo-leaf-content-right hidden lg:block" variant="leaf1" />
+          <GinkgoLeaf
+            class="pointer-events-none absolute bottom-[-0.45rem] right-[14%] z-0 hidden w-[2.35rem] rotate-[16deg] text-[rgba(226,194,119,0.18)] md:block"
+            variant="leaf2"
+          />
+
+          <div class="grid gap-3.5 lg:grid-cols-[1.08fr_0.92fr]">
+            <section class="surface-card px-4 py-5 sm:px-5 sm:py-5.5">
+              <p class="mb-4 text-xs font-semibold uppercase tracking-[0.28em] text-signal-500">HNUDAO</p>
+              <h1 class="text-balance text-[2rem] font-semibold tracking-tight text-ink-950 sm:text-[2.1rem]">
+                {organizationName[locale]}
+              </h1>
+              <p class="mt-3 max-w-3xl text-[0.92rem] leading-7 text-ink-600">
+                {t("home.orgDescription")}
+              </p>
+              <div class="mt-5 flex flex-wrap gap-2.5">
+                <a
+                  class="focus-ring inline-flex items-center justify-center rounded-full bg-signal-500 px-4 py-2.5 text-[0.84rem] font-semibold text-white transition hover:-translate-y-0.5 hover:bg-[#7f0604]"
+                  href="/en/about"
+                >
+                  {t("home.learnMore")}
+                </a>
+                <a
+                  class="glass-button focus-ring inline-flex items-center justify-center rounded-full px-4 py-2.5 text-[0.84rem] font-semibold text-ink-900 transition hover:-translate-y-0.5 hover:text-signal-500"
+                  href="/en/join"
+                >
+                  {t("home.joinUs")}
+                </a>
+              </div>
+            </section>
+
+            <section class="surface-card px-4 py-5 sm:px-5 sm:py-5.5">
+              <p class="mb-4 text-xs font-semibold uppercase tracking-[0.28em] text-signal-500">Focus</p>
+              <div class="flex flex-wrap gap-2">
+                {directions.map((item) => <Tag label={item} />)}
+              </div>
+              <div class="mt-5 grid gap-2.5 sm:grid-cols-2">
+                <div class="glass-tile px-3.5 py-3.5">
+                  <p class="text-sm font-semibold text-ink-950">{t("home.orgPosition")}</p>
+                  <p class="mt-2 text-[0.84rem] leading-5 text-ink-600">
+                    {t("home.orgPositionDesc")}
+                  </p>
+                </div>
+                <div class="glass-tile px-3.5 py-3.5">
+                  <p class="text-sm font-semibold text-ink-950">{t("home.contentMethod")}</p>
+                  <p class="mt-2 text-[0.84rem] leading-5 text-ink-600">
+                    {t("home.contentMethodDesc")}
+                  </p>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <IndustryMentorShowcase />
+
+    <section class="section-shell pt-6 sm:pt-8">
+      <div class="page-shell">
+        <div class="relative">
+          <GinkgoLeaf
+            class="pointer-events-none absolute right-[-1.15rem] top-[-1.35rem] hidden w-[2.8rem] rotate-[14deg] text-[rgba(223,190,121,0.16)] lg:block"
+            variant="leaf4"
+          />
+          <GinkgoLeaf
+            class="pointer-events-none absolute left-[-0.9rem] bottom-[-1.1rem] hidden w-[2.45rem] rotate-[-18deg] text-[rgba(170,0,13,0.07)] lg:block"
+            variant="leaf2"
+          />
+        <SectionHeading
+          actionHref="/en/news"
+          actionLabel={t("common.viewMore")}
+          eyebrow="Latest Updates"
+          title={t("home.latestUpdates")}
+          description={t("home.latestUpdatesDesc")}
+        />
+
+        <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+          {latestNews.map((entry) => (
+            <NewsCard
+              category={entry.data.category}
+              compact={true}
+              cover={entry.data.cover}
+              date={entry.data.pubDate}
+              description={entry.data.description}
+              featured={entry.data.featured}
+              href={getEntryHref(entry)}
+              tags={entry.data.tags}
+              title={entry.data.title}
+            />
+          ))}
+          {featuredActivity && (
+            <ActivityCard
+              category={featuredActivity.data.category}
+              compact={true}
+              cover={featuredActivity.data.cover}
+              description={featuredActivity.data.description}
+              href={getEntryHref(featuredActivity)}
+              location={featuredActivity.data.location}
+              startDate={featuredActivity.data.startDate}
+              status={featuredActivity.data.status}
+              tags={featuredActivity.data.tags}
+              title={featuredActivity.data.title}
+            />
+          )}
+          {featuredProject && (
+            <ProjectCard
+              compact={true}
+              cover={featuredProject.data.cover}
+              date={featuredProject.data.date}
+              description={featuredProject.data.description}
+              featured={featuredProject.data.featured}
+              href={getEntryHref(featuredProject)}
+              status={featuredProject.data.status}
+              tags={featuredProject.data.tags}
+              title={featuredProject.data.title}
+            />
+          )}
+        </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-shell pt-0">
+      <div class="page-shell">
+        <CTASection
+          description={t("home.joinCtaDesc")}
+          eyebrow="Join HNUDAO"
+          primaryHref="/en/join"
+          primaryLabel={t("home.viewJoin")}
+          secondaryHref="/en/contact"
+          secondaryLabel={t("home.contactUs")}
+          title={t("home.joinCtaTitle")}
+          tone="home"
+        />
+      </div>
+    </section>
+  </main>
+</BaseLayout>
