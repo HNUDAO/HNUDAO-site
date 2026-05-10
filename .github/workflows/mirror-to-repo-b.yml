@@ -6,7 +6,6 @@ on:
       - "**"
     tags:
       - "**"
-  delete:
   workflow_dispatch:
 
 jobs:
@@ -14,14 +13,32 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Mirror repository
+      - name: Mirror repository (excluding .github)
         env:
           MIRROR_TOKEN: ${{ secrets.MIRROR_TOKEN }}
         run: |
-          git clone --mirror https://x-access-token:${{ github.token }}@github.com/${{ github.repository }} source.git
-          cd source.git
+          # Clone the repository (shallow, latest only)
+          git clone --depth 1 https://x-access-token:${{ github.token }}@github.com/${{ github.repository }} repo
 
-          git remote set-url --push origin https://x-access-token:${MIRROR_TOKEN}@github.com/HNUDAO/HNUDAO-site.git
+          cd repo
 
-          git fetch -p origin
-          git push --mirror
+          # Remove .github folder
+          rm -rf .github
+
+          # Configure target remote
+          git remote set-url origin https://x-access-token:${MIRROR_TOKEN}@github.com/HNUDAO/HNUDAO-site.git
+
+          # Commit the removal if there are changes
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git diff --cached --quiet || git commit -m "Remove .github folder"
+
+          # Force push branch to target
+          git push --force origin HEAD
+
+          # If triggered by a tag push, also push the tag
+          if [[ "${{ github.ref_type }}" == "tag" ]]; then
+            git fetch --tags origin
+            git push --force origin "${{ github.ref }}"
+          fi
