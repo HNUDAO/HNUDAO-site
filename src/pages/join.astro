@@ -11,7 +11,7 @@ const t = useTranslations(locale);
 <ContentLayout
   breadcrumbs={[{ label: t("join.breadcrumb") }]}
   description={t("join.description")}
-  eyebrow="Join HNUDAO"
+  eyebrow={t("labels.join")}
   title={t("join.title")}
 >
   <section class="section-shell pt-0">
@@ -34,7 +34,7 @@ const t = useTranslations(locale);
   <section class="section-shell bg-white/65">
     <div class="page-shell">
       <SectionHeading
-        eyebrow="Process"
+        eyebrow={t("labels.process")}
         title={t("join.processTitle")}
         description={t("join.processDesc")}
       />
@@ -67,7 +67,7 @@ const t = useTranslations(locale);
     <div class="page-shell grid gap-10 lg:grid-cols-[1fr_0.9fr]">
       <div class="surface-card px-6 py-8 sm:px-8">
         <SectionHeading
-          eyebrow="FAQ"
+          eyebrow={t("labels.faq")}
           title={t("join.faqTitle")}
           description={t("join.faqDesc")}
         />
@@ -88,7 +88,7 @@ const t = useTranslations(locale);
       </div>
 
       <div class="surface-card-dark px-6 py-8 sm:px-8">
-        <p class="cta-eyebrow text-xs font-semibold">Registration</p>
+        <p class="cta-eyebrow text-xs font-semibold">{t("labels.registration")}</p>
         <h2 class="cta-title mt-3 text-3xl">{t("join.registerTitle")}</h2>
         <p class="cta-description mt-4 text-base leading-8">
           {t("join.registerDesc")}
@@ -110,7 +110,7 @@ const t = useTranslations(locale);
     <div class="page-shell">
       <CTASection
         description={t("join.ctaDesc")}
-        eyebrow="Keep in Touch"
+        eyebrow={t("labels.keepInTouch")}
         primaryHref="/contact"
         primaryLabel={t("join.viewContact")}
         secondaryHref="/news"

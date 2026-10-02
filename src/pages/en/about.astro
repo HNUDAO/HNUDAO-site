@@ -14,14 +14,14 @@ const t = useTranslations(locale);
 <ContentLayout
   breadcrumbs={[{ label: t("about.breadcrumb") }]}
   description={t("about.description")}
-  eyebrow="About HNUDAO"
+  eyebrow={t("labels.about")}
   title={t("about.title")}
 >
   <section class="section-shell pt-0">
     <div class="page-shell grid gap-10 xl:grid-cols-[1.1fr_0.9fr]">
       <div class="surface-card px-6 py-8 sm:px-8">
         <SectionHeading
-          eyebrow="Introduction"
+          eyebrow={t("labels.introduction")}
           title={t("about.introTitle")}
           description={t("about.introDesc")}
         />
@@ -47,7 +47,7 @@ const t = useTranslations(locale);
   <section class="section-shell bg-white/65">
     <div class="page-shell">
       <SectionHeading
-        eyebrow="Culture"
+        eyebrow={t("labels.culture")}
         title={t("about.cultureTitle")}
         description={t("about.cultureDesc")}
       />
@@ -72,7 +72,7 @@ const t = useTranslations(locale);
     <div class="page-shell grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
       <div class="surface-card px-6 py-8 sm:px-8">
         <SectionHeading
-          eyebrow="Future"
+          eyebrow={t("labels.future")}
           title={t("about.futureTitle")}
           description={t("about.futureDesc")}
         />
@@ -84,7 +84,7 @@ const t = useTranslations(locale);
       </div>
       <div class="surface-card px-6 py-8 sm:px-8">
         <SectionHeading
-          eyebrow="Timeline"
+          eyebrow={t("labels.timeline")}
           title={t("about.timelineTitle")}
           description={t("about.timelineDesc")}
         />
@@ -97,7 +97,7 @@ const t = useTranslations(locale);
     <div class="page-shell">
       <CTASection
         description={t("about.ctaDesc")}
-        eyebrow="Next Step"
+          eyebrow={t("labels.nextStep")}
         primaryHref="/en/join"
         primaryLabel={t("about.learnJoin")}
         secondaryHref="/en/contact"

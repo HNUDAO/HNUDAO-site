@@ -65,12 +65,15 @@ export function isExternalHref(href: string) {
   return /^https?:\/\//.test(href);
 }
 
-export function filterByLocale<T extends { id: string }>(
+export function filterByLocale<T extends { filePath: string }>(
   entries: T[],
   locale: "zh-CN" | "en",
 ): T[] {
+  // Astro normalizes dots out of entry.id, so the .en.md convention is only reliable in filePath.
+  const isEnglishEntry = (entry: T) => entry.filePath.endsWith(".en.md");
+
   if (locale === "zh-CN") {
-    return entries.filter((e) => !e.id.endsWith(".en"));
+    return entries.filter((entry) => !isEnglishEntry(entry));
   }
-  return entries.filter((e) => e.id.endsWith(".en"));
+  return entries.filter(isEnglishEntry);
 }

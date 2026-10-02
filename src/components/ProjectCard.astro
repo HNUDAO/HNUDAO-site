@@ -1,6 +1,7 @@
 ---
 import { formatDate } from "@/lib/formatDate";
 import { isExternalHref } from "@/lib/content";
+import { getLocaleFromPath, useTranslations } from "@/lib/i18n";
 import Tag from "./Tag.astro";
 
 type Props = {
@@ -27,10 +28,13 @@ const {
   compact = false,
 } = Astro.props;
 
+const locale = getLocaleFromPath(Astro.url.pathname);
+const t = useTranslations(locale);
+
 const statusLabel = {
-  planning: "Planning",
-  active: "Active",
-  archived: "Archived",
+  planning: t("projects.planning"),
+  active: t("projects.active"),
+  archived: t("projects.archived"),
 }[status];
 
 const isExternal = isExternalHref(href);
@@ -48,15 +52,17 @@ const isExternal = isExternalHref(href);
         alt={`${title} cover`}
         class="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"
         height="360"
+        loading="lazy"
         src={cover || "/images/placeholder-cover.svg"}
         width="640"
+        decoding="async"
       />
     </div>
     <div class:list={["flex h-full flex-col", compact ? "px-3.5 py-3.5" : "px-4 py-4 sm:px-5 sm:py-5"]}>
       <div class="flex flex-wrap items-center gap-2.5">
         <Tag label={statusLabel} variant="accent" />
-        {featured && <Tag label="Featured" />}
-        {date && <span class="text-xs text-ink-500 sm:text-sm">{formatDate(date)}</span>}
+        {featured && <Tag label={t("common.featured")} />}
+        {date && <span class="text-xs text-ink-500 sm:text-sm">{formatDate(date, locale)}</span>}
       </div>
       <h3
         class:list={[
@@ -75,7 +81,7 @@ const isExternal = isExternalHref(href);
         </div>
       )}
       <div class="mt-auto pt-4 text-[0.84rem] font-medium text-signal-500">
-        {isExternal ? "打开项目链接" : "查看项目"}
+        {isExternal ? t("common.openProject") : t("projects.viewProject")}
       </div>
     </div>
   </a>

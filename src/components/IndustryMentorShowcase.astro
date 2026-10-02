@@ -10,17 +10,17 @@ const t = useTranslations(locale);
   <div class="page-shell">
     <div class="mb-6 flex flex-col gap-3.5 text-left" data-reveal>
       <div class="mb-1 flex items-center gap-3">
-        <span aria-hidden="true" class="h-px w-10 bg-[rgba(170,0,13,0.62)]"></span>
-        <p class="subtle-label !text-[#8e1c23]">SPECIAL FEATURE</p>
+        <span aria-hidden="true" class="h-px w-10 bg-signal-500/70"></span>
+        <p class="subtle-label !text-signal-500">{t("labels.specialFeature")}</p>
       </div>
       <div class="max-w-3xl">
         <h2
           id="special-feature-heading"
-          class="text-balance text-[1.72rem] font-semibold tracking-tight text-[#231d19] sm:text-[2rem]"
+          class="text-balance text-[1.72rem] font-semibold tracking-tight text-ink-950 sm:text-[2rem]"
         >
           {t("specialFeature.title")}
         </h2>
-        <p class="mt-2.5 max-w-2xl text-[0.9rem] leading-6 text-[#7a6658]">
+        <p class="mt-2.5 max-w-2xl text-[0.9rem] leading-6 text-ink-600">
           {t("specialFeature.desc")}
         </p>
       </div>
@@ -43,7 +43,7 @@ const t = useTranslations(locale);
       <div class="grid gap-0 lg:grid-cols-[minmax(0,1.06fr)_1px_minmax(0,0.94fr)]">
         <section class="mentor-panel">
           <div class="flex items-center gap-3">
-            <p class="special-feature-kicker">VIP AREA</p>
+            <p class="special-feature-kicker">{t("labels.vipArea")}</p>
             <span aria-hidden="true" class="h-2 w-2 rounded-full bg-[#aa000d]"></span>
           </div>
 
@@ -58,15 +58,16 @@ const t = useTranslations(locale);
                 alt="Aipha Brain Lab Logo"
                 class="h-full w-full object-contain"
                 loading="lazy"
+                decoding="async"
               />
             </div>
 
             <div class="min-w-0">
               <p class="text-[1rem] font-medium leading-7 text-[#f2e9dc] sm:text-[1.05rem]">
-                Aipha Brain Lab（艾法智能脑实验室）
+                {t("specialFeature.organization")}
               </p>
               <p class="mt-2 text-[1.14rem] font-semibold tracking-tight text-[#f6efe5] sm:text-[1.28rem]">
-                梁泽波 Zebo Liang
+                {t("specialFeature.mentorName")}
               </p>
               <p class="mt-2 text-sm leading-7 text-[rgba(246,239,229,0.76)] sm:text-[0.95rem]">
                 {t("specialFeature.founderRole")}
@@ -85,7 +86,7 @@ const t = useTranslations(locale);
         <div class="mentor-research-divider" aria-hidden="true"></div>
 
         <section class="research-panel">
-          <p class="special-feature-kicker">RESEARCH</p>
+          <p class="special-feature-kicker">{t("labels.research")}</p>
 
           <h3 class="mt-3 text-balance text-[1.3rem] font-semibold tracking-tight text-[#f6efe5] sm:text-[1.52rem]">
             {t("specialFeature.researchTitle")}
@@ -97,7 +98,7 @@ const t = useTranslations(locale);
           </p>
 
           <p class="mt-3 max-w-[28rem] text-sm italic leading-7 text-[rgba(246,239,229,0.64)] sm:text-[0.95rem]">
-            Special thanks to our exclusive industry data supporter: Aipha Brain Lab
+            {t("specialFeature.supportNote")}
           </p>
 
           <div class="mt-5">

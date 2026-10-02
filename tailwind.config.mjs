@@ -5,31 +5,31 @@ export default {
     extend: {
       colors: {
         ink: {
-          50: "#f8f4ef",
-          100: "#efe6db",
-          200: "#dbcab6",
-          300: "#c5ac90",
-          400: "#a98766",
-          500: "#88694f",
-          600: "#694f3e",
-          700: "#4d3a31",
-          800: "#342823",
-          900: "#211a18",
-          950: "#16110f"
+          50: "rgb(var(--ink-50) / <alpha-value>)",
+          100: "rgb(var(--ink-100) / <alpha-value>)",
+          200: "rgb(var(--ink-200) / <alpha-value>)",
+          300: "rgb(var(--ink-300) / <alpha-value>)",
+          400: "rgb(var(--ink-400) / <alpha-value>)",
+          500: "rgb(var(--ink-500) / <alpha-value>)",
+          600: "rgb(var(--ink-600) / <alpha-value>)",
+          700: "rgb(var(--ink-700) / <alpha-value>)",
+          800: "rgb(var(--ink-800) / <alpha-value>)",
+          900: "rgb(var(--ink-900) / <alpha-value>)",
+          950: "rgb(var(--ink-950) / <alpha-value>)"
         },
         jade: {
-          100: "#f4e6db",
-          300: "#dfb897",
-          500: "#cd9870",
-          700: "#a77852"
+          100: "rgb(var(--jade-100) / <alpha-value>)",
+          300: "rgb(var(--jade-300) / <alpha-value>)",
+          500: "rgb(var(--jade-500) / <alpha-value>)",
+          700: "rgb(var(--jade-700) / <alpha-value>)"
         },
         gold: {
-          100: "#fbf1e7",
-          300: "#e8c9a8",
-          500: "#cd9870"
+          100: "rgb(var(--gold-100) / <alpha-value>)",
+          300: "rgb(var(--gold-300) / <alpha-value>)",
+          500: "rgb(var(--gold-500) / <alpha-value>)"
         },
         signal: {
-          500: "#9c0705"
+          500: "rgb(var(--signal-500) / <alpha-value>)"
         }
       },
       boxShadow: {

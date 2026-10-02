@@ -23,14 +23,14 @@ const wallets = [
 <ContentLayout
   breadcrumbs={[{ label: t("sponsor.breadcrumb") }]}
   description={t("sponsor.description")}
-  eyebrow="Sponsor HNUDAO"
+  eyebrow={t("labels.sponsor")}
   title={t("sponsor.title")}
 >
   <section class="section-shell pt-0">
     <div class="page-shell grid gap-5 lg:grid-cols-[1.02fr_0.98fr]">
       <div class="surface-card px-6 py-8 sm:px-8">
         <SectionHeading
-          eyebrow="Why Sponsor"
+          eyebrow={t("labels.whySponsor")}
           title={t("sponsor.whyTitle")}
           description={t("sponsor.whyDesc")}
         />
@@ -55,7 +55,7 @@ const wallets = [
       </div>
 
       <div class="surface-card-dark px-6 py-8 sm:px-8">
-        <p class="cta-eyebrow text-xs font-semibold">Notice</p>
+        <p class="cta-eyebrow text-xs font-semibold">{t("labels.notice")}</p>
         <h2 class="cta-title mt-3 text-3xl">{t("sponsor.noticeTitle")}</h2>
         <div class="cta-description mt-5 space-y-3 text-sm leading-7">
           <p>{t("sponsor.notice1")}</p>
@@ -69,7 +69,7 @@ const wallets = [
   <section class="section-shell pt-0">
     <div class="page-shell">
       <SectionHeading
-        eyebrow="Wallets"
+        eyebrow={t("labels.wallets")}
         title={t("sponsor.walletsTitle")}
         description={t("sponsor.walletsDesc")}
       />
@@ -84,6 +84,8 @@ const wallets = [
               <button
                 class="focus-ring inline-flex items-center justify-center rounded-full border border-ink-200 bg-white px-4 py-2 text-sm font-semibold text-ink-900 transition hover:border-jade-500 hover:text-signal-500"
                 data-copy-address={wallet.address}
+                data-copy-failure="复制失败"
+                data-copy-success="已复制"
                 type="button"
               >
                 {t("common.copy")}
@@ -102,7 +104,7 @@ const wallets = [
     <div class="page-shell">
       <CTASection
         description={t("sponsor.ctaDesc")}
-        eyebrow="Need Confirmation"
+        eyebrow={t("labels.needConfirmation")}
         primaryHref="/contact"
         primaryLabel={t("sponsor.contactAssociation")}
         secondaryHref="mailto:contact@mail.hnudao.cn"
@@ -113,36 +115,27 @@ const wallets = [
   </section>
 
   <script>
-    const copyButtons = document.querySelectorAll("[data-copy-address]");
+    if (document.documentElement.dataset.hnudaoCopyEvents !== "true") {
+      document.documentElement.dataset.hnudaoCopyEvents = "true";
 
-    copyButtons.forEach((button) => {
-      button.addEventListener("click", async () => {
-        if (!(button instanceof HTMLButtonElement)) {
-          return;
-        }
+      document.addEventListener("click", async (event) => {
+        const button = event.target instanceof Element ? event.target.closest("[data-copy-address]") : null;
+        if (!(button instanceof HTMLButtonElement)) return;
 
         const address = button.dataset.copyAddress;
+        if (!address) return;
 
-        if (!address) {
-          return;
-        }
-
+        const original = button.textContent ?? "";
         try {
           await navigator.clipboard.writeText(address);
-          const originalText = button.textContent;
-          button.textContent = "已复制";
-
-          window.setTimeout(() => {
-            button.textContent = originalText;
-          }, 1600);
+          button.textContent = button.dataset.copySuccess ?? "已复制";
         } catch {
-          button.textContent = "复制失败";
-
-          window.setTimeout(() => {
-            button.textContent = "复制";
-          }, 1600);
+          button.textContent = button.dataset.copyFailure ?? "复制失败";
         }
+        window.setTimeout(() => {
+          button.textContent = original;
+        }, 1600);
       });
-    });
+    }
   </script>
 </ContentLayout>

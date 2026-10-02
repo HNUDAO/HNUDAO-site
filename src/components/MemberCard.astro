@@ -1,5 +1,6 @@
 ---
 import type { Member } from "@/data/members";
+import { getLocaleFromPath, useTranslations } from "@/lib/i18n";
 import SocialIcon from "./SocialIcon.astro";
 import Tag from "./Tag.astro";
 
@@ -8,16 +9,18 @@ type Props = {
 };
 
 const { member } = Astro.props;
-const initials = member.name.replace(/\s+/g, "").slice(0, 2) || "待补";
+const locale = getLocaleFromPath(Astro.url.pathname);
+const t = useTranslations(locale);
+const initials = member.name.replace(/\s+/g, "").slice(0, 2) || t("members.pending");
 const linkItems = [
   member.github
     ? { href: member.github, label: "GitHub", platform: "github" as const }
     : null,
   member.email
-    ? { href: `mailto:${member.email}`, label: "邮箱", platform: "email" as const }
+    ? { href: `mailto:${member.email}`, label: t("common.email"), platform: "email" as const }
     : null,
   member.personalSite
-    ? { href: member.personalSite, label: "个人主页", platform: "website" as const }
+    ? { href: member.personalSite, label: t("common.website"), platform: "website" as const }
     : null,
 ].filter(Boolean);
 ---
@@ -29,8 +32,10 @@ const linkItems = [
         alt={`${member.name} 头像`}
         class="h-14 w-14 rounded-[1rem] border border-ink-100 object-cover"
         height="64"
+        loading="lazy"
         src={member.avatar}
         width="64"
+        decoding="async"
       />
     ) : (
       <div class="flex h-14 w-14 items-center justify-center rounded-[1rem] bg-ink-100 text-base font-semibold text-ink-700">
@@ -48,7 +53,7 @@ const linkItems = [
   </div>
   <p class="mt-4 text-[0.84rem] leading-6 text-ink-600">{member.bio}</p>
   <div class="mt-5 flex items-center justify-between gap-4 border-t border-ink-100 pt-4">
-    <p class="text-sm text-ink-500">相关链接</p>
+    <p class="text-sm text-ink-500">{t("members.relatedLinks")}</p>
     {linkItems.length > 0 ? (
       <div class="flex items-center gap-2">
         {linkItems.map((item) => (
@@ -63,7 +68,7 @@ const linkItems = [
         ))}
       </div>
     ) : (
-      <span class="text-sm text-ink-400">暂未公开</span>
+      <span class="text-sm text-ink-400">{t("members.notPublic")}</span>
     )}
   </div>
 </article>

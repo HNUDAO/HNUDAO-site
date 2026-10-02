@@ -16,7 +16,7 @@ const studentMembers = members[locale].filter((member) => member.group === "memb
 <ContentLayout
   breadcrumbs={[{ label: t("members.breadcrumb") }]}
   description={t("members.description")}
-  eyebrow="Members"
+  eyebrow={t("labels.members")}
   title={t("members.title")}
 >
   <section class="section-shell -mt-8 pb-6 pt-0 sm:-mt-10 sm:pb-8">
@@ -24,7 +24,7 @@ const studentMembers = members[locale].filter((member) => member.group === "memb
       <div class="grid gap-4 xl:grid-cols-[0.92fr_1.08fr]">
         <div class="surface-card px-6 py-6 sm:px-8">
           <SectionHeading
-            eyebrow="Advisors"
+            eyebrow={t("labels.advisors")}
             title={t("members.advisorsTitle")}
             description={t("members.advisorsDesc")}
           />
@@ -43,7 +43,7 @@ const studentMembers = members[locale].filter((member) => member.group === "memb
     <div class="page-shell">
       <div class="surface-card px-6 py-6 sm:px-8">
         <SectionHeading
-          eyebrow="Filter UI"
+          eyebrow={t("labels.filterUi")}
           title={t("members.filterTitle")}
         />
         <form class="grid gap-4 md:grid-cols-3" onsubmit="return false;">

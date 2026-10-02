@@ -79,7 +79,7 @@ const directions = ["Blockchain", "Web3", "Security", "Open Source", "Research",
             </section>
 
             <section class="surface-card px-4 py-5 sm:px-5 sm:py-5.5">
-              <p class="mb-4 text-xs font-semibold uppercase tracking-[0.28em] text-signal-500">Focus</p>
+              <p class="mb-4 text-xs font-semibold uppercase tracking-[0.28em] text-signal-500">{t("labels.homeFocus")}</p>
               <div class="flex flex-wrap gap-2">
                 {directions.map((item) => <Tag label={item} />)}
               </div>
@@ -119,7 +119,7 @@ const directions = ["Blockchain", "Web3", "Security", "Open Source", "Research",
         <SectionHeading
           actionHref="/en/news"
           actionLabel={t("common.viewMore")}
-          eyebrow="Latest Updates"
+          eyebrow={t("labels.latestUpdates")}
           title={t("home.latestUpdates")}
           description={t("home.latestUpdatesDesc")}
         />
@@ -174,7 +174,7 @@ const directions = ["Blockchain", "Web3", "Security", "Open Source", "Research",
       <div class="page-shell">
         <CTASection
           description={t("home.joinCtaDesc")}
-          eyebrow="Join HNUDAO"
+          eyebrow={t("labels.joinHnudao")}
           primaryHref="/en/join"
           primaryLabel={t("home.viewJoin")}
           secondaryHref="/en/contact"

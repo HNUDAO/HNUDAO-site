@@ -23,13 +23,13 @@ const contactCards = [
 <ContentLayout
   breadcrumbs={[{ label: t("contact.breadcrumb") }]}
   description={t("contact.description")}
-  eyebrow="Contact"
+  eyebrow={t("labels.contact")}
   title={t("contact.title")}
 >
   <section class="section-shell pt-0">
     <div class="page-shell">
       <SectionHeading
-        eyebrow="Channels"
+        eyebrow={t("labels.channels")}
         title={t("contact.channelsTitle")}
         description={t("contact.channelsDesc")}
       />
@@ -47,7 +47,9 @@ const contactCards = [
                 <img
                   alt={t("contact.wechatQrAlt")}
                   class="h-auto w-full rounded-2xl border border-ink-100"
+                  loading="lazy"
                   src="/qrcode_for公众号.jpg"
+                  decoding="async"
                 />
                 <p class="mt-3 text-xs leading-6 text-ink-600">{t("contact.wechatQrText")}</p>
               </div>

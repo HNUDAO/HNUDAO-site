@@ -14,13 +14,63 @@
     "viewMore": "View Archive",
     "viewOriginal": "Read Original",
     "viewLink": "View Link",
+    "viewContent": "View Content",
     "openProject": "Open Project",
+    "featured": "Featured",
+    "quickLink": "Quick Link",
+    "breadcrumb": "Breadcrumb",
+    "email": "Email",
+    "website": "Website",
     "copy": "Copy",
     "copied": "Copied",
     "copyFailed": "Failed",
     "scroll": "Scroll",
     "skipToContent": "Skip to main content",
-    "openMenu": "Open menu"
+    "openMenu": "Open menu",
+    "toggleTheme": "Toggle dark theme"
+  },
+  "labels": {
+    "homeFocus": "Focus",
+    "latestUpdates": "Latest Updates",
+    "joinHnudao": "Join HNUDAO",
+    "about": "About HNUDAO",
+    "introduction": "Introduction",
+    "culture": "Culture",
+    "future": "Future",
+    "timeline": "Timeline",
+    "nextStep": "Next Step",
+    "contact": "Contact",
+    "channels": "Channels",
+    "departments": "Departments",
+    "structure": "Structure",
+    "members": "Members",
+    "advisors": "Advisors",
+    "filterUi": "Filter UI",
+    "news": "News",
+    "featuredStory": "Featured Story",
+    "categories": "Categories",
+    "allNews": "All News",
+    "activities": "Activities",
+    "featuredActivity": "Featured Activity",
+    "status": "Status",
+    "allActivities": "All Activities",
+    "projects": "Projects",
+    "featuredProject": "Featured Project",
+    "statusTags": "Status Tags",
+    "projectList": "Project List",
+    "join": "Join HNUDAO",
+    "process": "Process",
+    "faq": "FAQ",
+    "registration": "Registration",
+    "keepInTouch": "Keep in Touch",
+    "sponsor": "Sponsor HNUDAO",
+    "whySponsor": "Why Sponsor",
+    "notice": "Notice",
+    "wallets": "Wallets",
+    "needConfirmation": "Need Confirmation",
+    "specialFeature": "Special Feature",
+    "vipArea": "VIP Area",
+    "research": "Research"
   },
   "home": {
     "orgDescription": "HNUDAO is dedicated to connecting blockchain learning, technical practice, open-source collaboration, and campus exchange. Students interested in Web3, cybersecurity, open-source technology, and youth innovation are welcome to follow us.",
@@ -96,7 +146,12 @@
     "structureTitle": "Structure for Long-term Maintenance",
     "structureDesc": "HNUDAO adopts an organization approach focused on collaboration and long-term maintenance, covering technology, content, operations, partnerships, and research.",
     "emptyTitle": "Department Info Updating",
-    "emptyDesc": "Department information is being organized. Detailed descriptions for each direction will be added later."
+    "emptyDesc": "Department information is being organized. Detailed descriptions for each direction will be added later.",
+    "department": "Department",
+    "memberCount": "Member Count",
+    "coreResponsibilities": "Core Responsibilities",
+    "lead": "Lead",
+    "contact": "Contact"
   },
   "members": {
     "title": "Members",
@@ -119,7 +174,10 @@
     "member": "Member",
     "updateNote": "Member information will be published gradually based on authorization.",
     "emptyTitle": "Student Member List Updating",
-    "emptyDesc": "Due to privacy and accuracy considerations, the student member list will be published gradually after individual authorization and semester updates."
+    "emptyDesc": "Due to privacy and accuracy considerations, the student member list will be published gradually after individual authorization and semester updates.",
+    "relatedLinks": "Related Links",
+    "notPublic": "Not Public",
+    "pending": "Pending"
   },
   "join": {
     "title": "Join Us",
@@ -207,7 +265,11 @@
     "currentNote": "Current Note",
     "currentNoteDesc": "The activities page is currently used as a public publishing entry. Real activity notifications and registration will be integrated gradually.",
     "allActivitiesTitle": "All Activities",
-    "allActivitiesDesc": "Activity cards link directly to external event pages or official notifications for unified maintenance and distribution."
+    "allActivitiesDesc": "Activity cards link directly to external event pages or official notifications for unified maintenance and distribution.",
+    "time": "Time",
+    "location": "Location",
+    "locationTba": "To be announced",
+    "viewActivity": "View Activity"
   },
   "projects": {
     "title": "Projects",
@@ -220,7 +282,11 @@
     "currentNote": "Current Note",
     "currentNoteDesc": "The current project page displays directions the association is building or planning. Real outcome links will replace them gradually.",
     "projectListTitle": "Project List",
-    "projectListDesc": "Click a card to go directly to the project repository, demo address, or other public resource page."
+    "projectListDesc": "Click a card to go directly to the project repository, demo address, or other public resource page.",
+    "planning": "Planning",
+    "active": "Active",
+    "archived": "Archived",
+    "viewProject": "View Project"
   },
   "notFound": {
     "title": "Page Not Found",
@@ -238,11 +304,14 @@
   "specialFeature": {
     "title": "Guest Mentor & Research",
     "desc": "Industry collaboration, mentor support, and research showcase.",
-    "industryMentor": "Guest Industry Mentor / Industry Partner & Mentor",
+    "industryMentor": "Guest Industry Mentor",
     "founderRole": "Founder & Chief AI Trading Researcher",
     "mentorLabel": "HNUDAO Guest Industry Mentor",
-    "researchTitle": "Frontier Research / Research",
-    "dataSupport": "EXCLUSIVE DATA SUPPORT"
+    "researchTitle": "Frontier Research",
+    "dataSupport": "Exclusive Data Support",
+    "supportNote": "Special thanks to our exclusive industry data supporter: Aipha Brain Lab",
+    "organization": "Aipha Brain Lab",
+    "mentorName": "Zebo Liang"
   },
   "timeline": {
     "websiteLaunch": "HNUDAO Website Launched",
