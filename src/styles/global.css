@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  color-scheme: light dark;
+  color-scheme: light;
   --bg: #f8f2eb;
   --bg-soft: #f0e4d8;
   --surface: rgba(255, 251, 247, 0.74);
@@ -124,64 +124,6 @@ html.dark {
 
 html.light {
   color-scheme: light;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root:not(.light):not(.dark) {
-    color-scheme: dark;
-    --bg: #0f1115;
-    --bg-soft: #151922;
-    --surface: rgba(27, 33, 43, 0.82);
-    --surface-strong: rgba(34, 42, 54, 0.94);
-    --line: rgba(214, 190, 151, 0.18);
-    --text: #f4efe8;
-    --text-soft: #b8b0a7;
-    --ink-deep: #f8f5ef;
-    --accent: #d6be97;
-    --accent-soft: #6d5842;
-    --gold: #d6be97;
-    --signal: #d64b43;
-    --ink-50: 29 34 43;
-    --ink-100: 43 50 61;
-    --ink-200: 62 72 84;
-    --ink-300: 88 101 116;
-    --ink-400: 116 128 143;
-    --ink-500: 155 164 175;
-    --ink-600: 183 190 198;
-    --ink-700: 211 216 220;
-    --ink-800: 232 235 237;
-    --ink-900: 244 245 246;
-    --ink-950: 250 250 250;
-    --jade-100: 48 43 38;
-    --jade-300: 174 143 104;
-    --jade-500: 214 190 151;
-    --jade-700: 232 198 144;
-    --gold-100: 46 42 37;
-    --gold-300: 188 156 113;
-    --gold-500: 214 190 151;
-    --signal-500: 214 75 67;
-    --page-bg-top: #0b0f14;
-    --page-bg-mid: #0f141b;
-    --page-bg-bottom: #141b24;
-    --glow-gold: rgba(214, 190, 151, 0.08);
-    --glow-red: rgba(214, 75, 67, 0.1);
-    --glow-gold-soft: rgba(214, 190, 151, 0.06);
-    --surface-border: rgba(214, 190, 151, 0.18);
-    --surface-card-top: rgba(28, 36, 47, 0.96);
-    --surface-card-bottom: rgba(15, 21, 29, 0.98);
-    --surface-highlight: rgba(255, 255, 255, 0.06);
-    --surface-gloss: rgba(255, 255, 255, 0.035);
-    --surface-shadow: rgba(0, 0, 0, 0.42);
-    --glass-top: rgba(30, 39, 51, 0.9);
-    --glass-bottom: rgba(14, 20, 28, 0.86);
-    --glass-border: rgba(214, 190, 151, 0.2);
-    --glass-highlight: rgba(255, 255, 255, 0.07);
-    --glass-shadow: rgba(0, 0, 0, 0.42);
-    --header-top-rgb: 42, 50, 63;
-    --header-bottom-rgb: 18, 22, 29;
-    --header-border-rgb: 214, 190, 151;
-    --header-shadow-rgb: 0, 0, 0;
-  }
 }
 
 html {
@@ -569,24 +511,6 @@ html.dark [class~="bg-white/74"] {
   background-color: color-mix(in srgb, var(--surface-strong) 74%, transparent);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root:not(.light):not(.dark) .bg-white {
-    background-color: var(--surface-strong);
-  }
-
-  :root:not(.light):not(.dark) [class~="bg-white/65"] {
-    background-color: color-mix(in srgb, var(--surface-strong) 65%, transparent);
-  }
-
-  :root:not(.light):not(.dark) [class~="bg-white/70"] {
-    background-color: color-mix(in srgb, var(--surface-strong) 70%, transparent);
-  }
-
-  :root:not(.light):not(.dark) [class~="bg-white/74"] {
-    background-color: color-mix(in srgb, var(--surface-strong) 74%, transparent);
-  }
-}
-
 .theme-icon {
   width: 1.1rem;
   height: 1.1rem;
@@ -603,16 +527,6 @@ html.dark .theme-icon-sun {
 
 html.dark .theme-icon-moon {
   display: block;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root:not(.light):not(.dark) .theme-icon-sun {
-    display: none;
-  }
-
-  :root:not(.light):not(.dark) .theme-icon-moon {
-    display: block;
-  }
 }
 
 .home-page .site-header {

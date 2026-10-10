@@ -32,15 +32,14 @@ const isHome = /^\/(en\/)?$/.test(Astro.url.pathname);
   <head>
     <meta charset="UTF-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <meta content="light dark" name="color-scheme" />
+    <meta content="light" name="color-scheme" />
     <script is:inline>
       try {
+        // shortcut: 不跟随系统主题，默认浅色；只有用户手动切换过（localStorage）才应用深色
         const theme = localStorage.getItem("hnudao-theme");
-        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-        if (theme === "dark" || (theme !== "light" && prefersDark)) {
+        if (theme === "dark") {
           document.documentElement.classList.add("dark");
-        }
-        if (theme === "light") {
+        } else {
           document.documentElement.classList.add("light");
         }
       } catch {}

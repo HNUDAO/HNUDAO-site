@@ -131,10 +131,8 @@ const isActive = (href: string) => {
     document.documentElement.dataset.hnudaoHeaderEvents = "true";
 
     const applyTheme = (root: HTMLElement, theme: string | null) => {
-      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-      const isDark = theme === "dark" || (theme !== "light" && prefersDark);
-      root.classList.toggle("dark", isDark);
-      root.classList.toggle("light", theme === "light");
+      root.classList.toggle("dark", theme === "dark");
+      root.classList.toggle("light", theme !== "dark");
     };
 
     document.addEventListener("click", (event) => {
