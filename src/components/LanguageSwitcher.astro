@@ -5,8 +5,13 @@ const locale = getLocaleFromPath(Astro.url.pathname);
 const currentPath = Astro.url.pathname;
 
 const targetLocale = locale === "zh-CN" ? "en" : "zh-CN";
-const targetPath =
-  locale === "zh-CN"
+// 404 页没有对应的另一语言路径（中文 404 构建为 /404.html），统一指到该语言首页
+const isNotFound = /^\/(en\/)?404(\/|\.html)?$/.test(currentPath);
+const targetPath = isNotFound
+  ? locale === "zh-CN"
+    ? "/en/"
+    : "/"
+  : locale === "zh-CN"
     ? `/en${currentPath}`
     : currentPath.replace(/^\/en/, "") || "/";
 ---

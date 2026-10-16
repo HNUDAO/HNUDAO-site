@@ -1,6 +1,5 @@
 ---
 import ActivityCard from "@/components/ActivityCard.astro";
-import CTASection from "@/components/CTASection.astro";
 import GinkgoLeaf from "@/components/GinkgoLeaf.astro";
 import Hero from "@/components/Hero.astro";
 import IndustryMentorShowcase from "@/components/IndustryMentorShowcase.astro";
@@ -69,12 +68,6 @@ const directions = ["Blockchain", "Web3", "Security", "Open Source", "Research",
                 >
                   {t("home.learnMore")}
                 </a>
-                <a
-                  class="glass-button focus-ring inline-flex items-center justify-center rounded-full px-4 py-2.5 text-[0.84rem] font-semibold text-ink-900 transition hover:-translate-y-0.5 hover:text-signal-500"
-                  href="/join"
-                >
-                  {t("home.joinUs")}
-                </a>
               </div>
             </section>
 
@@ -121,8 +114,7 @@ const directions = ["Blockchain", "Web3", "Security", "Open Source", "Research",
           actionLabel={t("common.viewMore")}
           eyebrow={t("labels.latestUpdates")}
           title={t("home.latestUpdates")}
-          description={t("home.latestUpdatesDesc")}
-        />
+          />
 
         <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
           {latestNews.map((entry) => (
@@ -170,19 +162,5 @@ const directions = ["Blockchain", "Web3", "Security", "Open Source", "Research",
       </div>
     </section>
 
-    <section class="section-shell pt-0">
-      <div class="page-shell">
-        <CTASection
-          description={t("home.joinCtaDesc")}
-          eyebrow={t("labels.joinHnudao")}
-          primaryHref="/join"
-          primaryLabel={t("home.viewJoin")}
-          secondaryHref="/contact"
-          secondaryLabel={t("home.contactUs")}
-          title={t("home.joinCtaTitle")}
-          tone="home"
-        />
-      </div>
-    </section>
   </main>
 </BaseLayout>

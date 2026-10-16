@@ -1,6 +1,5 @@
 ---
 import DepartmentCard from "@/components/DepartmentCard.astro";
-import EmptyState from "@/components/EmptyState.astro";
 import SectionHeading from "@/components/SectionHeading.astro";
 import ContentLayout from "@/layouts/ContentLayout.astro";
 import { departments } from "@/data/departments";
@@ -23,18 +22,9 @@ const t = useTranslations(locale);
         title={t("departments.structureTitle")}
         description={t("departments.structureDesc")}
       />
-      {departments[locale].length > 0 ? (
-        <div class="grid gap-5 lg:grid-cols-2 xl:grid-cols-3">
-          {departments[locale].map((department) => <DepartmentCard department={department} />)}
-        </div>
-      ) : (
-        <EmptyState
-          actionHref="/contact"
-          actionLabel={t("contact.contactAssociation")}
-          description={t("departments.emptyDesc")}
-          title={t("departments.emptyTitle")}
-        />
-      )}
+            <div class="grid gap-5 lg:grid-cols-2 xl:grid-cols-3">
+        {departments[locale].map((department) => <DepartmentCard department={department} />)}
+      </div>
     </div>
   </section>
 </ContentLayout>

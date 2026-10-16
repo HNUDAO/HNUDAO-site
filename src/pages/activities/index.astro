@@ -59,24 +59,9 @@ const featuredExternal = isExternalHref(featuredHref);
         <SectionHeading
           eyebrow={t("labels.status")}
           title={t("activities.statusTitle")}
-          description={t("activities.statusDesc")}
         />
         <div class="flex flex-wrap gap-3">
           {statusLabels.map((status) => <Tag label={`${status.label} / ${status.text}`} variant="accent" />)}
-        </div>
-        <div class="mt-6 grid gap-3">
-          <div class="glass-tile px-4 py-4">
-            <p class="text-sm font-semibold text-ink-950">{t("activities.maintainMethod")}</p>
-            <p class="mt-2.5 text-sm leading-6 text-ink-600">
-              {t("activities.maintainMethodDesc")}
-            </p>
-          </div>
-          <div class="glass-tile px-4 py-4">
-            <p class="text-sm font-semibold text-ink-950">{t("activities.currentNote")}</p>
-            <p class="mt-2.5 text-sm leading-6 text-ink-600">
-              {t("activities.currentNoteDesc")}
-            </p>
-          </div>
         </div>
       </div>
     </div>
@@ -87,7 +72,6 @@ const featuredExternal = isExternalHref(featuredHref);
       <SectionHeading
         eyebrow={t("labels.allActivities")}
         title={t("activities.allActivitiesTitle")}
-        description={t("activities.allActivitiesDesc")}
       />
       <div class="grid gap-4 lg:grid-cols-2 xl:grid-cols-3">
         {entries.map((entry) => (

@@ -64,7 +64,6 @@ const featuredExternal = isExternalHref(featuredHref);
       <SectionHeading
         eyebrow={t("labels.categories")}
         title={t("news.categoriesTitle")}
-        description={t("news.categoriesDesc")}
       />
       <div class="flex flex-wrap gap-2">
         {categories.length > 0 ? categories.map((category) => <Tag label={category!} variant="accent" />) : <Tag label={t("news.defaultCategory")} />}
@@ -77,7 +76,6 @@ const featuredExternal = isExternalHref(featuredHref);
       <SectionHeading
         eyebrow={t("labels.allNews")}
         title={t("news.allNewsTitle")}
-        description={t("news.allNewsDesc")}
       />
       <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
         {entries.map((entry) => (

@@ -1,7 +1,5 @@
 ---
-import CTASection from "@/components/CTASection.astro";
 import SectionHeading from "@/components/SectionHeading.astro";
-import StatCard from "@/components/StatCard.astro";
 import Timeline from "@/components/Timeline.astro";
 import ContentLayout from "@/layouts/ContentLayout.astro";
 import { timelineItems } from "@/data/timeline";
@@ -18,7 +16,7 @@ const t = useTranslations(locale);
   title={t("about.title")}
 >
   <section class="section-shell pt-0">
-    <div class="page-shell grid gap-10 xl:grid-cols-[1.1fr_0.9fr]">
+    <div class="page-shell">
       <div class="surface-card px-6 py-8 sm:px-8">
         <SectionHeading
           eyebrow={t("labels.introduction")}
@@ -35,11 +33,6 @@ const t = useTranslations(locale);
             <p class="mt-3 text-base leading-8 text-ink-600">{t("about.missionDesc")}</p>
           </div>
         </div>
-      </div>
-      <div class="grid gap-4 sm:grid-cols-3 xl:grid-cols-1">
-        <StatCard label={t("about.memberScale")} note={t("about.memberScaleNote")} value={t("about.memberScaleValue")} />
-        <StatCard label={t("about.activityPlan")} note={t("about.activityPlanNote")} value={t("about.activityPlanValue")} />
-        <StatCard label={t("about.projectDirection")} note={t("about.projectDirectionNote")} value={t("about.projectDirectionValue")} />
       </div>
     </div>
   </section>
@@ -86,24 +79,10 @@ const t = useTranslations(locale);
         <SectionHeading
           eyebrow={t("labels.timeline")}
           title={t("about.timelineTitle")}
-          description={t("about.timelineDesc")}
-        />
+          />
         <Timeline items={timelineItems[locale]} />
       </div>
     </div>
   </section>
 
-  <section class="section-shell pt-0">
-    <div class="page-shell">
-      <CTASection
-        description={t("about.ctaDesc")}
-          eyebrow={t("labels.nextStep")}
-        primaryHref="/en/join"
-        primaryLabel={t("about.learnJoin")}
-        secondaryHref="/en/contact"
-        secondaryLabel={t("home.contactUs")}
-        title={t("about.ctaTitle")}
-      />
-    </div>
-  </section>
 </ContentLayout>
