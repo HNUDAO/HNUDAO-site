@@ -4,8 +4,7 @@ import sitemap from "@astrojs/sitemap";
 import tailwind from "@astrojs/tailwind";
 
 export default defineConfig({
-  site: "https://example.com",
-  output: "static",
+  site: "https://www.hnudao.cn",
   i18n: {
     defaultLocale: "zh-CN",
     locales: ["zh-CN", "en"],
@@ -25,5 +24,10 @@ export default defineConfig({
       theme: "github-dark",
       wrap: true,
     },
+  },
+  // 站点部署在海外边缘节点，首次请求 TTFB 偏高；鼠标悬停即预取，点导航时基本是即时切换
+  prefetch: {
+    prefetchAll: true,
+    defaultStrategy: "hover",
   },
 });

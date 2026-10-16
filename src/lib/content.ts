@@ -15,18 +15,19 @@ export function isPublished<T extends SortableEntry>(entry: T) {
   return !entry.data.draft;
 }
 
+/** 按日期倒序排列（新→旧）。只允许实际存在的三个日期字段，避免 keyof 联合体索引不可靠 */
 export function sortEntriesByDate<T extends SortableEntry>(
   entries: T[],
-  field: keyof T["data"],
+  field: "pubDate" | "startDate" | "date",
 ) {
+  const toTime = (value: unknown) =>
+    value instanceof Date ? value.getTime() : value ? new Date(value as string).getTime() : 0;
+
   return [...entries].sort((a, b) => {
-    const first = a.data[field];
-    const second = b.data[field];
+    const first = toTime((a.data as Record<string, unknown>)[field]);
+    const second = toTime((b.data as Record<string, unknown>)[field]);
 
-    const firstDate = first instanceof Date ? first : first ? new Date(first as string) : new Date(0);
-    const secondDate = second instanceof Date ? second : second ? new Date(second as string) : new Date(0);
-
-    return secondDate.getTime() - firstDate.getTime();
+    return second - first;
   });
 }
 

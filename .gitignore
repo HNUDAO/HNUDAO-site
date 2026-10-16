@@ -11,7 +11,6 @@ dist/
 # Environment variables
 .env
 .env.*
-!.env.example
 
 # Logs
 npm-debug.log*
@@ -35,7 +34,12 @@ Thumbs.db
 *.tsbuildinfo
 
 # Project-specific temporary files
-.serena/
+.worktrees/
 docs/superpowers/
+.superpowers/
+archive/
 build-output.txt
 pkublockchain-home.html
+
+# CodeGraph 索引（本地工具产物）
+.codegraph/

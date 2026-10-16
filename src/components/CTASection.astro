@@ -7,7 +7,6 @@ type Props = {
   primaryHref: string;
   secondaryLabel?: string;
   secondaryHref?: string;
-  tone?: "default" | "home";
 };
 
 const {
@@ -18,7 +17,6 @@ const {
   primaryHref,
   secondaryLabel,
   secondaryHref,
-  tone = "default",
 } = Astro.props;
 ---
 
@@ -31,7 +29,7 @@ const {
   <div
     class:list={[
       "absolute inset-y-0 right-0 hidden w-1/2 bg-gradient-to-l lg:block",
-      tone === "home" ? "from-[#f0bb7a]/18 via-[#d99a58]/8 to-transparent" : "from-[#f0bb7a]/14 to-transparent",
+      "from-[#f0bb7a]/14 to-transparent",
     ]}
   ></div>
   <div class="relative flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">

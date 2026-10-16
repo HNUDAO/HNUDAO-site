@@ -26,7 +26,3 @@ export function getLocaleFromPath(pathname: string): Locale {
   return pathname === "/en" || pathname.startsWith("/en/") ? "en" : "zh-CN";
 }
 
-export function getLocalePath(path: string, locale: Locale): string {
-  if (locale === "zh-CN") return path;
-  return `/en${path}`;
-}
