@@ -108,4 +108,7 @@
 
 - `astro.config.mjs` 中的 `site`
 - `src/lib/site.ts` 中的 `siteUrl`
+- `public/robots.txt` 里的 `Sitemap:` 行
 - 如有外部资料或 README 中的站点地址，也同步更新
+
+改动后跑一次 `npm run build`，确认产物里的 canonical、`og:url` 和 `sitemap-index.xml` 都换成了新域名。

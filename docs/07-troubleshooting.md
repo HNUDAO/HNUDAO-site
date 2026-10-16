@@ -112,9 +112,9 @@ npm run build
 检查：
 
 - 文件是否存在：
-  `public/qrcode_for公众号.jpg`
+  `public/wechat-qrcode.jpg`
 - 文件名是否完全一致
-- 是否误改了 `Footer.astro` 或 `contact.astro` 中的图片路径
+- 是否误改了 `contact.astro` 中的图片路径
 
 ## GitHub 或 X 链接不对
 

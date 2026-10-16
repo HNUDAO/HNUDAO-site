@@ -132,7 +132,7 @@ git push origin content/add-open-sharing-post
 - `src/lib/site.ts` 的 GitHub、X、联系方式是否正确
 - `public/favicon.svg` 是否为正式图标
 - `public/logo-placeholder.svg` 是否为正式 Logo
-- `public/qrcode_for公众号.jpg` 是否为最新公众号二维码
+- `public/wechat-qrcode.jpg` 是否为最新公众号二维码
 - 是否仍存在不该公开的测试文案或临时链接
 
 ## 换届时如何交接 Vercel 权限

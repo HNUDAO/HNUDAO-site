@@ -12,7 +12,7 @@ HNUDAO 官网不是学校门户，也不是单页宣传页，而是一个可持�
 - 部门方向与公开说明
 - 新闻动态与活动入口
 - 项目展示与开源链接
-- 加入我们与官方联系渠道
+- 官方联系渠道
 
 ## 当前维护特点
 
@@ -20,7 +20,7 @@ HNUDAO 官网不是学校门户，也不是单页宣传页，而是一个可持�
 - 新闻、活动、项目内容主要通过 Markdown 维护。
 - 部门、成员、导航、联系方式与社交链接通过配置文件维护。
 - 新闻、活动、项目卡片以“官网展示 + 外部平台跳转”为主。
-- 微信公众号二维码图片当前位于 `public/qrcode_for公众号.jpg`。
+- 微信公众号二维码图片当前位于 `public/wechat-qrcode.jpg`。
 
 ## 当前对外渠道
 
@@ -29,7 +29,7 @@ HNUDAO 官网不是学校门户，也不是单页宣传页，而是一个可持�
 - X：
   `https://x.com/HNUBlockchain`
 - 微信公众号：
-  通过页脚和联系页公众号图标悬浮查看二维码
+  在联系页「微信公众号」卡片内直接展示二维码
 
 ## 技术栈
 
@@ -46,30 +46,30 @@ HNUDAO 官网不是学校门户，也不是单页宣传页，而是一个可持�
 
 站点支持中文（默认）和英文两种语言，使用子路径路由：
 
-**中文页面（根路径）：**
+**中文页面（根路径）：**（标 `*` 的只从页脚进入，未放进顶部导航）
 
 - `/` — 首页
 - `/about` — 关于协会
-- `/departments` — 部门介绍
 - `/members` — 成员风采
 - `/news` — 新闻动态
-- `/activities` — 活动中心
-- `/projects` — 项目展示
-- `/join` — 加入我们
 - `/contact` — 联系我们
+- `/departments` — 部门介绍 `*`
+- `/activities` — 活动中心 `*`
+- `/projects` — 项目展示 `*`（页面保留，导航入口已下线）
+- `/sponsor` — 赞助我们 `*`
 - `/404` — 自定义 404 页面
 
 **英文页面（`/en/` 前缀）：**
 
 - `/en/` — Homepage
 - `/en/about` — About
-- `/en/departments` — Departments
 - `/en/members` — Members
 - `/en/news` — News
-- `/en/activities` — Activities
-- `/en/projects` — Projects
-- `/en/join` — Join Us
 - `/en/contact` — Contact
+- `/en/departments` — Departments `*`
+- `/en/activities` — Activities `*`
+- `/en/projects` — Projects `*`
+- `/en/sponsor` — Sponsor `*`
 - `/en/404` — 404 Page
 
 ## 目录结构
@@ -80,7 +80,8 @@ HNUDAO 官网不是学校门户，也不是单页宣传页，而是一个可持�
 ├── public/                   # 静态资源
 │   ├── favicon.svg
 │   ├── logo-placeholder.svg
-│   ├── qrcode_for公众号.jpg
+│   ├── ginkgo/                 # 银杏叶装饰（CSS mask 引用的独立 SVG）
+│   ├── wechat-qrcode.jpg
 │   └── images/
 ├── src/
 │   ├── components/           # 复用组件
@@ -130,6 +131,7 @@ npm run dev
 
 ```bash
 npm run build
+npm run check      # 自检：i18n 键与站内链接
 ```
 
 预览：

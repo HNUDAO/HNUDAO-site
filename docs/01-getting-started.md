@@ -53,6 +53,7 @@ pnpm build
 
 ```bash
 npm run build
+npm run check     # 自检 i18n 与站内链接（需先 build）
 ```
 
 预览：
@@ -121,12 +122,12 @@ npm start
 - `src/data/departments.ts`
   部门介绍。
 - `src/data/members.ts`
-  成员列表。当前默认是空数组。
+  成员列表（指导老师 + 已获授权的学生成员）。
 
 ## 开始维护前建议先确认的事项
 
 - `public/logo-placeholder.svg` 是否已经替换为正式 Logo
 - `public/favicon.svg` 是否已经替换为正式 favicon
-- `public/qrcode_for公众号.jpg` 是否为最新二维码
+- `public/wechat-qrcode.jpg` 是否为最新二维码
 - `src/lib/site.ts` 中 GitHub、X、公众号信息是否正确
 - `astro.config.mjs` 中 `site` 是否已改成正式域名
