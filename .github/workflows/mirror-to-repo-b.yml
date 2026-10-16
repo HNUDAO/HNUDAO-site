@@ -17,8 +17,9 @@ jobs:
         env:
           MIRROR_TOKEN: ${{ secrets.MIRROR_TOKEN }}
         run: |
-          # Clone the repository (shallow, latest only)
-          git clone --depth 1 https://x-access-token:${{ github.token }}@github.com/${{ github.repository }} repo
+          # 完整克隆：浅克隆（--depth 1）配合 force push 在服务端会报
+          # "did not receive expected object <sha>; index-pack failed" 而失败
+          git clone https://x-access-token:${{ github.token }}@github.com/${{ github.repository }} repo
 
           cd repo
 
