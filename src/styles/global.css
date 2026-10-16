@@ -60,72 +60,6 @@
   --header-shadow-rgb: 88, 57, 40;
 }
 
-html.dark {
-    color-scheme: dark;
-    --bg: #0f1115;
-    --bg-soft: #151922;
-    --surface: rgba(27, 33, 43, 0.82);
-    --surface-strong: rgba(34, 42, 54, 0.94);
-    --line: rgba(214, 190, 151, 0.18);
-    --text: #f4efe8;
-    --text-soft: #b8b0a7;
-    --ink-deep: #f8f5ef;
-    --accent: #d6be97;
-    --accent-soft: #6d5842;
-    --gold: #d6be97;
-    --signal: #d64b43;
-
-    --ink-50: 29 34 43;
-    --ink-100: 43 50 61;
-    --ink-200: 62 72 84;
-    --ink-300: 88 101 116;
-    --ink-400: 116 128 143;
-    --ink-500: 155 164 175;
-    --ink-600: 183 190 198;
-    --ink-700: 211 216 220;
-    --ink-800: 232 235 237;
-    --ink-900: 244 245 246;
-    --ink-950: 250 250 250;
-    --jade-100: 48 43 38;
-    --jade-300: 174 143 104;
-    --jade-500: 214 190 151;
-    --jade-700: 232 198 144;
-    --gold-100: 46 42 37;
-    --gold-300: 188 156 113;
-    --gold-500: 214 190 151;
-    --signal-500: 214 75 67;
-
-    --page-bg-top: #0b0f14;
-    --page-bg-mid: #0f141b;
-    --page-bg-bottom: #141b24;
-    --glow-gold: rgba(214, 190, 151, 0.08);
-    --glow-red: rgba(214, 75, 67, 0.1);
-    --glow-gold-soft: rgba(214, 190, 151, 0.06);
-    --surface-border: rgba(214, 190, 151, 0.18);
-    --surface-card-top: rgba(28, 36, 47, 0.96);
-    --surface-card-bottom: rgba(15, 21, 29, 0.98);
-    --surface-highlight: rgba(255, 255, 255, 0.06);
-    --surface-gloss: rgba(255, 255, 255, 0.035);
-    --surface-shadow: rgba(0, 0, 0, 0.42);
-    --glass-top: rgba(30, 39, 51, 0.9);
-    --glass-bottom: rgba(14, 20, 28, 0.86);
-    --glass-border: rgba(214, 190, 151, 0.2);
-    --glass-highlight: rgba(255, 255, 255, 0.07);
-    --glass-shadow: rgba(0, 0, 0, 0.42);
-    --header-top-rgb: 42, 50, 63;
-    --header-bottom-rgb: 18, 22, 29;
-    --header-border-rgb: 214, 190, 151;
-    --header-shadow-rgb: 0, 0, 0;
-}
-
-html.dark {
-  color-scheme: dark;
-}
-
-html.light {
-  color-scheme: light;
-}
-
 html {
   scroll-behavior: smooth;
 }
@@ -328,14 +262,6 @@ img {
   color: #fff0d3;
 }
 
-.cta-note-panel {
-  border: 1px solid rgba(255, 220, 180, 0.14);
-  background:
-    linear-gradient(180deg, rgba(255, 248, 241, 0.06), rgba(255, 255, 255, 0.03)),
-    radial-gradient(circle at top left, rgba(236, 177, 105, 0.08), transparent 32%);
-  box-shadow: inset 0 1px 0 rgba(255, 244, 232, 0.06);
-}
-
 .glass-button,
 .glass-tile {
   border: 1px solid var(--glass-border);
@@ -479,12 +405,6 @@ img {
   backdrop-filter: blur(22px) saturate(160%);
 }
 
-.site-theme-toggle {
-  border: 1px solid var(--glass-border);
-  background: var(--glass-bottom);
-  box-shadow: inset 0 1px 0 var(--glass-highlight);
-}
-
 .site-footer {
   border-color: var(--surface-border) !important;
   background: linear-gradient(180deg, var(--page-bg-top), var(--page-bg-mid)) !important;
@@ -493,40 +413,6 @@ img {
 .site-footer [class~="bg-white/74"] {
   border-color: var(--glass-border);
   background: var(--glass-bottom);
-}
-
-html.dark .bg-white {
-  background-color: var(--surface-strong);
-}
-
-html.dark [class~="bg-white/65"] {
-  background-color: color-mix(in srgb, var(--surface-strong) 65%, transparent);
-}
-
-html.dark [class~="bg-white/70"] {
-  background-color: color-mix(in srgb, var(--surface-strong) 70%, transparent);
-}
-
-html.dark [class~="bg-white/74"] {
-  background-color: color-mix(in srgb, var(--surface-strong) 74%, transparent);
-}
-
-.theme-icon {
-  width: 1.1rem;
-  height: 1.1rem;
-  color: var(--accent);
-}
-
-.theme-icon-moon {
-  display: none;
-}
-
-html.dark .theme-icon-sun {
-  display: none;
-}
-
-html.dark .theme-icon-moon {
-  display: block;
 }
 
 .home-page .site-header {
@@ -644,6 +530,21 @@ html.dark .theme-icon-moon {
 
 .hero-logo-cluster > .hero-logo-stage {
   animation: heroStageIn 1.05s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* 银杏叶用遮罩盒渲染（见 GinkgoLeaf.astro）；:where() 让 display 保持 0 特异性，
+   这样 Tailwind 的 hidden / 下面的 display:none 仍然能生效。 */
+:where(.ginkgo-shape) {
+  display: block;
+  background-color: currentColor;
+  -webkit-mask-image: var(--ginkgo-leaf);
+  mask-image: var(--ginkgo-leaf);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
 }
 
 .ginkgo-leaf {
@@ -789,10 +690,6 @@ html.dark .theme-icon-moon {
   z-index: 0;
   color: rgba(223, 190, 121, 0.14);
   filter: blur(0.15px);
-}
-
-.content-ginkgo-main {
-  inset: 0;
 }
 
 .content-ginkgo-upper-left {
@@ -943,16 +840,6 @@ html.dark .theme-icon-moon {
   }
 }
 
-@keyframes scrollIndicatorIn {
-  0% {
-    opacity: 0;
-    transform: translateX(-50%) translateY(12px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
-  }
-}
 
 @keyframes scrollNudge {
   0%,
@@ -1063,23 +950,6 @@ html.dark .theme-icon-moon {
   to {
     transform: rotate(-2deg) translate(-8px, -10px);
   }
-}
-
-.prose-content {
-  @apply text-base leading-8 text-ink-700;
-}
-
-.prose-content h2,
-.prose-content h3 {
-  @apply mt-10 text-2xl font-semibold text-ink-900;
-}
-
-.prose-content p {
-  @apply mb-5;
-}
-
-.prose-content a {
-  @apply text-signal-500 underline decoration-jade-300 underline-offset-4;
 }
 
 .focus-ring {

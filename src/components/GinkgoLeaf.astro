@@ -1,9 +1,4 @@
 ---
-import Leaf1 from "@/components/GinkgoLeaf/Leaf1.astro";
-import Leaf2 from "@/components/GinkgoLeaf/Leaf2.astro";
-import Leaf3 from "@/components/GinkgoLeaf/Leaf3.astro";
-import Leaf4 from "@/components/GinkgoLeaf/Leaf4.astro";
-
 type Props = {
   class?: string;
   variant?: "leaf1" | "leaf2" | "leaf3" | "leaf4";
@@ -11,14 +6,20 @@ type Props = {
 
 const { class: className = "", variant = "leaf3" } = Astro.props;
 
-const variants = {
-  leaf1: Leaf1,
-  leaf2: Leaf2,
-  leaf3: Leaf3,
-  leaf4: Leaf4,
-};
+// 叶子是被描摹出来的巨大路径（单个 16–38KB），内联会让每个页面多出几百 KB。
+// 这里改成「遮罩盒」：路径放在 public/ginkgo/*.svg，页面只留一个 URL + 宽高比。
+const leaves = {
+  leaf1: { src: "/ginkgo/leaf1.svg", ratio: "729 / 960" },
+  leaf2: { src: "/ginkgo/leaf2.svg", ratio: "905 / 988" },
+  leaf3: { src: "/ginkgo/leaf3.svg", ratio: "853 / 920" },
+  leaf4: { src: "/ginkgo/leaf4.svg", ratio: "754 / 885" },
+} as const;
 
-const LeafComponent = variants[variant];
+const leaf = leaves[variant];
 ---
 
-<LeafComponent class={className} />
+<span
+  aria-hidden="true"
+  class:list={["ginkgo-shape", className]}
+  style={`--ginkgo-leaf:url(${leaf.src});aspect-ratio:${leaf.ratio}`}
+></span>
