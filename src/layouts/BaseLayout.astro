@@ -33,17 +33,6 @@ const isHome = /^\/(en\/)?$/.test(Astro.url.pathname);
     <meta charset="UTF-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <meta content="light" name="color-scheme" />
-    <script is:inline>
-      try {
-        // shortcut: 不跟随系统主题，默认浅色；只有用户手动切换过（localStorage）才应用深色
-        const theme = localStorage.getItem("hnudao-theme");
-        if (theme === "dark") {
-          document.documentElement.classList.add("dark");
-        } else {
-          document.documentElement.classList.add("light");
-        }
-      } catch {}
-    </script>
     <title>{pageTitle}</title>
     <meta content={description} name="description" />
     <meta content={siteName} property="og:site_name" />
