@@ -130,6 +130,12 @@ npm run build
 - X：
   `https://x.com/HNUBlockchain`
 
+## 页面上的邮箱显示为 `[email protected]`
+
+这是 Cloudflare 的「Scrape Shield → Email Address Obfuscation（电子邮件地址混淆）」在改写 HTML，不是代码问题，`src/lib/site.ts` 里的邮箱无需改动。Cloudflare 会在页面里注入脚本还原真实邮箱，脚本被浏览器拦截（如广告拦截插件）或者查看源码时，就会看到 `[email protected]`。
+
+修复：Cloudflare 控制台 → 选择 `hnudao.cn` 域 → Scrape Shield → 关闭「Email Address Obfuscation」。
+
 ## Vercel 构建失败
 
 优先在本地执行：
