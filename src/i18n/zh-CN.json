@@ -27,7 +27,7 @@
     "contact": "联系我们",
     "departments": "部门介绍",
     "structure": "组织结构",
-    "members": "成员风采",
+    "members": "协会成员",
     "news": "新闻动态",
     "featuredStory": "精选内容",
     "categories": "分类标签",
@@ -104,8 +104,8 @@
     "contact": "联系"
   },
   "members": {
-    "title": "成员风采",
-    "breadcrumb": "成员风采"
+    "title": "协会成员",
+    "breadcrumb": "协会成员"
   },
   "sponsor": {
     "title": "赞助我们",

@@ -30,7 +30,7 @@ export const navItems: Record<Locale, NavItem[]> = {
   "zh-CN": [
     { label: "首页", href: "/" },
     { label: "关于协会", href: "/about" },
-    { label: "成员风采", href: "/members" },
+    { label: "协会成员", href: "/members" },
     { label: "动态资讯", href: "/news" },
     { label: "联系我们", href: "/contact" },
   ],

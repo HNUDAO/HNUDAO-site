@@ -50,7 +50,7 @@ HNUDAO 官网不是学校门户，也不是单页宣传页，而是一个可持�
 
 - `/` — 首页
 - `/about` — 关于协会
-- `/members` — 成员风采
+- `/members` — 协会成员
 - `/news` — 新闻动态
 - `/contact` — 联系我们
 - `/departments` — 部门介绍 `*`
